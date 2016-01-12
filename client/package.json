@@ -1,0 +1,23 @@
+{
+  "name": "bitcoin-exchange-client",
+  "version": "0.0.1",
+  "description": "Client-side code for bitcoin exchange",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/?????/?????"
+  },
+  "bugs": {
+    "url": "https://github.com/?????/?????/issues"
+  },
+  "keywords": [
+    "bitcoin",
+    "bitcoin-exchange"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap": "3.3.6"
+  },
+  "private": true,
+  "license": "MIT"
+}
