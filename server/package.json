@@ -5,19 +5,20 @@
   "author": "Dean Kerr <dean_k@live.co.uk>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oriondean/bitcoin-exchange"
+    "url": "https://github.com/oriondean/bitcoin-exchange-seed"
   },
   "bugs": {
-    "url": "https://github.com/oriondean/bitcoin-exchange/issues"
+    "url": "https://github.com/oriondean/bitcoin-exchange-seed/issues"
   },
   "keywords": [
     "bitcoin",
-    "bitcoin-exchange"
+    "bitcoin-exchange",
+    "bitcoin-exchange-seed"
   ],
   "dependencies": {},
   "devDependencies": {
-    "jasmine": "^2.4.1",
-    "underscore": "^1.8.3"
+    "jasmine": "2.4.1",
+    "underscore": "1.8.3"
   },
   "private": true,
   "license": "MIT"
