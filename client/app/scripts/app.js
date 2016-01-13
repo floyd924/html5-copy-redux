@@ -4,7 +4,7 @@ var module = angular.module('bitcoinExchange', ['order-book']);
 
 // Sourced from http://www.html5rocks.com/en/tutorials/frameworks/angular-websockets/
 module.factory('socket', function ($rootScope) {
-    var socket = io.connect("http://localhost:1337"); // this should match the port your server opens to websocket traffic
+    var socket = io.connect("http://localhost"); // this should match the port your server opens to websocket traffic
     return {
         on: function (eventName, callback) {
             socket.on(eventName, function () {
