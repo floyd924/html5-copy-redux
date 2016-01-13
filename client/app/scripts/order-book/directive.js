@@ -7,9 +7,7 @@ module.directive("orderBook", function() {
         restrict: "E",
         scope: {},
         templateUrl: "scripts/order-book/template.html",
-        controller: function($websocket) {
-            console.log("websocket library", $websocket);
-            
+        controller: function() {
             this.orders = [
                 { action: "Buy", price: 15.5, quantity: 32.5 },
                 { action: "Buy", price: 22.3, quantity: 55.1 },
