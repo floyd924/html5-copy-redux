@@ -18,7 +18,8 @@
   "devDependencies": {
     "angular": "^1.4.8",
     "bootstrap": "^3.3.6",
-    "http-server": "^0.8.5"
+    "http-server": "^0.8.5",
+    "socket.io-client": "^1.4.4"
   },
   "scripts": {
     "start": "http-server -a localhost -p 8080 -c-1"
