@@ -1,5 +1,9 @@
 'use strict';
 
+import angular from 'angular';
+import io from 'socket.io-client';
+import orderBook from './order-book/module.js';
+
 var module = angular.module('bitcoinExchange', ['order-book']);
 
 // Sourced from http://www.html5rocks.com/en/tutorials/frameworks/angular-websockets/
@@ -26,3 +30,5 @@ module.factory('socket', function ($rootScope) {
         }
     };
 });
+
+export default module;
