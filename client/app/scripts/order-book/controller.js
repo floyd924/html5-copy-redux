@@ -1,7 +1,9 @@
 'use strict';
 
 export default class OrderBookController {
-    constructor() {
+    constructor(socket) {
+        console.log("websocket library", socket);
+        
         this.orders = [
             { action: "Buy", price: 15.5, quantity: 32.5 },
             { action: "Buy", price: 22.3, quantity: 55.1 },
@@ -13,4 +15,4 @@ export default class OrderBookController {
     }
 };
 
-OrderBookController.$inject = [];
+OrderBookController.$inject = ["socket"];
