@@ -1,0 +1,10 @@
+$padding: 10px;
+
+.orderBook {
+  padding: $padding;
+
+  ul {
+    list-style: square;
+    color: blue;
+  }
+}
