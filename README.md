@@ -18,7 +18,7 @@ Contains empty matcher and unit test spec file.
 ###### Setup Instructions
 * Open your CLI
 * Change to the ```client``` directory within this project
-* Run ```npm install``` to install the client-side dependencies
+* Run ```npm install``` to install the server-side dependencies
 * Install [jasmine](http://jasmine.github.io/edge/node.html) globally via ```npm install --global jasmine```
 * Type ```jasmine``` to run the unit tests
 
