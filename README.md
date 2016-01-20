@@ -3,16 +3,24 @@ The starting point for the bitcoin-exchange project, containing individual clien
 Each application has their own package.json, to prevent cross-pollination of dependencies between client and server-side.
 
 ##### Client
-Contains a sample Angular application, mockup wireframe and a wrapper around the socket.io-client library to integrate it with Angular's change detection mechanism. You can host the application locally using [http-server](https://www.npmjs.com/package/http-server) by entering ```npm start``` into your CLI.
+Contains a sample Angular application, mockup wireframe and a wrapper around the socket.io-client library to integrate it with Angular's change detection mechanism. 
+
+###### Setup Instructions
+* Open your CLI
+* Change to the ```client``` directory within this project
+* Run ```npm install``` to install the client-side dependencies
+* Install [http-server](https://www.npmjs.com/package/http-server) globally via ```npm install --global http-server```
+* Run ```npm start``` to host the application on http://localhost:8080
 
 ##### Server
 Contains empty matcher and unit test spec file.
 
-###### Running the unit tests
+###### Setup Instructions
 * Open your CLI
-* Browse to the ```server``` directory of this project
-* Install jasmine globally via ```npm install --global jasmine```
-* Type ```jasmine```
+* Change to the ```client``` directory within this project
+* Run ```npm install``` to install the client-side dependencies
+* Install [jasmine](http://jasmine.github.io/edge/node.html) globally via ```npm install --global jasmine```
+* Type ```jasmine``` to run the unit tests
 
 ##### Directory Structure
 ```
