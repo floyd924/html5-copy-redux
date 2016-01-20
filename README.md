@@ -29,7 +29,7 @@ Contains empty matcher and unit test spec file.
 │   │   │   ├── index.html - index page of the application
 │   │   │   ├── mockup.html - empty mockup wireframe
 │   │   ├── node_modules - application's dependencies (e.g. Angular, socket.io-client)
-│   │   ├── package.json - metadata relevant to the application, used by npm to manage the application dependencies
+│   │   ├── package.json - metadata relevant to the application, used by npm to manage application dependencies
 │   ├── server - server-side application
 │   │   ├── app
 │   │   │   ├── matcher.js - placeholder file for the matcher implementation
@@ -38,7 +38,7 @@ Contains empty matcher and unit test spec file.
 │   │   │   ├── support
 │   │   │   |   |   ├── jasmine.json - configuration for the jasmine test runner
 │   │   │   ├── matcherSpec.js - placeholder file for the matcher unit tests
-│   │   ├── package.json - metadata relevant to the application, used by npm to manage the application dependencies
+│   │   ├── package.json - metadata relevant to the application, used by npm to manage application dependencies
 │   ├── .gitignore - specifies intentionally untracked files that Git should ignore
 │   ├── LICENSE - MIT software license file
 │   ├── README.md - what you're reading right now
