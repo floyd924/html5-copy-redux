@@ -15,10 +15,11 @@
     "bitcoin-exchange",
     "bitcoin-exchange-seed"
   ],
-  "dependencies": {},
-  "devDependencies": {
-    "jasmine": "2.4.1",
+  "dependencies": {
     "underscore": "1.8.3"
+  },
+  "devDependencies": {
+    "jasmine": "2.4.1"
   },
   "private": true,
   "license": "MIT"
