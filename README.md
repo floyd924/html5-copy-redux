@@ -3,7 +3,10 @@ The starting point for the bitcoin-exchange project, containing individual clien
 Each application has their own package.json, to prevent cross-pollination of dependencies between client and server-side.
 
 ##### Client
-Contains a sample Angular application, mockup wireframe and a wrapper around the socket.io-client library to integrate it with Angular's change detection mechanism. 
+Contains
+
+* Sample Redux / React application based on the create-react-app seed framework.
+* Mockup wireframe to build a sample UI before implementation.
 
 ###### Setup Instructions
 * Open your CLI

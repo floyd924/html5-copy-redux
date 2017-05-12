@@ -1,31 +1,21 @@
 {
-  "name": "bitcoin-exchange-client",
-  "version": "0.0.1",
-  "description": "Client-side code for bitcoin exchange side",
-  "author": "Dean Kerr <dean_k@live.co.uk>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/oriondean/bitcoin-exchange-seed"
-  },
-  "bugs": {
-    "url": "https://github.com/oriondean/bitcoin-exchange-seed/issues"
-  },
-  "keywords": [
-    "bitcoin",
-    "bitcoin-exchange",
-    "bitcoin-exchange-seed"
-  ],
+  "name": "test",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "angular": "^1.4.8",    
-    "bootstrap": "^3.3.6",
-    "socket.io-client": "^1.4.4"
+    "prop-types": "^15.5.9",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0"
   },
-  "devDependencies": {    
-    "http-server": "^0.8.5"
+  "devDependencies": {
+    "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start": "http-server -a localhost -p 8080 -c-1"
-  },
-  "private": true,
-  "license": "MIT"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
