@@ -12,7 +12,6 @@ Contains
 * Open your CLI
 * Change to the ```client``` directory within this project
 * Run ```npm install``` to install the client-side dependencies
-* Install [http-server](https://www.npmjs.com/package/http-server) globally via ```npm install --global http-server```
 * Run ```npm start``` to host the application on http://localhost:8080
 
 ##### Server
@@ -29,18 +28,28 @@ Contains empty matcher and unit test spec file.
 ```
 ├── bitcoin-exchange-seed/
 │   ├── client - client-side application
-│   │   ├── app
-│   │   │   ├── css
-│   │   │   |   ├── app.css - application-wide styles
-│   │   │   ├── scripts
-│   │   │   |   ├── order-book
-│   │   │   |   |   ├── directive.js - A simple order book directive with an inline controller
-│   │   │   |   |   ├── template.js - The template file for the order book directive
-│   │   │   |   ├── app.js - top-level angular module of the application, includes socket.io-client wrapper
-│   │   │   ├── index.html - index page of the application
+│   │   ├── node_modules - application's dependencies (e.g. React, Redux, socket.io-client)
+│   │   ├── public
+│   │   │   ├── favicon.ico - default React favicon
+│   │   │   ├── index.html - page template
 │   │   │   ├── mockup.html - empty mockup wireframe
-│   │   ├── node_modules - application's dependencies (e.g. Angular, socket.io-client)
-│   │   ├── package.json - metadata relevant to the application, used by npm to manage application dependencies
+│   │   ├── src
+│   │   │   ├── components
+|   │   │   │   ├── App.css - CSS specific to the App component
+|   │   │   │   ├── App.js - main component for the app
+|   │   │   │   ├── App.test.js - tests specific to the App component
+│   │   │   ├── reducers
+|   │   │   │   ├── ducks
+|   |   │   │   │   ├── example.js - an example 'duck' which contains a related action type, reducer and action creator
+|   │   │   │   ├── root.js - root reducer that is a combination of all the other reducers
+│   │   │   ├── store
+|   │   │   │   ├── configure-store.js - code to configure the Redux store
+│   │   │   ├── index.css - application-wide styles
+│   │   │   ├── index.js - JavaScript entry point
+│   │   │   ├── logo.svg - default React logo
+│   |   ├── .gitignore - specifies intentionally untracked files that Git should ignore
+│   │   ├── package.json - metadata relevant to the client application, used by npm to manage application dependencies
+|   │   ├── README.md - create-react-app README file
 │   ├── server - server-side application
 │   │   ├── app
 │   │   │   ├── matcher.js - placeholder file for the matcher implementation
@@ -49,7 +58,7 @@ Contains empty matcher and unit test spec file.
 │   │   │   ├── support
 │   │   │   |   |   ├── jasmine.json - configuration for the jasmine test runner
 │   │   │   ├── matcherSpec.js - placeholder file for the matcher unit tests
-│   │   ├── package.json - metadata relevant to the application, used by npm to manage application dependencies
+│   │   ├── package.json - metadata relevant to the server application, used by npm to manage application dependencies
 │   ├── .gitignore - specifies intentionally untracked files that Git should ignore
 │   ├── LICENSE - MIT software license file
 │   ├── README.md - what you're reading right now
