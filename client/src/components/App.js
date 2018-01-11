@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import logo from '../logo.svg';
 import './App.css';
+import List from './List';
 
 export class App extends Component {
     render() {
@@ -15,6 +16,7 @@ export class App extends Component {
                 <p className="App-intro">
                     To get started, edit <code>src/App.js</code> and save to reload.
                 </p>
+				<List numbers={[1,2,3,4]} lulz="cat"/>
             </div>
         );
     }
