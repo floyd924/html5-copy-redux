@@ -1,7 +1,9 @@
 {
-  "name": "test",
-  "version": "0.1.0",
+  "name": "bitcoin-exchange-client",
+  "version": "0.0.1",
   "private": true,
+  "description": "Slient-side code for bitcoin exchange",
+  "author": "Scott Logic Ltd",
   "dependencies": {
     "prop-types": "^15.5.9",
     "react": "^15.5.4",

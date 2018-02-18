@@ -1,24 +1,11 @@
 {
   "name": "bitcoin-exchange-server",
   "version": "0.0.1",
+  "private": true,
   "description": "Server-side code for bitcoin exchange",
-  "author": "Dean Kerr <dean_k@live.co.uk>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/oriondean/bitcoin-exchange-seed"
-  },
-  "bugs": {
-    "url": "https://github.com/oriondean/bitcoin-exchange-seed/issues"
-  },
-  "keywords": [
-    "bitcoin",
-    "bitcoin-exchange",
-    "bitcoin-exchange-seed"
-  ],
+  "author": "Scott Logic Ltd",
   "dependencies": {},
   "devDependencies": {
     "jasmine": "2.4.1"
-  },
-  "private": true,
-  "license": "MIT"
+  }
 }
