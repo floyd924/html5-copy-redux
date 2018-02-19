@@ -1,18 +1,11 @@
 {
-  "name": "bitcoin-exchange-client",
-  "version": "0.0.1",
+  "name": "client",
+  "version": "0.1.0",
   "private": true,
-  "description": "Slient-side code for bitcoin exchange",
-  "author": "Scott Logic Ltd",
   "dependencies": {
-    "prop-types": "^15.5.9",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-redux": "^5.0.4",
-    "redux": "^3.6.0"
-  },
-  "devDependencies": {
-    "react-scripts": "^1.1.1"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
