@@ -6,6 +6,10 @@
   "author": "Scott Logic Ltd",
   "dependencies": {},
   "devDependencies": {
-    "jasmine": "2.4.1"
+    "jest": "^22.3.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
   }
 }
