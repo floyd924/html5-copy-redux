@@ -1,0 +1,96 @@
+h1, h2, h3, h4, h5, h6, p, span, label {
+  color: #fff; }
+
+.noListStyle {
+  list-style: none;
+  margin: 0.2em 0; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+.listItem-buy .listItem-price {
+  color: #5cb85c; }
+
+.listItem-belowMV .listItem-price {
+  color: #5cb85c; }
+
+.listItem-sell .listItem-price {
+  color: #f0ad4e; }
+
+.listItem-aboveMV .listItem-price {
+  color: #f0ad4e; }
+
+.listItem-quantity {
+  color: #fff; }
+
+.listItem-timestamp {
+  color: #81898e; }
+
+.listItem-accountTo {
+  color: #81898e; }
+
+.listItem-accountFrom {
+  color: #81898e; }
+
+html, body {
+  height: 100%;
+  background-color: #1e2b34;
+  font-family: "opensans";
+  font-family: "Open Sans";
+  overflow-x: hidden; }
+
+.App {
+  text-align: center; }
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px; }
+  .App-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white; }
+  .App-intro {
+    font-size: large; }
+  .App-body {
+    padding: 2em 0 0 0; }
+  .App .columnTitle > h2 {
+    margin: 0; }
+  .App .ownLine {
+    margin: 1em 0 1em 0; }
+  .App .container-fluid {
+    margin: 0 auto;
+    height: 100%;
+    padding: 20px 0;
+    background-color: #1e2b34;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+  .App .panel {
+    background-color: #1e2b34;
+    /* margin-left: 10px; */
+    padding: 0;
+    padding-bottom: 10px;
+    border-radius: 0px;
+    border-color: #12191f;
+    /* padding: 5px; */
+    height: 100%;
+    margin-bottom: 0; }
+  .App .panel h2 {
+    margin: 0;
+    background-color: #2f3d45;
+    padding: 20px 0 20px 0; }
+  .App .orderBook ul {
+    max-height: 425px;
+    overflow-y: auto; }
+  .App .tradeBook ul {
+    max-height: 435px;
+    overflow-y: auto; }
+  .App ul {
+    overflow: auto; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }

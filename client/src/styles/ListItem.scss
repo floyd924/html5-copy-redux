@@ -1,0 +1,49 @@
+@import 'Colours.scss';
+
+.noListStyle {
+  list-style:none;
+  margin: 0.2em 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  // padding: 0.2em 0.5em 0.2em 0.5em;
+  // margin: 0.5em 0;
+}
+
+.listItem-buy .listItem-price {
+  color: $order-green;
+}
+
+.listItem-belowMV .listItem-price {
+  color: $order-green;
+}
+
+.listItem-sell .listItem-price {
+  color: $order-orange;
+}
+
+.listItem-aboveMV .listItem-price {
+  color: $order-orange;
+}
+
+.listItem-quantity {
+  color: #fff;
+}
+
+.listItem-timestamp {
+  color: #81898e;
+}
+
+.listItem-accountTo {
+  color: #81898e;
+}
+
+.listItem-accountFrom {
+  color: #81898e;
+}
+

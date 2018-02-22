@@ -1,0 +1,31 @@
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+svg {
+  padding-left: 26px;
+  padding-bottom: 26px;
+  height: 500px;
+}
+
+.sellArea {
+  fill: #4b3735;
+}
+
+.buyArea {
+  fill: #2e4a3b;
+}
+
+.axis text {
+  fill: #fff;
+}
+
+.axis line{
+  stroke: rgb(133, 133, 133);
+}
+
+.axis path{
+  stroke: rgb(133, 133, 133);;
+}
