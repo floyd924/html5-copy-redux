@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import OrderForm from '../components/OrderForm';
-import { changeAccount } from '../actions/accountActions';
-import { changeActionType } from '../actions/orderActions';
+import { changeAccount, changeActionType } from '../actions/accountActions';
 
 const mapDispatchToProps = {
     changeAccount,
@@ -11,9 +10,9 @@ const mapDispatchToProps = {
 function mapStateToProps(state) {
     return {
         name: state.example.name,
-        accountId: state.example.accountId,
-        allAccounts: state.example.allAccounts,
-        selectedAction: state.example.selectedAction,
+        accountId: state.account.accountId,
+        allAccounts: state.account.allAccounts,
+        selectedAction: state.account.selectedAction,
         orderBook: state.example.orderBook,
         tradeBook: state.example.tradeBook,
         marketAverage: state.example.marketAverage,

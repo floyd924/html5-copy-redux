@@ -8,13 +8,34 @@ import io from 'socket.io-client'
 import { updateOrderBook, updateTradeBook, updateMarketAverage, updatePrivateOrderBook } from './actions/orderActions';
 import { windowResized } from './actions/windowResizedAction';
 
+
 import './index.css';
 
 import configureStore from './store/configure-store';
+import rootSaga from './sagas';
+// import sagaMiddleware from 'redux-saga';
+
 
 const store = configureStore({ example: { 
     name: 'Joe Bloggs',
+    selectedAction: 'BUY',
+    orderBook: [],
+    privateOrderBook: [],
+    tradeBook: [],
+    marketAverage: 0,
+    viewPrivate: false,
+    windowResized: Date.now(),
+    bitCoinJSON: [1],
+    sendApiFetch: false,
+    bitCoinLastUpdated: 0,
+    bitCoinEURRate: 0,
+    bitCoinGBPRate: 0,
+    bitCoinUSDRate: 0,
+    message: "nothing to report",
+}, 
+account: {
     accountId: 4,
+    selectedAction: 'BUY',
     allAccounts: [{
         id: 1,
         name: 'Account 1'
@@ -28,18 +49,26 @@ const store = configureStore({ example: {
         id: 4,
         name: 'Default Account'
     }],
-    selectedAction: 'BUY',
-    orderBook: [],
-    privateOrderBook: [],
-    tradeBook: [],
-    marketAverage: 0,
-    viewPrivate: false,
-    windowResized: Date.now(),
+},
+bitCoinApi: {
+    bitCoinJSON: [1],
+    sendApiFetch: false,
+    bitCoinLastUpdated: 0,
+    bitCoinEURRate: 0,
+    bitCoinGBPRate: 0,
+    bitCoinUSDRate: 0,
+    message: "nothing to report",
 }});
+
+store.runSaga(rootSaga);
 
 store.dispatch({
     type: 'example/CHANGE_NAME',
     name: "Ivan Mladjenovic"
+})
+
+store.dispatch({
+    type: 'REQUEST_BITCOIN_API',
 })
 
 window.addEventListener('resize', () => {

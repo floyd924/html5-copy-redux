@@ -32,23 +32,6 @@ class PriceChart extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        // if (this.d3Chart) {
-        //     this.d3Chart.update(nextProps.orderBook);
-        // }
-        // console.log(this.props.windowResized);
-        // if (this.props.windowResized !== nextProps.windowResized) {
-        //     if (this.d3Chart) {
-        //         const priceChartEl = d3.select('.PriceChart').node();
-        //         const priceChartDimensions = priceChartEl.getBoundingClientRect();
-        //         const width = priceChartDimensions.width;
-        //         console.log(width);
-        //         this.d3Chart.resize()
-        //         this.d3Chart.render();
-        //     }
-        // }
-    }
-
     shouldComponentUpdate(nextProps) {
         const shouldComponentUpdate = this.props.orderBook !== nextProps.orderBook.length;
         if (shouldComponentUpdate) {

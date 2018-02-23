@@ -25,8 +25,8 @@ class OrderBook extends Component {
         const listPrivateOrders = privateOrderBook.map((order) =>
             <div key={`${order.price + "" + order.quantity + "" + order.action}`} className={`row noListStyle ${order.action} listItem-${classNameCheck(order.action)}`}>
                 <li>
-                <div className={`listItem listItem-quantity col-xs-6`}>{order.quantity}</div>
-                <div className="listItem listItem-price col-xs-6">£{order.price}</div></li>
+                <div className={`listItem listItem-quantity col-xs-6`}>{order.quantity.toFixed(9)}</div>
+                <div className="listItem listItem-price col-xs-6">£{order.price.toFixed(2)}</div></li>
             </div>
         );
 

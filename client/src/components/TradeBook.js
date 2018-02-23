@@ -23,13 +23,13 @@ class TradeBook extends Component {
         return (
             <div className="tradeBook">
                 <h2>Trade History</h2>
-                    <div className="row">
-                        <div className="col-xs-2"><span>Trade size</span></div>
-                        <div className="col-xs-2"><span>Price</span></div>
-                        <div className="col-xs-4"><span>Time</span></div>
-                        <div className="col-xs-2"><span>Account To</span></div>
-                        <div className="col-xs-2"><span>Account From</span></div>
-                    </div>
+                <div className="row">
+                    <div className="col-xs-2"><span>Trade size</span></div>
+                    <div className="col-xs-2"><span>Price</span></div>
+                    <div className="col-xs-4"><span>Time</span></div>
+                    <div className="col-xs-2"><span>Account To</span></div>
+                    <div className="col-xs-2"><span>Account From</span></div>
+                </div>
                 <ul>
                     {listTrades}
                 </ul>

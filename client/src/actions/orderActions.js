@@ -1,8 +1,3 @@
-export const changeActionType = selectedAction => ({
-    type: 'CHANGE_ACTION_TYPE',
-    selectedAction,
-});
-
 export const updateOrderBook = orderBook => ({
     type: 'UPDATE_ORDER_BOOK',
     orderBook,

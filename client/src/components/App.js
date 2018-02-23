@@ -26,6 +26,12 @@ class App extends Component {
             viewPrivate,
             privateOrderBook,
             windowResized,
+            requestBitCoinApi,
+            bitCoinJSON,
+            bitCoinLastUpdated,
+            bitCoinEURRate,
+            bitCoinGBPRate,
+            bitCoinUSDRate,
         } = this.props;
         return (
             <div className="App">
@@ -52,8 +58,8 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="panel col-xs-12 col-md-6 col-lg-2">
-                        <CurrentLivePrice />
+                    <div className="panel col-xs-12 col-md-6 col-lg-6">
+                        <CurrentLivePrice bitCoinGBPRate={bitCoinGBPRate} bitCoinUSDRate={bitCoinUSDRate} bitCoinEURRate={bitCoinEURRate} bitCoinLastUpdated={bitCoinLastUpdated} bitCoinJSON={bitCoinJSON} requestBitCoinApi={requestBitCoinApi} />
                     </div>
                 </div>
             </div>
