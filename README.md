@@ -15,14 +15,13 @@ Contains
 * Run ```npm start``` to host the application on http://localhost:8080
 
 ##### Server
-Contains empty matcher and unit test spec file.
+Contains empty matcher and unit test file.
 
 ###### Setup Instructions
 * Open your CLI
 * Change to the ```server``` directory within this project
 * Run ```npm install``` to install the server-side dependencies
-* Install [jasmine](http://jasmine.github.io/edge/node.html) globally via ```npm install --global jasmine```
-* Type ```jasmine``` to run the unit tests
+* Run ```npm test``` to run the unit tests
 
 ##### Directory Structure
 ```
@@ -53,11 +52,9 @@ Contains empty matcher and unit test spec file.
 │   ├── server - server-side application
 │   │   ├── app
 │   │   │   ├── matcher.js - placeholder file for the matcher implementation
-│   │   ├── node_modules -  server-side dependencies  (e.g. socket.io, jasmine)
-│   │   ├── spec
-│   │   │   ├── support
-│   │   │   |   |   ├── jasmine.json - configuration for the jasmine test runner
-│   │   │   ├── matcherSpec.js - placeholder file for the matcher unit tests
+│   │   ├── node_modules -  server-side dependencies  (e.g. socket.io, jest)
+│   │   ├── test
+│   │   │   ├── matcher.test.js - placeholder file for the matcher unit tests
 │   │   ├── package.json - metadata relevant to the server application, used by npm to manage application dependencies
 │   ├── .gitignore - specifies intentionally untracked files that Git should ignore
 │   ├── LICENSE - MIT software license file
