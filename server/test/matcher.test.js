@@ -1,10 +1,7 @@
 const Matcher = require("../app/matcher");
-const Order = require("../app/matcher");
 
 describe("Matcher", () => {
     let matcher;
-    let order1;
-    let order2;
     
     beforeEach(() => {
         matcher = new Matcher();
