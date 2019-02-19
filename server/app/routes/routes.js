@@ -3,8 +3,12 @@ let appRouter = function (app) {
         res.status(200).send("welcome to the restful API :) This is a GET request on / ");
     });
     app.get("/trades", function (req, res){
-        let data = "This is the list of trades. in brackets and curlybois put some aobjects or arrays"
-        res.status(200).send(data);
+        // let data = ({
+        //     data: "here",
+        //     another: "attribute"
+        // })
+        // res.status(200).send(data);
+        res.status(200).send("this is where all trades will appear");
     });
 
 }

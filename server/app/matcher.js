@@ -141,6 +141,43 @@ function Matcher() {
         })
     }
 
+    //for the API route /trades
+    this.getAllOrders = function(){
+        return this.allOrders;
+    }
+
+    //for the API route /trades/recent
+    this.getRecentOrders = function(){
+        let recentOrders = this.allOrders.reverse();
+        return recentOrders;
+    }
+
+    //for the API route /trades/:name
+    this.getAllOrdersByName = function(name){
+        let ordersForThisPerson = []
+        this.allOrders.forEach(order => {
+            if (name.toUpperCase() == order.account.toUpperCase()) {
+                ordersForThisPerson.push(order)
+            }
+        })
+        return ordersForThisPerson;
+    }
+
+    this.seed = function(){
+        //seed the file with data
+        this.newOrder("iain", 1.25, 30, "SELL");
+        this.newOrder("iain", 1.3, 20, "SELL");
+        this.newOrder("benj", 1.27, 5, "SELL");
+        this.newOrder("steve", 1.29, 20, "BUY");
+        this.newOrder("steve", 1.26, 10, "SELL");
+        this.newOrder("benj", 1.3, 12, "BUY");
+        this.newOrder("iain", 1.31, 14, "SELL");
+        this.newOrder("benj", 1.23, 2, "BUY");
+        this.newOrder("iain", 1.25, 20, "BUY");
+        this.newOrder("steve", 1.27, 40, "SELL");
+        this.newOrder("benj", 1.31, 10, "SELL");
+    }
+
 
 }
 
