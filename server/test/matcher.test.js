@@ -58,4 +58,13 @@ describe("Matcher", () => {
         expect(matcher.sellOrders[2].price).toBe(26);
     })
 
+    it("will take small amounts from 3 consecutive orders, deleting empty ones after all transactions have taken place", () => {
+        matcher.newOrder("small", 10, 1, "SELL");
+        matcher.newOrder("med", 10, 2, "SELL");
+        matcher.newOrder("large", 10, 3, "SELL");
+        matcher.newOrder("XL", 10, 10, "SELL");
+        matcher.newOrder("iain", 10, 10, "BUY");
+        expect(matcher.sellOrders.length).toBe(1);
+    })
+
 });

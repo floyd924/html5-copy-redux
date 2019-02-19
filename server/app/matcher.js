@@ -9,6 +9,8 @@ function Matcher() {
     this.sellOrders = [];
 
     //creates a new order and calls the receiveOrder method
+    //which triggers any possible trades
+    //empty orders are then cleared once trades have taken place
     this.newOrder = function(acc, prix, volume, act){
         let order = {
             account: acc,
@@ -17,6 +19,7 @@ function Matcher() {
             action: act
         }
         this.receiveOrder(order);
+        this.clearEmptyOrders();
     }
 
  
@@ -90,49 +93,52 @@ function Matcher() {
             newOrder.quantity -= oldOrder.quantity;
             //set old order to 0
             oldOrder.quantity = 0;
-            //check origial items in array
-            // console.log("buyOrders:", this.buyOrders)
-            // console.log("sellOrders:", this.sellOrders)
-            //delete old order
-            let ind = checkArray.indexOf(oldOrder);
-            checkArray.splice(ind, 1);
-            // console.log("array has been spliced? is:", checkArray)
 
 
         } else if (newOrderQuantityAfterTrade < 0) {
-            //TODO: credit each account????
+            //credit each account
             this.credit(newOrder, newOrder.quantity, tradePrice);
             this.credit(oldOrder, newOrder.quantity, tradePrice);
             //subtract new order value from old order value
             oldOrder.quantity -= newOrder.quantity;
             //set new order value to 0
             newOrder.quantity = 0;
-            //delete new order
-            let ind = newOrderArray.indexOf(newOrder);
-            newOrderArray.splice(ind, 1);
-            // console.log("did it work? new order array", newOrderArray)
-            // console.log("did it work? old order array", checkArray)
-
 
         } else {
-            //TODO: credit each account????
+            //credit each account
             this.credit(newOrder, newOrder.quantity, tradePrice);
             this.credit(oldOrder, oldOrder.quantity, tradePrice);
             //put both to 0
             newOrder.quantity = 0;
             oldOrder.quantity = 0;
-            //delete them from the array?
-            let newInd = newOrderArray.indexOf(newOrder);
-            newOrderArray.splice(newInd, 1);
-            let oldInd = checkArray.indexOf(oldOrder);
-            checkArray.splice(oldInd, 1);
-            // console.log("check array:", checkArray);
-            // console.log("new array:", newOrderArray);
         }
     }
 
     this.credit = function(order, quantity, price){
         console.log(`Trade: ${order.account}'s trade to ${order.action} ${quantity} coins went through at a price of ${price}, compared to the asking price of ${order.price}.`);
+    }
+
+    this.clearEmptyOrders = function(){
+        let emptyBuys = []
+        this.buyOrders.forEach(order => {
+            if (order.quantity == 0) {
+                emptyBuys.push(this.buyOrders.indexOf(order));
+            }
+        });
+        emptyBuys.forEach(index => {
+            this.buyOrders.splice(index, 1);
+        })
+        emptyBuys.reverse();
+        let emptySells = [];
+        this.sellOrders.forEach(order => {
+            if (order.quantity == 0) {
+                emptySells.push(this.sellOrders.indexOf(order))
+            }
+        })
+        emptySells.reverse();
+        emptySells.forEach(index => {
+            this.sellOrders.splice(index, 1);
+        })
     }
 
 

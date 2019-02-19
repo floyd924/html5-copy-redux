@@ -4,7 +4,10 @@
   "private": true,
   "description": "Server-side code for bitcoin exchange",
   "author": "Scott Logic Ltd",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
   "devDependencies": {
     "jest": "^22.3.0"
   },
