@@ -44,7 +44,6 @@ function Matcher() {
                 return b.price - a.price
             })
             this.checkBuyOrders(order);
-            console.log("buyOrders sorted:", this.buyOrders)
 
         } else {
             throw new Error("ERROR: neither BUY nor SELL")
@@ -125,10 +124,10 @@ function Matcher() {
                 emptyBuys.push(this.buyOrders.indexOf(order));
             }
         });
+        emptyBuys.reverse();
         emptyBuys.forEach(index => {
             this.buyOrders.splice(index, 1);
         })
-        emptyBuys.reverse();
         let emptySells = [];
         this.sellOrders.forEach(order => {
             if (order.quantity == 0) {
@@ -139,6 +138,17 @@ function Matcher() {
         emptySells.forEach(index => {
             this.sellOrders.splice(index, 1);
         })
+        let emptyAlls = []
+        this.allOrders.forEach(order => {
+            if (order.quantity == 0) {
+                emptyAlls.push(this.allOrders.indexOf(order));
+            }
+        });
+        emptyAlls.reverse();
+        emptyAlls.forEach(index => {
+            this.allOrders.splice(index, 1);
+        })
+
     }
 
     //for the API route /trades
@@ -146,10 +156,20 @@ function Matcher() {
         return this.allOrders;
     }
 
+    //for the API route /top, 
+    //returns 3 largest orders by quantity
+    this.getTopOrders = function(){
+        let sortedOrders = this.allOrders.sort(function(a, b){
+            return a.quantity - b.quantity
+        })
+        return sortedOrders.slice(0,3);
+    }
+
     //for the API route /trades/recent
+    //returns 3 most recent orders that have not been fulfilled
     this.getRecentOrders = function(){
         let recentOrders = this.allOrders.reverse();
-        return recentOrders;
+        return recentOrders.slice(0,3);
     }
 
     //for the API route /trades/:name
@@ -165,7 +185,7 @@ function Matcher() {
 
     this.seed = function(){
         //seed the file with data
-        this.newOrder("iain", 1.25, 30, "SELL");
+        this.newOrder("iain", 1.26, 30, "SELL");
         this.newOrder("iain", 1.3, 20, "SELL");
         this.newOrder("benj", 1.27, 5, "SELL");
         this.newOrder("steve", 1.29, 20, "BUY");
