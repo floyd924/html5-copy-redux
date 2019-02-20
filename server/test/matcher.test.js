@@ -1,10 +1,7 @@
 const Matcher = require("../app/matcher");
-const Order = require("../app/matcher");
 
 describe("Matcher", () => {
     let matcher;
-    let order1;
-    let order2;
     
     beforeEach(() => {
         matcher = new Matcher();
@@ -20,14 +17,14 @@ describe("Matcher", () => {
 
     it("can save multiple orders", () => {
         matcher.newOrder("current", 1.25, 20, "SELL");
-        matcher.newOrder("current", 1.3, 50, "BUY");
+        matcher.newOrder("current", 1.3, 50, "SELL");
         expect(matcher.allOrders.length).toBe(2);
     })
 
     it("can count buy orders", () => {
         matcher.newOrder("current", 1.25, 20, "SELL");
         matcher.newOrder("current", 1.3, 50, "BUY");
-        expect(matcher.allOrders.length).toBe(2);
+        expect(matcher.allOrders.length).toBe(1);
         expect(matcher.buyOrders.length).toBe(1);
     })
 
@@ -35,7 +32,7 @@ describe("Matcher", () => {
         matcher.newOrder("Iain", 1.25, 20, "SELL");
         matcher.newOrder("Banjamin", 1.3, 50, "SELL");
         matcher.newOrder("Steve", 1.3, 1, "BUY");
-        expect(matcher.allOrders.length).toBe(3);
+        expect(matcher.allOrders.length).toBe(2);
         expect(matcher.sellOrders.length).toBe(2);
     })
 
@@ -56,6 +53,35 @@ describe("Matcher", () => {
         matcher.newOrder("bob", 28, 20, "BUY");
         expect(matcher.sellOrders[0].price).toBe(18);
         expect(matcher.sellOrders[2].price).toBe(26);
+    })
+
+    it("will take small amounts from 3 consecutive orders, deleting empty ones after all transactions have taken place", () => {
+        matcher.newOrder("small", 10, 1, "SELL");
+        matcher.newOrder("med", 10, 2, "SELL");
+        matcher.newOrder("large", 10, 3, "SELL");
+        matcher.newOrder("XL", 10, 10, "SELL");
+        matcher.newOrder("iain", 10, 10, "BUY");
+        expect(matcher.sellOrders.length).toBe(1);
+    })
+
+    it("will get all orders for iain", () => {
+        matcher.newOrder("iain", 10, 1, "SELL");
+        matcher.newOrder("iain", 10, 1, "SELL");
+        matcher.newOrder("iain", 10, 1, "SELL");
+        matcher.newOrder("Steve", 10, 1, "SELL");
+        matcher.newOrder("Steve", 10, 1, "SELL");
+        matcher.newOrder("iain", 10, 1, "SELL");
+        expect(matcher.getAllOrdersByName("iain").length).toBe(4);
+    })
+
+    it("will get all orders for iain", () => {
+        matcher.newOrder("iain", 10, 1, "SELL");
+        matcher.newOrder("iain", 10, 1, "BUY");
+        matcher.newOrder("iain", 10, 1, "SELL");
+        matcher.newOrder("Steve", 10, 1, "SELL");
+        matcher.newOrder("Steve", 10, 1, "SELL");
+        matcher.newOrder("iain", 10, 1, "SELL");
+        expect(matcher.getAllOrdersByName("iain").length).toBe(2);
     })
 
 });

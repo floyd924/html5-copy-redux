@@ -1,27 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bitcoin Exchange</title>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body { margin-top: 50px; }
-    </style>
-</head>
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Bitcoin Exchange</a>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bitcoin Exchange</title>
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            body { 
+                /* margin-top: 50px;  */
+                margin-left: 20px;
+                margin-right: 20px;
+                }
+            .table-wrapper-scroll-y {
+                display: block;
+                max-height: 200px;
+                overflow-y: auto;
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+                }
+            /* .row {
+                height: 400px;
+                } */ 
+                tr {
+                    line-height: 2px;
+                    min-height: 2px;
+                    height: 2px;
+                }
+        </style>
+    </head>
+    <body>
+
+
+
+<!-- if you need more rows in all your little data tables why not make each element 3 columns wide and double the height rather than 6 columns wide? -->
+
+
+
+
+
+
+
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#">
+                    <img src="./logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+                    Trading App
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Visuals</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown link
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">£100</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">$200</a>
+                    </li>
+                    
+                    </ul>
+
+                    <div class="container-fluid float-right d-inline w-50">
+                        
+                        
+                        <!-- <p class="col-3 d-inline float-right">$600</p>
+                        <p class="col-3 d-inline float-right">£400:</p> -->
+                        <button type="button" class="col-5 btn btn-warning float-right d-inline" >Change</button>
+                        <select class="form-control col-5 d-inline float-right">
+                                <option value="iain">iain</option>
+                                <option value="benj">benj</option>
+                                <option value="steve">steve</option>
+                            </select>
+                        <p class="col-2 d-inline float-right">Logged in as:</p>
+                    </div>
+                </div>
+            </nav>
+
+
+
+
+
+
+        
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                    
+                
+
+
+
+
+                <div class="col-6 border bg-secondary p-2 mt-3 h-200 d-inline-block">
+                
+                
+                
+                    <h2>Place a new trade</h2>
+                    <p>Trading as: usernamehere</p>
+                    <div class="form-wrapper">
+                        <form id="input-form">
+                
+                
+                
+                            <div class="form-item d-inline">
+                                <!-- quantity -->
+                                <label for="quantity">Quantity:</label>
+                                <input id="quantity" type="number" min="0" />
+                            </div>
+                
+                            <div class="form-item d-inline">
+                                <!-- price -->
+                                <label for="price">Price:</label>
+                                <input id="price" type="number" min="0" step="0.01" />
+                            </div>
+                
+                            <div class="form-item">
+                                <fieldset>
+                                    <legend>Action:</legend>
+                                    <input type="radio" id="action" name="action" value="BUY" />
+                                    <label for="BUY">Buy</label>
+                                    <input type="radio" id="action" name="action" value="SELL" />
+                                    <label for="SELL">Sell</label>
+                                </fieldset>
+                            </div>
+                
+                
+                            <button type="button" class="btn btn-info">Submit Order</button>
+                
+                        </form>
+                    </div>
+                
+                </div>
+                
+
+                <div class="h-25 bg-secondary d-inline-block col-6 rounded-right border  p-2 mt-3 h-75 d-inline-block" style="height: 100%">
+                    <h2>Top orders</h2>
+                    <p>GBPBIT</p>
+                    <div class="table-wrapper-scroll-y">
+                        <table class="table table-dark table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Iain</td>
+                                    <td>BUY</td>
+                                    <td>50</td>
+                                    <td>1.25</td>
+                                </tr>
+                                <tr>
+                                    <td>Bob</td>
+                                    <td>BUY</td>
+                                    <td>50</td>
+                                    <td>1.5</td>
+                                </tr>
+                                <tr>
+                                    <td>Milo</td>
+                                    <td>BUY</td>
+                                    <td>1</td>
+                                    <td>1.2</td>
+                                </tr>
+                                <tr>
+                                    <td>Davide</td>
+                                    <td>SELL</td>
+                                    <td>500</td>
+                                    <td>1.9</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                
+
+
+                <div class="col-6 bg-secondary rounded-left border w-90 mt-3 p-2 h-100 d-inline-block">
+                    <h2>Recent orders</h2>
+                    <p>GBPBIT</p>
+                    <div class="table-wrapper-scroll-y">
+                        <table class="table table-dark table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Iain</td>
+                                    <td>BUY</td>
+                                    <td>50</td>
+                                    <td>1.25</td>
+                                </tr>
+                                <tr>
+                                    <td>Bob</td>
+                                    <td>BUY</td>
+                                    <td>50</td>
+                                    <td>1.5</td>
+                                </tr>
+                                <tr>
+                                    <td>Milo</td>
+                                    <td>BUY</td>
+                                    <td>1</td>
+                                    <td>1.2</td>
+                                </tr>
+                                <tr>
+                                    <td>Davide</td>
+                                    <td>SELL</td>
+                                    <td>500</td>
+                                    <td>1.9</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-6 bg-secondary rounded-left border  mt-3 p-2 h-25">
+                    <h2>My orders</h2>
+                    <p>GBPBIT</p>
+                    <div class="table-wrapper-scroll-y">
+                        <table class="table table-dark table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pending</td>
+                                    <td>Iain</td>
+                                    <td>BUY</td>
+                                    <td>50</td>
+                                    <td>1.25</td>
+                                </tr>
+                                <tr>
+                                    <td>Completed</td>
+                                    <td>Iain</td>
+                                    <td>BUY</td>
+                                    <td>50</td>
+                                    <td>1.5</td>
+                                </tr>
+                                <tr>
+                                    <td>Completed</td>
+                                    <td>Iain</td>
+                                    <td>BUY</td>
+                                    <td>1</td>
+                                    <td>1.2</td>
+                                </tr>
+                                <tr>
+                                    <td>Completed</td>
+                                    <td>Iain</td>
+                                    <td>SELL</td>
+                                    <td>500</td>
+                                    <td>1.9</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-12 bg-secondary mt-3 mb-5 border border-rounded">
+                    <img src="https://www.cannontrading.com/css/images/software/screenshots/sierra-charts/1.png" class="img-fluid" alt="image of graph here" width="100%">
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
-<div class="container">
-    <div class="row">
-        <h1>Mockup goes here</h1>
-    </div>
-</div>
-</body>
+
+
+    </body>
 </html>

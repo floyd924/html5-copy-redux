@@ -9,6 +9,8 @@ function Matcher() {
     this.sellOrders = [];
 
     //creates a new order and calls the receiveOrder method
+    //which triggers any possible trades
+    //empty orders are then cleared once trades have taken place
     this.newOrder = function(acc, prix, volume, act){
         let order = {
             account: acc,
@@ -17,6 +19,7 @@ function Matcher() {
             action: act
         }
         this.receiveOrder(order);
+        this.clearEmptyOrders();
     }
 
  
@@ -26,7 +29,7 @@ function Matcher() {
     //and calls relevant checkOrders method
     this.receiveOrder = function(order){
         this.allOrders.push(order);
-        if (order.action == "BUY") {
+        if (order.action === "BUY") {
             this.buyOrders.push(order);
             //sort the sellOrders by price, lowest first
             this.sellOrders.sort(function(a,b){
@@ -34,14 +37,13 @@ function Matcher() {
             })
             this.checkSellOrders(order);
 
-        } else if (order.action == "SELL"){
+        } else if (order.action === "SELL"){
             this.sellOrders.push(order);
             //sort buyOrders by price, highest first
             this.buyOrders.sort(function(a,b){
                 return b.price - a.price
             })
             this.checkBuyOrders(order);
-            console.log("buyOrders sorted:", this.buyOrders)
 
         } else {
             throw new Error("ERROR: neither BUY nor SELL")
@@ -52,7 +54,7 @@ function Matcher() {
     this.checkSellOrders = function(order){
         this.sellOrders.forEach(e => {
             if ((order.quantity > 0) && (e.price <= order.price)) {           
-                this.trade(order, e, this.sellOrders, this.buyOrders)
+                this.trade(order, e)
             }
         });
 
@@ -62,7 +64,7 @@ function Matcher() {
     this.checkBuyOrders = function(order){
         this.buyOrders.forEach(e => {
             if ((order.quantity > 0) && (e.price >= order.price)) {
-                this.trade(order, e, this.buyOrders, this.sellOrders)
+                this.trade(order, e)
             }
         });
 
@@ -70,13 +72,13 @@ function Matcher() {
     }
 
     //makes the exchange between two orders, removes completed orders 
-    this.trade = function(newOrder, oldOrder, checkArray, newOrderArray){
+    this.trade = function(newOrder, oldOrder){
         let newOrderQuantityAfterTrade = (newOrder.quantity - oldOrder.quantity);
         let tradePrice
         //to benifit the existing order instead of the new order
         //change 'newOrder.action' to 'oldOrder.action' below!
         //i think
-        if (newOrder.action == "BUY") {
+        if (newOrder.action === "BUY") {
             tradePrice = Math.min(newOrder.price, oldOrder.price);
         } else {
             tradePrice = Math.max(newOrder.price, oldOrder.price);
@@ -90,49 +92,77 @@ function Matcher() {
             newOrder.quantity -= oldOrder.quantity;
             //set old order to 0
             oldOrder.quantity = 0;
-            //check origial items in array
-            // console.log("buyOrders:", this.buyOrders)
-            // console.log("sellOrders:", this.sellOrders)
-            //delete old order
-            let ind = checkArray.indexOf(oldOrder);
-            checkArray.splice(ind, 1);
-            // console.log("array has been spliced? is:", checkArray)
 
 
         } else if (newOrderQuantityAfterTrade < 0) {
-            //TODO: credit each account????
+            //credit each account
             this.credit(newOrder, newOrder.quantity, tradePrice);
             this.credit(oldOrder, newOrder.quantity, tradePrice);
             //subtract new order value from old order value
             oldOrder.quantity -= newOrder.quantity;
             //set new order value to 0
             newOrder.quantity = 0;
-            //delete new order
-            let ind = newOrderArray.indexOf(newOrder);
-            newOrderArray.splice(ind, 1);
-            // console.log("did it work? new order array", newOrderArray)
-            // console.log("did it work? old order array", checkArray)
-
 
         } else {
-            //TODO: credit each account????
+            //credit each account
             this.credit(newOrder, newOrder.quantity, tradePrice);
             this.credit(oldOrder, oldOrder.quantity, tradePrice);
             //put both to 0
             newOrder.quantity = 0;
             oldOrder.quantity = 0;
-            //delete them from the array?
-            let newInd = newOrderArray.indexOf(newOrder);
-            newOrderArray.splice(newInd, 1);
-            let oldInd = checkArray.indexOf(oldOrder);
-            checkArray.splice(oldInd, 1);
-            // console.log("check array:", checkArray);
-            // console.log("new array:", newOrderArray);
         }
     }
 
     this.credit = function(order, quantity, price){
         console.log(`Trade: ${order.account}'s trade to ${order.action} ${quantity} coins went through at a price of ${price}, compared to the asking price of ${order.price}.`);
+    }
+
+    this.clearEmptyOrders = function(){
+        this.buyOrders = this.buyOrders.filter(order => order.quantity > 0);
+        this.sellOrders = this.sellOrders.filter(order => order.quantity > 0);
+        this.allOrders = this.allOrders.filter(order => order.quantity > 0);
+    }
+
+    //for the API route /trades
+    this.getAllOrders = function(){
+        return this.allOrders;
+    }
+
+    //for the API route /top, 
+    //returns 3 largest orders by quantity
+    this.getTopOrders = function(){
+        let sortedOrders = this.allOrders.sort(function(a, b){
+            return a.quantity - b.quantity
+        })
+        return sortedOrders.slice(0,3);
+    }
+
+    //for the API route /trades/recent
+    //returns 3 most recent orders that have not been fulfilled
+    this.getRecentOrders = function(){
+        let recentOrders = this.allOrders.reverse();
+        return recentOrders.slice(0,3);
+    }
+
+    //for the API route /trades/:name
+    this.getAllOrdersByName = function(name){
+        let ordersForThisPerson = this.allOrders.filter(order => name.toUpperCase() === order.account.toUpperCase());
+        return ordersForThisPerson;
+    }
+
+    this.seed = function(){
+        //seed the file with data
+        this.newOrder("iain", 1.26, 30, "SELL");
+        this.newOrder("iain", 1.3, 20, "SELL");
+        this.newOrder("benj", 1.27, 5, "SELL");
+        this.newOrder("steve", 1.29, 20, "BUY");
+        this.newOrder("steve", 1.26, 10, "SELL");
+        this.newOrder("benj", 1.3, 12, "BUY");
+        this.newOrder("iain", 1.31, 14, "SELL");
+        this.newOrder("benj", 1.23, 2, "BUY");
+        this.newOrder("iain", 1.25, 20, "BUY");
+        this.newOrder("steve", 1.27, 40, "SELL");
+        this.newOrder("benj", 1.31, 10, "SELL");
     }
 
 
