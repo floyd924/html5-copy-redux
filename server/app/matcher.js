@@ -29,7 +29,7 @@ function Matcher() {
     //and calls relevant checkOrders method
     this.receiveOrder = function(order){
         this.allOrders.push(order);
-        if (order.action == "BUY") {
+        if (order.action === "BUY") {
             this.buyOrders.push(order);
             //sort the sellOrders by price, lowest first
             this.sellOrders.sort(function(a,b){
@@ -37,7 +37,7 @@ function Matcher() {
             })
             this.checkSellOrders(order);
 
-        } else if (order.action == "SELL"){
+        } else if (order.action === "SELL"){
             this.sellOrders.push(order);
             //sort buyOrders by price, highest first
             this.buyOrders.sort(function(a,b){
@@ -54,7 +54,7 @@ function Matcher() {
     this.checkSellOrders = function(order){
         this.sellOrders.forEach(e => {
             if ((order.quantity > 0) && (e.price <= order.price)) {           
-                this.trade(order, e, this.sellOrders, this.buyOrders)
+                this.trade(order, e)
             }
         });
 
@@ -64,7 +64,7 @@ function Matcher() {
     this.checkBuyOrders = function(order){
         this.buyOrders.forEach(e => {
             if ((order.quantity > 0) && (e.price >= order.price)) {
-                this.trade(order, e, this.buyOrders, this.sellOrders)
+                this.trade(order, e)
             }
         });
 
@@ -72,13 +72,13 @@ function Matcher() {
     }
 
     //makes the exchange between two orders, removes completed orders 
-    this.trade = function(newOrder, oldOrder, checkArray, newOrderArray){
+    this.trade = function(newOrder, oldOrder){
         let newOrderQuantityAfterTrade = (newOrder.quantity - oldOrder.quantity);
         let tradePrice
         //to benifit the existing order instead of the new order
         //change 'newOrder.action' to 'oldOrder.action' below!
         //i think
-        if (newOrder.action == "BUY") {
+        if (newOrder.action === "BUY") {
             tradePrice = Math.min(newOrder.price, oldOrder.price);
         } else {
             tradePrice = Math.max(newOrder.price, oldOrder.price);
@@ -118,37 +118,9 @@ function Matcher() {
     }
 
     this.clearEmptyOrders = function(){
-        let emptyBuys = []
-        this.buyOrders.forEach(order => {
-            if (order.quantity == 0) {
-                emptyBuys.push(this.buyOrders.indexOf(order));
-            }
-        });
-        emptyBuys.reverse();
-        emptyBuys.forEach(index => {
-            this.buyOrders.splice(index, 1);
-        })
-        let emptySells = [];
-        this.sellOrders.forEach(order => {
-            if (order.quantity == 0) {
-                emptySells.push(this.sellOrders.indexOf(order))
-            }
-        })
-        emptySells.reverse();
-        emptySells.forEach(index => {
-            this.sellOrders.splice(index, 1);
-        })
-        let emptyAlls = []
-        this.allOrders.forEach(order => {
-            if (order.quantity == 0) {
-                emptyAlls.push(this.allOrders.indexOf(order));
-            }
-        });
-        emptyAlls.reverse();
-        emptyAlls.forEach(index => {
-            this.allOrders.splice(index, 1);
-        })
-
+        this.buyOrders = this.buyOrders.filter(order => order.quantity > 0);
+        this.sellOrders = this.sellOrders.filter(order => order.quantity > 0);
+        this.allOrders = this.allOrders.filter(order => order.quantity > 0);
     }
 
     //for the API route /trades
@@ -174,12 +146,7 @@ function Matcher() {
 
     //for the API route /trades/:name
     this.getAllOrdersByName = function(name){
-        let ordersForThisPerson = []
-        this.allOrders.forEach(order => {
-            if (name.toUpperCase() == order.account.toUpperCase()) {
-                ordersForThisPerson.push(order)
-            }
-        })
+        let ordersForThisPerson = this.allOrders.filter(order => name.toUpperCase() === order.account.toUpperCase());
         return ordersForThisPerson;
     }
 
