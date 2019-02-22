@@ -7,8 +7,8 @@ let appRouter = function (app) {
         res.status(200).send("welcome to the restful API :) This is a GET request on / ");
     });
 
-    app.get("/trades", function (req, res){
-        let data = matcher.getAllOrders();
+    app.get("/orders", function (req, res){
+        let data = matcher.getAllPendingOrders();
         res.status(200).send(data);
     });
 
@@ -22,10 +22,15 @@ let appRouter = function (app) {
         res.status(200).send(data);
     });
 
-    app.post("/trades", function (req, res){
+    app.post("/orders", function (req, res){
         let newData = req.body;
         matcher.newOrder(newData.account, newData.price, newData.quantity, newData.action);
-        res.status(201).send(matcher.getAllOrders());
+        res.status(201).send(matcher.getAllPendingOrders());
+    })
+
+    app.get("/trades", function(req, res){
+        let data = matcher.getRecentTrades();
+        res.status(200).send(data);
     })
 
 }

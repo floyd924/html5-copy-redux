@@ -3,19 +3,41 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import logo from '../logo.svg';
 import './App.css';
+import TopBar from './TopBar.js';
+import Recents from './Recents.js';
+import Form from './Form.js';
+import OrderBook from './OrderBook.js';
+import MyOrders from './MyOrders.js';
+import Graph from './Graph.js';
+import Pracs from './Pracs.js';
 
 export class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React {this.props.name}</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="grid">
+          <div className="top">
+            <TopBar />
+          </div>
+          <div className="recents">
+            <Recents />
+          </div>
+          {/* <div classname="form">
+            <Form />
+          </div> */}
+          <div className="pracs">
+            <Pracs />
+          </div>
+          <div className="order-book">
+            <OrderBook />
+          </div>
+          <div className="my-orders">
+            <MyOrders />
+          </div>
+          <div className="graph">
+            <Graph />
+          </div>
       </div>
+
     );
   }
 }

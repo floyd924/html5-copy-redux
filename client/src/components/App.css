@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+
+
 }
 
 .App-logo {
@@ -26,3 +28,175 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.grid {
+  display: grid;
+  grid-template-areas: 
+    'top-bar top-bar top-bar top-bar'
+    'recents bananas bananas book'
+    'recents graph graph book'
+    'recents graph graph book'
+    'my-orders graph graph book'
+    'my-orders graph graph book';
+  /* grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; */
+  grid-gap: 5px;
+  padding: 10px;
+  background-color: #7d7d7d;
+}
+
+/* ================================================================================== */
+
+.top {
+  grid-area: top-bar;
+  /* grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2; */
+}
+
+.top-bar {
+  border: 2px solid #00204a;
+  background-color: #1eafed;
+  height: 100%;
+  width: 100%;
+}
+
+.logo {
+  display: inline;
+  height: 80px;
+  width: 80px;
+}
+
+
+.app-title{
+  display: inline-block;
+  vertical-align: -webkit-baseline-middle;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+.login {
+  /* display: inline; */
+  /* margin-left: 50%; */
+  float: right;
+  padding-top: 20px;
+  padding-right: 20px;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+.login-text {
+  display: inline-block;;
+  padding-bottom: -10px;
+}
+
+.login-select {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 10px;
+}
+/* 
+=============================================================================================== */
+
+.recents {
+  grid-area: recents;
+  /* grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 5; */
+}
+
+.recents-container {
+  border: 3px solid yellow;
+  height: 100%;
+  width: 100%;
+}
+
+/* ===================================================================================== */
+
+/* .form{
+  /* grid-area: bananas; */
+  /*grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.form-container{
+  border: 3px solid white;
+  height: 100%;
+  width: 100%;
+} */
+/* 
+========================================================================================== */
+
+.pracs{
+  grid-area: bananas;
+  /* grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3; */
+}
+
+.pracs-container {
+  border: 3px solid white;
+  height: 100%;
+  width: 100%;
+}
+/* 
+
+
+/* ===================================================================== */
+
+.order-book{
+  grid-area: book;
+  /* grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 7; */
+}
+
+.order-book-container {
+  border: 3px solid salmon;
+  height: 100%;
+  width: 100%;
+}
+/* 
+================================================================================ */
+
+.my-orders{
+  grid-area: my-orders;
+  /* grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 5;
+  grid-row-end: 7; */
+}
+
+.my-orders-container {
+  border: 3px solid green;
+  height: 100%;
+  width: 100%;
+}
+/* 
+======================================================================================= */
+
+.graph{
+  grid-area: graph;
+  /* grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 7; */
+}
+
+.graph-container{
+  border: 3px solid rgb(28, 190, 196);
+  height: 100%;
+  width: 100%;
+}
+
+.graph-image{
+  width: 100%;
+}
+/* 
+==================================================================================== */
