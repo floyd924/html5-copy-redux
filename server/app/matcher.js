@@ -134,14 +134,7 @@ function Matcher() {
         return this.allPendingOrders;
     }
 
-    //for the API route /top, 
-    //returns 3 largest orders by quantity
-    this.getTopOrders = function(){
-        let sortedOrders = this.allPendingOrders.sort(function(a, b){
-            return a.quantity - b.quantity
-        })
-        return sortedOrders.slice(0,3);
-    }
+
 
     //for the API route /trades/recent
     //returns 3 most recent orders that have not been fulfilled
