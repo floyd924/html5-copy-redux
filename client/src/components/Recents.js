@@ -1,7 +1,75 @@
 import React, { Component} from 'react';
+import {connect} from "react-redux";
+import { getTrades } from '../actions/index.js';
 
+
+
+const mapStateToProps = (state) => {
+    return { trades: state.trades };
+};
+
+function mapDispatchToProps(dispatch){
+    return {
+        getTrades: article => dispatch(getTrades())
+    };
+}
+
+
+    
 class Recents extends Component {
+
+    constructor(props){
+        super(props);
+
+    }
+
+    getData = function(){
+        const allTrades = [];
+
+        this.props.getTrades().then(trades => trades.forEach(trade => {
+           //create an html element
+           allTrades.push(
+                <tr>
+                   <td>{trade.size}</td>
+                   <td>{trade.price}</td>
+               </tr>)}
+
+           ))
+           ;
+
+        console.log("allTrades is:", allTrades)
+        allTrades.forEach(item => ( console.log("hi", item)))
+
+        // console.log("allTrades[0] is:", allTrades[0])
+
+        // {
+
+        //     <tr>
+        //        <td>{trade.size}</td>
+        //        <td>{trade.value}</td>
+        //    </tr>
+        // }
+        // let tableRows = allTrades.map(x => 
+        //     console.log(x.value));
+        // console.log("tableRows are:", tableRows)
+        // return tableRows;
+    }
+
+    
+
+
+
     render(){
+
+        // const mapStateToProps = state => {
+        //     return { trades: state.trades };
+        // };
+
+        // const data = this.props.getTrades();
+        // console.log(data);
+
+        // let data = this.props.getTrades();
+
         return(
             <div className="recents-container">
 
@@ -12,37 +80,12 @@ class Recents extends Component {
                     <table class="table table-dark table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Action</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Rate</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Value</th>
                             </tr>
                         </thead>
                         <tbody>                            
-                            <tr>
-                                <td>Iain</td>
-                                <td>BUY</td>
-                                <td>50</td>
-                                <td>1.25</td>
-                            </tr>
-                            <tr>
-                                <td>Bob</td>
-                                <td>BUY</td>
-                                <td>50</td>
-                                <td>1.5</td>
-                            </tr>
-                            <tr>
-                                <td>Milo</td>
-                                <td>BUY</td>
-                                <td>1</td>
-                                <td>1.2</td>
-                            </tr>
-                            <tr>
-                                <td>Davide</td>
-                                <td>SELL</td>
-                                <td>500</td>
-                                <td>1.9</td>
-                            </tr>
+                            {this.getData()}
                         </tbody>
                     </table>
                 </div>
@@ -51,4 +94,6 @@ class Recents extends Component {
     }
 }
 
-export default Recents;
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recents);

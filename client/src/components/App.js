@@ -42,14 +42,18 @@ export class App extends Component {
   }
 }
 
-App.propTypes = {
-  name: PropTypes.string.isRequired
-};
+// App.propTypes = {
+//   name: PropTypes.string.isRequired
+// };
 
-function mapStateToProps(state) {
-  return {
-    name: state.example.name
-  };
-}
+//===========================================================================================
+// function mapStateToProps(state) {
+//   return {
+//     name: state.example.name
+//   };
+// }
 
-export default connect(mapStateToProps)(App);
+// export default connect(mapStateToProps)(App);
+//============================================================================================
+
+export default App;
