@@ -20,39 +20,16 @@ class Recents extends Component {
 
     constructor(props){
         super(props);
-
+        this.state = {
+            allTrades: []
+        };
+        this.getData();
     }
 
     getData = function(){
         const allTrades = [];
 
-        this.props.getTrades().then(trades => trades.forEach(trade => {
-           //create an html element
-           allTrades.push(
-                <tr>
-                   <td>{trade.size}</td>
-                   <td>{trade.price}</td>
-               </tr>)}
-
-           ))
-           ;
-
-        console.log("allTrades is:", allTrades)
-        allTrades.forEach(item => ( console.log("hi", item)))
-
-        // console.log("allTrades[0] is:", allTrades[0])
-
-        // {
-
-        //     <tr>
-        //        <td>{trade.size}</td>
-        //        <td>{trade.value}</td>
-        //    </tr>
-        // }
-        // let tableRows = allTrades.map(x => 
-        //     console.log(x.value));
-        // console.log("tableRows are:", tableRows)
-        // return tableRows;
+        this.props.getTrades().then(data => this.setState({allTrades: data}));
     }
 
     
@@ -85,7 +62,13 @@ class Recents extends Component {
                             </tr>
                         </thead>
                         <tbody>                            
-                            {this.getData()}
+                            {this.state.allTrades.map((trade) => {
+                                return (
+                                    <tr>
+                                       <td>{trade.size}</td>
+                                       <td>{trade.price}</td>
+                                   </tr>)
+                            })}
                         </tbody>
                     </table>
                 </div>
