@@ -27,8 +27,6 @@ class Recents extends Component {
     }
 
     getData = function(){
-        const allTrades = [];
-
         this.props.getTrades().then(data => this.setState({allTrades: data}));
     }
 

@@ -1,6 +1,31 @@
 import React, {Component} from 'react';
+import { getPendingOrders } from '../actions/index.js';
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+    return { orders: state.orders };
+};
+
+function mapDispatchToProps(dispatch){
+    return {
+        getPendingOrders: article => dispatch(getPendingOrders())
+    }
+}
 
 class OrderBook extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            allOrders: []
+        };
+        this.getData();
+    }
+
+    getData = function(){
+        this.props.getPendingOrders().then(data => this.setState({ allOrders: data}));
+    };
+
     render(){
         return(
             <div className="order-book-container">
@@ -16,30 +41,16 @@ class OrderBook extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Iain</td>
-                                <td>BUY</td>
-                                <td>50</td>
-                                <td>1.25</td>
-                            </tr>
-                            <tr>
-                                <td>Bob</td>
-                                <td>BUY</td>
-                                <td>50</td>
-                                <td>1.5</td>
-                            </tr>
-                            <tr>
-                                <td>Milo</td>
-                                <td>BUY</td>
-                                <td>1</td>
-                                <td>1.2</td>
-                            </tr>
-                            <tr>
-                                <td>Davide</td>
-                                <td>SELL</td>
-                                <td>500</td>
-                                <td>1.9</td>
-                            </tr>
+                            {this.state.allOrders.map((order) => {
+                                return (
+                                    <tr>
+                                        <td>{order.account}</td>
+                                        <td>{order.action}</td>
+                                        <td>{order.quantity}</td>
+                                        <td>{order.price}</td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </div>
@@ -48,4 +59,4 @@ class OrderBook extends Component{
     }
 }
 
-export default OrderBook;
+export default connect(mapStateToProps, mapDispatchToProps)(OrderBook);

@@ -1,6 +1,32 @@
 import React, {Component} from 'react';
+import { getMyOrders } from '../actions/index.js';
+import {connect} from "react-redux";
+
+const mapStateToProps = (state) => {
+    return { orders: state.orders };
+};
+
+function mapDispatchToProps(dispatch){
+    return {
+        getMyOrders: article => dispatch(getMyOrders())
+    }
+}
+
 
 class MyOrders extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            myOrders: []
+        };
+        this.getData();
+    }
+
+    getData = function(){
+        this.props.getMyOrders().then(data => this.setState({myOrders: data}));
+    };
+
     render(){
         return(
             <div className="my-orders-container">
@@ -9,42 +35,21 @@ class MyOrders extends Component{
                     <table class="table table-dark table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">Status</th>
-                                <th scope="col">Name</th>
                                 <th scope="col">Action</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Rate</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Pending</td>
-                                <td>Iain</td>
-                                <td>BUY</td>
-                                <td>50</td>
-                                <td>1.25</td>
-                            </tr>
-                            <tr>
-                                <td>Completed</td>
-                                <td>Iain</td>
-                                <td>BUY</td>
-                                <td>50</td>
-                                <td>1.5</td>
-                            </tr>
-                            <tr>
-                                <td>Completed</td>
-                                <td>Iain</td>
-                                <td>BUY</td>
-                                <td>1</td>
-                                <td>1.2</td>
-                            </tr>
-                            <tr>
-                                <td>Completed</td>
-                                <td>Iain</td>
-                                <td>SELL</td>
-                                <td>500</td>
-                                <td>1.9</td>
-                            </tr>
+                            {this.state.myOrders.map((order) => {
+                                return (
+                                    <tr>
+                                        <td>{order.action}</td>
+                                        <td>{order.quantity}</td>
+                                        <td>{order.price}</td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </div>
@@ -54,4 +59,6 @@ class MyOrders extends Component{
 }
 
 
-export default MyOrders;
+// export default MyOrders;
+//need this last line to recognise the function 'getMyOrders'
+export default connect(mapStateToProps, mapDispatchToProps)(MyOrders);

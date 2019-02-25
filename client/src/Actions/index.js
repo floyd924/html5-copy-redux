@@ -29,11 +29,25 @@ export function getTrades(){
 export function getPendingOrders(payload){
     //this returns a promise
     //use thunk
+    return function (dispatch){
+        return fetch("http://localhost:3001/orders")
+        .then(res => res.json())
+        // .then(json => {
+        //     dispatch({ type: TRADES_LOADED, payload: json });
+        // });
+    }
 };
 
 export function getMyOrders(payload){
     //this returns a promise
     //use thunk
+    return function(dispatch){
+        return fetch("http://localhost:3001/users/iain")
+        .then(res => res.json())
+        // .then(json => {
+        //     dispatch({ type: TRADES_LOADED, payload: json });
+        // });
+    }
 };
 
 export function postNewOrder(payload){
