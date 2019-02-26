@@ -12,19 +12,19 @@ describe("Matcher", () => {
     
     it("can save an order", () => {
         matcher.newOrder("current", 1.25, 20, "SELL");
-        expect(matcher.allOrders.length).toBe(1);
+        expect(matcher.allPendingOrders.length).toBe(1);
     })
 
     it("can save multiple orders", () => {
         matcher.newOrder("current", 1.25, 20, "SELL");
         matcher.newOrder("current", 1.3, 50, "SELL");
-        expect(matcher.allOrders.length).toBe(2);
+        expect(matcher.allPendingOrders.length).toBe(2);
     })
 
     it("can count buy orders", () => {
         matcher.newOrder("current", 1.25, 20, "SELL");
         matcher.newOrder("current", 1.3, 50, "BUY");
-        expect(matcher.allOrders.length).toBe(1);
+        expect(matcher.allPendingOrders.length).toBe(1);
         expect(matcher.buyOrders.length).toBe(1);
     })
 
@@ -32,7 +32,7 @@ describe("Matcher", () => {
         matcher.newOrder("Iain", 1.25, 20, "SELL");
         matcher.newOrder("Banjamin", 1.3, 50, "SELL");
         matcher.newOrder("Steve", 1.3, 1, "BUY");
-        expect(matcher.allOrders.length).toBe(2);
+        expect(matcher.allPendingOrders.length).toBe(2);
         expect(matcher.sellOrders.length).toBe(2);
     })
 
@@ -82,6 +82,12 @@ describe("Matcher", () => {
         matcher.newOrder("Steve", 10, 1, "SELL");
         matcher.newOrder("iain", 10, 1, "SELL");
         expect(matcher.getAllOrdersByName("iain").length).toBe(2);
+    })
+
+    it("can add completed trades", () => {
+        matcher.newOrder("iain", 10, 1, "SELL");
+        matcher.newOrder("steve", 10, 1, "BUY");
+        expect(matcher.getRecentTrades().length).toBe(1);
     })
 
 });

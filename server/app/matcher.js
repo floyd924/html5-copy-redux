@@ -4,9 +4,10 @@
 function Matcher() {
 
     //storing all our orders in arrays
-    this.allOrders = [];
+    this.allPendingOrders = [];
     this.buyOrders = [];
     this.sellOrders = [];
+    this.completedTrades = [];
 
     //creates a new order and calls the receiveOrder method
     //which triggers any possible trades
@@ -28,7 +29,7 @@ function Matcher() {
     //checks what type of order has arrived, adds order to relevant array
     //and calls relevant checkOrders method
     this.receiveOrder = function(order){
-        this.allOrders.push(order);
+        this.allPendingOrders.push(order);
         if (order.action === "BUY") {
             this.buyOrders.push(order);
             //sort the sellOrders by price, lowest first
@@ -113,40 +114,38 @@ function Matcher() {
         }
     }
 
-    this.credit = function(order, quantity, price){
-        console.log(`Trade: ${order.account}'s trade to ${order.action} ${quantity} coins went through at a price of ${price}, compared to the asking price of ${order.price}.`);
+    //add to completed trades
+    this.credit = function(order, quantity, prix){
+        if (order.action.toUpperCase() === "BUY") {
+            let trade = {size: quantity, price: prix}
+            this.completedTrades.push(trade);
+        }
+
     }
 
     this.clearEmptyOrders = function(){
         this.buyOrders = this.buyOrders.filter(order => order.quantity > 0);
         this.sellOrders = this.sellOrders.filter(order => order.quantity > 0);
-        this.allOrders = this.allOrders.filter(order => order.quantity > 0);
+        this.allPendingOrders = this.allPendingOrders.filter(order => order.quantity > 0);
     }
 
     //for the API route /trades
-    this.getAllOrders = function(){
-        return this.allOrders;
+    this.getAllPendingOrders = function(){
+        return this.allPendingOrders;
     }
 
-    //for the API route /top, 
-    //returns 3 largest orders by quantity
-    this.getTopOrders = function(){
-        let sortedOrders = this.allOrders.sort(function(a, b){
-            return a.quantity - b.quantity
-        })
-        return sortedOrders.slice(0,3);
-    }
+
 
     //for the API route /trades/recent
     //returns 3 most recent orders that have not been fulfilled
-    this.getRecentOrders = function(){
-        let recentOrders = this.allOrders.reverse();
-        return recentOrders.slice(0,3);
+    this.getRecentTrades = function(){
+        let recentTrades = this.completedTrades.reverse();
+        return recentTrades.slice(0,3);
     }
 
     //for the API route /trades/:name
     this.getAllOrdersByName = function(name){
-        let ordersForThisPerson = this.allOrders.filter(order => name.toUpperCase() === order.account.toUpperCase());
+        let ordersForThisPerson = this.allPendingOrders.filter(order => name.toUpperCase() === order.account.toUpperCase());
         return ordersForThisPerson;
     }
 
@@ -167,6 +166,7 @@ function Matcher() {
 
 
 }
+
 
 
 
