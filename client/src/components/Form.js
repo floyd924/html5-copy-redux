@@ -23,14 +23,35 @@ class Form extends Component {
             price: "",
             action: ""
         }
+        this.handleQuantityChange = this.handleQuantityChange.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handlePriceChange = this.handlePriceChange.bind(this);
+        this.handleButtonSelect = this.handleButtonSelect.bind(this);
     }
 
 
 
 
-    buttonClicked(){
-        console.log("submit called");
-        //manually create a new post request with hard coded data and try and amke it work
+    handleButtonClick(event){
+        let quantityBox = document.getElementById("quantity");
+        console.log("submit state:", this.state)
+        //get name on account
+        //save name to local state
+        //send a post request using local state
+        //could hard code a post request if you need to
+    }
+
+    handleQuantityChange(event){
+        this.setState({quantity: event.target.value})
+    }
+
+    handlePriceChange(event){
+        this.setState({price: event.target.value})
+    }
+
+    handleButtonSelect(event){
+        console.log(event.target.value);
+        this.setState({action: event.target.value})
     }
 
     render(){
@@ -47,27 +68,27 @@ class Form extends Component {
                         <div class="form-item d-inline">
 
                             <label for="quantity">Quantity:</label>
-                            <input id="quantity" type="number" min="0" />
+                            <input onChange={this.handleQuantityChange} id="quantity" type="number" min="0" />
                         </div>
             
                         <div class="form-item d-inline">
 
                             <label for="price">Price:</label>
-                            <input id="price" type="number" min="0" step="0.01" />
+                            <input onChange={this.handlePriceChange} id="price" type="number" min="0" step="0.01" />
                         </div>
             
                         <div class="form-item">
                             <fieldset>
                                 <legend>Action:</legend>
-                                <input type="radio" id="action" name="action" value="BUY" />
+                                <input onClick={this.handleButtonSelect} type="radio" id="action" name="action" value="BUY" />
                                 <label for="BUY">Buy</label>
-                                <input type="radio" id="action" name="action" value="SELL" />
+                                <input onClick={this.handleButtonSelect} type="radio" id="action" name="action" value="SELL" />
                                 <label for="SELL">Sell</label>
                             </fieldset>
                         </div>
             
             
-                        <button onclick={this.buttonClicked} type="button" class="btn btn-info">Submit Order</button>
+                        <button onClick={this.handleButtonClick} type="button" class="btn btn-info">Submit Order</button>
             
                     </form>
             </div>

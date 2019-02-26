@@ -38,8 +38,6 @@
     'recents graph graph book'
     'my-orders graph graph book'
     'my-orders graph graph book';
-  /* grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; */
   grid-gap: 5px;
   padding: 10px;
   background-color: #7d7d7d;
@@ -49,10 +47,6 @@
 
 .top {
   grid-area: top-bar;
-  /* grid-column-start: 1;
-  grid-column-end: 5;
-  grid-row-start: 1;
-  grid-row-end: 2; */
 }
 
 .top-bar {
@@ -78,8 +72,6 @@
 }
 
 .login {
-  /* display: inline; */
-  /* margin-left: 50%; */
   float: right;
   padding-top: 20px;
   padding-right: 20px;
@@ -101,10 +93,6 @@
 
 .recents {
   grid-area: recents;
-  /* grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 5; */
 }
 
 .recents-container {
@@ -118,10 +106,6 @@
 
 .pracs{
   grid-area: bananas;
-  /* grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 3; */
 }
 
 .pracs-container {
@@ -136,10 +120,6 @@
 
 .order-book{
   grid-area: book;
-  /* grid-column-start: 4;
-  grid-column-end: 5;
-  grid-row-start: 2;
-  grid-row-end: 7; */
 }
 
 .order-book-container {
@@ -152,10 +132,6 @@
 
 .my-orders{
   grid-area: my-orders;
-  /* grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 5;
-  grid-row-end: 7; */
 }
 
 .my-orders-container {
@@ -168,10 +144,6 @@
 
 .graph{
   grid-area: graph;
-  /* grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 7; */
 }
 
 .graph-container{
