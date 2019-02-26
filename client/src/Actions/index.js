@@ -1,9 +1,9 @@
-import { CHANGE_USER }  from "../Constants/action-types";
-import { GET_TRADES }  from "../Constants/action-types";
-import { TRADES_LOADED } from "../Constants/action-types";
-import { GET_PENDING_ORDERS }  from "../Constants/action-types";
-import { GET_MY_ORDERS }  from "../Constants/action-types";
-import { POST_NEW_ORDER }  from "../Constants/action-types";
+import { CHANGE_USER }  from "../constants/action-types";
+import { GET_TRADES }  from "../constants/action-types";
+import { TRADES_LOADED } from "../constants/action-types";
+import { GET_PENDING_ORDERS }  from "../constants/action-types";
+import { GET_MY_ORDERS }  from "../constants/action-types";
+import { POST_NEW_ORDER }  from "../constants/action-types";
 //TRADES_LOADED
 
 const fetch = require('node-fetch');
@@ -53,6 +53,7 @@ export function getMyOrders(payload){
 //currently only getting and returning data
 //not forwarding to the store
 export function postNewOrder(payload){
+    console.log("paylaod is::", payload)
     //this returns a promise
     //use thunk
     return function(dispatch){

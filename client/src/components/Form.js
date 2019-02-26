@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 //not using this yet
 function mapDispatchToProps(dispatch){
     return {
-        postNewOrder: article => dispatch(postNewOrder())
+        postNewOrder: order => dispatch(postNewOrder(order))
     }
 }
 
@@ -18,10 +18,10 @@ class Form extends Component {
     constructor(props){
         super(props);
         this.state = {
-            account: "",
-            quantity: "",
-            price: "",
-            action: ""
+            account: "TEST",
+            quantity: null,
+            price: null,
+            action: null
         }
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -33,12 +33,10 @@ class Form extends Component {
 
 
     handleButtonClick(event){
-        let quantityBox = document.getElementById("quantity");
-        console.log("submit state:", this.state)
-        //get name on account
-        //save name to local state
-        //send a post request using local state
-        //could hard code a post request if you need to
+       // send a post request using local state
+        if (this.state.quantity && this.state.price && this.state.action) {
+            this.props.postNewOrder(this.state).then(response => console.log(response))
+        }
     }
 
     handleQuantityChange(event){
@@ -50,7 +48,6 @@ class Form extends Component {
     }
 
     handleButtonSelect(event){
-        console.log(event.target.value);
         this.setState({action: event.target.value})
     }
 
@@ -70,7 +67,7 @@ class Form extends Component {
                             <label for="quantity">Quantity:</label>
                             <input onChange={this.handleQuantityChange} id="quantity" type="number" min="0" />
                         </div>
-            
+                        <br />
                         <div class="form-item d-inline">
 
                             <label for="price">Price:</label>
