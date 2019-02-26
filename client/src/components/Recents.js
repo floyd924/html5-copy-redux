@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
     return { trades: state.trades };
 };
 
+
+//not using this yet
 function mapDispatchToProps(dispatch){
     return {
         getTrades: article => dispatch(getTrades())
@@ -35,15 +37,6 @@ class Recents extends Component {
 
 
     render(){
-
-        // const mapStateToProps = state => {
-        //     return { trades: state.trades };
-        // };
-
-        // const data = this.props.getTrades();
-        // console.log(data);
-
-        // let data = this.props.getTrades();
 
         return(
             <div className="recents-container">

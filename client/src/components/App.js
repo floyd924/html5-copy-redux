@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import logo from '../logo.svg';
 import './App.css';
 import TopBar from './TopBar.js';
 import Recents from './Recents.js';
-import Form from './Form.js';
 import OrderBook from './OrderBook.js';
 import MyOrders from './MyOrders.js';
 import Graph from './Graph.js';
-import Pracs from './Pracs.js';
+import Form from './Form.js';
 
 export class App extends Component {
   render() {
@@ -21,11 +19,8 @@ export class App extends Component {
           <div className="recents">
             <Recents />
           </div>
-          {/* <div classname="form">
-            <Form />
-          </div> */}
           <div className="pracs">
-            <Pracs />
+            <Form />
           </div>
           <div className="order-book">
             <OrderBook />
@@ -42,9 +37,7 @@ export class App extends Component {
   }
 }
 
-// App.propTypes = {
-//   name: PropTypes.string.isRequired
-// };
+
 
 //===========================================================================================
 // function mapStateToProps(state) {

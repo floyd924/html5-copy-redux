@@ -27,8 +27,7 @@ let appRouter = function (app) {
     });
 
 
-    //need this
-    //has been tested
+    
     app.get("/trades", function(req, res){
         let data = matcher.getRecentTrades();
         res.status(200).send(data);

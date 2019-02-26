@@ -26,9 +26,9 @@ export function getTrades(){
     };
 };
 
+//currently only getting and returning data
+//not forwarding to the store
 export function getPendingOrders(payload){
-    //this returns a promise
-    //use thunk
     return function (dispatch){
         return fetch("http://localhost:3001/orders")
         .then(res => res.json())
@@ -38,9 +38,9 @@ export function getPendingOrders(payload){
     }
 };
 
+//currently only getting and returning data
+//not forwarding to the store
 export function getMyOrders(payload){
-    //this returns a promise
-    //use thunk
     return function(dispatch){
         return fetch("http://localhost:3001/users/iain")
         .then(res => res.json())
@@ -50,7 +50,22 @@ export function getMyOrders(payload){
     }
 };
 
+//currently only getting and returning data
+//not forwarding to the store
 export function postNewOrder(payload){
     //this returns a promise
     //use thunk
+    return function(dispatch){
+        return fetch("http://localhost:3001/orders", {
+            method: 'POST',
+            mode: 'CORS',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        }).then(res => {
+            return res
+        })
+    }
 }

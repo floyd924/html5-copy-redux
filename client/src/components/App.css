@@ -115,21 +115,6 @@
 
 /* ===================================================================================== */
 
-/* .form{
-  /* grid-area: bananas; */
-  /*grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
-
-.form-container{
-  border: 3px solid white;
-  height: 100%;
-  width: 100%;
-} */
-/* 
-========================================================================================== */
 
 .pracs{
   grid-area: bananas;

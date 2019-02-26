@@ -6,6 +6,7 @@ const mapStateToProps = (state) => {
     return { orders: state.orders };
 };
 
+//not using this yet
 function mapDispatchToProps(dispatch){
     return {
         getPendingOrders: article => dispatch(getPendingOrders())

@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import { reducer as example } from './ducks/example';
 //import { NAME_OF_ARRIVING_COMMAND } from "here";
-import { TRADES_LOADED } from "../Constants/action-types";
+import { TRADES_LOADED } from "../constants/action-types";
 
 
 const initialState = {

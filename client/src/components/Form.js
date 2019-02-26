@@ -1,12 +1,46 @@
-import React, {Component} from 'react';
+import React, { Component} from 'react';
+import { postNewOrder } from '../actions/index.js';
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+    return { orders: state.orders };
+};
+
+//not using this yet
+function mapDispatchToProps(dispatch){
+    return {
+        postNewOrder: article => dispatch(postNewOrder())
+    }
+}
 
 class Form extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            account: "",
+            quantity: "",
+            price: "",
+            action: ""
+        }
+    }
+
+
+
+
+    buttonClicked(){
+        console.log("submit called");
+        //manually create a new post request with hard coded data and try and amke it work
+    }
+
     render(){
         return(
-            <div className="form-container">
-                <h1>this is a form</h1>
-                
-                    <form id="input-form">
+            <div className="pracs-container">
+
+                <h2>Add a new trade</h2>
+
+
+                <form id="input-form">
             
             
             
@@ -33,13 +67,12 @@ class Form extends Component {
                         </div>
             
             
-                        <button type="button" class="btn btn-info">Submit Order</button>
+                        <button onclick={this.buttonClicked} type="button" class="btn btn-info">Submit Order</button>
             
                     </form>
-                </div>
-            
+            </div>
         )
     }
 }
 
-export default Form;
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
