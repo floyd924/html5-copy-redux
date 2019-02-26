@@ -35,6 +35,7 @@ function rootReducer(state = initialState, action){
 
 
         case CHANGE_USER:
+        console.log("change user called in root.js with payload:", action.payload)
             return Object.assign({}, state, {
                 user: state.user.concat(action.payload)
             });

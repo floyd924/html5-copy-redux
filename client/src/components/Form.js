@@ -35,7 +35,8 @@ class Form extends Component {
     handleButtonClick(event){
        // send a post request using local state
         if (this.state.quantity && this.state.price && this.state.action) {
-            this.props.postNewOrder(this.state)
+            this.props.postNewOrder(this.state).then(window.location.reload());
+            //document.getElementById("input-form").reset();
         }
     }
 
