@@ -21,6 +21,7 @@ class MyOrders extends Component{
         this.getData();
     }
 
+    //should i put this in 'componentDidMount?'
     getData = function(){
         this.props.getMyOrders();
     };

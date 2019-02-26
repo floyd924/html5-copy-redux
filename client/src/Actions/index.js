@@ -60,8 +60,6 @@ export function postNewOrder(payload){
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(payload)
-        }).then(res => {
-            return res
         })
     }
 }

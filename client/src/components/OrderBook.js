@@ -20,6 +20,7 @@ class OrderBook extends Component{
         this.getData();
     }
 
+    //should i put this in 'componentDidMount?'
     getData = function(){
         this.props.getPendingOrders();
     };

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
     return { orders: state.orders };
+    //come back and check this line if not working
 };
 
 function mapDispatchToProps(dispatch){
@@ -34,7 +35,7 @@ class Form extends Component {
     handleButtonClick(event){
        // send a post request using local state
         if (this.state.quantity && this.state.price && this.state.action) {
-            this.props.postNewOrder(this.state).then(response => console.log(response))
+            this.props.postNewOrder(this.state)
         }
     }
 

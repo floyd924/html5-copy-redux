@@ -22,14 +22,12 @@ class Recents extends Component {
         this.getData();
     }
 
+    //should i put this in 'componentDidMount?'
     getData = function(){
         this.props.getTrades()
     }
 
     
-
-
-
     render(){
 
         return(

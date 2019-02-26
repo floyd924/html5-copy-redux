@@ -1,6 +1,3 @@
-import {combineReducers} from 'redux';
-import { reducer as example } from './ducks/example';
-//import { NAME_OF_ARRIVING_COMMAND } from "here";
 import { TRADES_LOADED } from "../constants/action-types";
 import { PENDING_ORDERS_LOADED } from "../constants/action-types";
 import { MY_ORDERS_LOADED } from "../constants/action-types";
@@ -31,7 +28,7 @@ function rootReducer(state = initialState, action){
 
 
         case PENDING_ORDERS_LOADED:
-        console.log("called now", action.payload)
+        console.log("pending orders called now", action.payload)
             return Object.assign({}, state, {
                 pendingOrders: state.pendingOrders.concat(action.payload)
             });
