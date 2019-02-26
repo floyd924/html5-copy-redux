@@ -16,7 +16,6 @@ function mapDispatchToProps(dispatch){
     };
 }
 
-
     
 class Recents extends Component {
 
