@@ -31,6 +31,7 @@ function rootReducer(state = initialState, action){
 
 
         case PENDING_ORDERS_LOADED:
+        console.log("called now", action.payload)
             return Object.assign({}, state, {
                 pendingOrders: state.pendingOrders.concat(action.payload)
             });
@@ -49,11 +50,5 @@ function rootReducer(state = initialState, action){
 }
 
 export default rootReducer;
-
-
-
-
-// const rootReducer = combineReducers({ example });
-// export default rootReducer;
 
 

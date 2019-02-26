@@ -1,17 +1,13 @@
 import React, { Component} from 'react';
 import {connect} from "react-redux";
 import { getTrades } from '../actions/index.js';
-import store from '../store/index.js';
-
-
-
 
 const mapStateToProps = (state) => {
     return { trades: state.trades };
 };
 
 
-//not using this yet
+//what does 'trade' do here?
 function mapDispatchToProps(dispatch){
     return {
         getTrades: trade => dispatch(getTrades())

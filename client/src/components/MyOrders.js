@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import { getMyOrders } from '../actions/index.js';
 import {connect} from "react-redux";
+import { getMyOrders } from '../actions/index.js';
 
 const mapStateToProps = (state) => {
-    return { orders: state.orders };
+    return { myOrders: state.myOrders };
 };
 
-//not using this yet
-
+//why 'order'?
 function mapDispatchToProps(dispatch){
     return {
-        getMyOrders: article => dispatch(getMyOrders())
+        getMyOrders: order => dispatch(getMyOrders())
     }
 }
 
@@ -19,14 +18,11 @@ class MyOrders extends Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            myOrders: []
-        };
         this.getData();
     }
 
     getData = function(){
-        this.props.getMyOrders().then(data => this.setState({myOrders: data}));
+        this.props.getMyOrders();
     };
 
     render(){
@@ -43,7 +39,7 @@ class MyOrders extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.myOrders.map((order, index) => {
+                            {this.props.myOrders.map((order, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{order.action}</td>
@@ -60,7 +56,4 @@ class MyOrders extends Component{
     }
 }
 
-
-// export default MyOrders;
-//need this last line to recognise the function 'getMyOrders'
 export default connect(mapStateToProps, mapDispatchToProps)(MyOrders);

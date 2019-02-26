@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import { getPendingOrders } from '../actions/index.js';
 import { connect } from "react-redux";
+import { getPendingOrders } from '../actions/index.js';
 
 const mapStateToProps = (state) => {
-    return { orders: state.orders };
+    return { pendingOrders: state.pendingOrders };
 };
 
-//not using this yet
+//what does 'order' do here?
 function mapDispatchToProps(dispatch){
     return {
-        getPendingOrders: article => dispatch(getPendingOrders())
+        getPendingOrders: order => dispatch(getPendingOrders())
     }
 }
 
@@ -17,14 +17,11 @@ class OrderBook extends Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            allOrders: []
-        };
         this.getData();
     }
 
     getData = function(){
-        this.props.getPendingOrders().then(data => this.setState({ allOrders: data}));
+        this.props.getPendingOrders();
     };
 
     render(){
@@ -42,7 +39,7 @@ class OrderBook extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.allOrders.map((order, index) => {
+                            {this.props.pendingOrders.map((order, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{order.account}</td>
