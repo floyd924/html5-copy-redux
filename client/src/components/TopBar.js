@@ -13,7 +13,7 @@ class TopBar extends Component {
                         <option value="benj">Benj</option>
                         <option value="steve">Steve</option>
                     </select>
-                    <button type="button" class="btn btn-warning">Change</button>
+                    <button type="button" className="btn btn-warning">Change</button>
 
                 </div>
             </div>

@@ -31,8 +31,8 @@ class OrderBook extends Component{
         return(
             <div className="order-book-container">
                 <h1>here are the current pending orders</h1>
-                <div class="table-wrapper-scroll-y">
-                    <table class="table table-dark table-striped table-bordered">
+                <div className="table-wrapper-scroll-y">
+                    <table className="table table-dark table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -42,9 +42,9 @@ class OrderBook extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.allOrders.map((order) => {
+                            {this.state.allOrders.map((order, index) => {
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <td>{order.account}</td>
                                         <td>{order.action}</td>
                                         <td>{order.quantity}</td>

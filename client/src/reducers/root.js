@@ -2,56 +2,56 @@ import {combineReducers} from 'redux';
 import { reducer as example } from './ducks/example';
 //import { NAME_OF_ARRIVING_COMMAND } from "here";
 import { TRADES_LOADED } from "../constants/action-types";
+import { PENDING_ORDERS_LOADED } from "../constants/action-types";
+import { MY_ORDERS_LOADED } from "../constants/action-types";
+import { CHANGE_USER } from "../constants/action-types";
 
 
 const initialState = {
     user: [],
-    trades: ["iain", "benj", "steve"]
+    trades: [],
+    myOrders: [],
+    pendingOrders: []
 }
 
 function rootReducer(state = initialState, action){
-    if (action.type === TRADES_LOADED) {
-        return Object.assign({}, state, {
-            trades: state.trades.concat(action.payload)
-        });
-    }
 
-    if (action.type === "NAME_OF_FUNCTIONN"){
-        return Object.assign({}, state, {
-            remoteArticles: state.remoteArticles.concat(action.payload)
-        });
-    } 
-    return state;
+    switch (action.type) {
+        case TRADES_LOADED:
+            console.log("Trades loaded has been called in the root with poayload:", action.payload)
+            return Object.assign({}, state, {
+                trades: state.trades.concat(action.payload)
+            });
+
+
+        case MY_ORDERS_LOADED:
+            return Object.assign({}, state, {
+                myOrders: state.myOrders.concat(action.payload)
+            });
+
+
+        case PENDING_ORDERS_LOADED:
+            return Object.assign({}, state, {
+                pendingOrders: state.pendingOrders.concat(action.payload)
+            });
+
+
+        case CHANGE_USER:
+            return Object.assign({}, state, {
+                user: state.user.concat(action.payload)
+            });
+
+
+        default:
+        return state;
+
+    }
 }
 
 export default rootReducer;
 
 
 
-
-// // export function changeUser(payload){
-// //     return {type: "CHANGE_USER", payload}
-// // };
-
-// // export function getTrades(payload){
-// //     //this returns a promise
-// //     //use thunk
-// // };
-
-// // export function getPendingOrders(payload){
-// //     //this returns a promise
-// //     //use thunk
-// // };
-
-// // export function getMyOrders(payload){
-// //     //this returns a promise
-// //     //use thunk
-// // };
-
-// // export function postNewOrder(payload){
-// //     //this returns a promise
-// //     //use thunk
-// // }
 
 // const rootReducer = combineReducers({ example });
 // export default rootReducer;

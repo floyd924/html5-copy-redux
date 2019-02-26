@@ -33,8 +33,8 @@ class MyOrders extends Component{
         return(
             <div className="my-orders-container">
                 <h1>all my orders go here</h1>
-                <div class="table-wrapper-scroll-y">
-                    <table class="table table-dark table-striped table-bordered">
+                <div className="table-wrapper-scroll-y">
+                    <table className="table table-dark table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Action</th>
@@ -43,9 +43,9 @@ class MyOrders extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.myOrders.map((order) => {
+                            {this.state.myOrders.map((order, index) => {
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <td>{order.action}</td>
                                         <td>{order.quantity}</td>
                                         <td>{order.price}</td>

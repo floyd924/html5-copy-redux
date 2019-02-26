@@ -17,12 +17,11 @@ export function changeUser(payload){
 export function getTrades(){
     return function(dispatch) {
         return fetch("http://localhost:3001/trades")
-        // return fetch("https://api.punkapi.com/v2/beers")
-        // .then("we are here now again")
         .then(res => res.json())
-        // .then(json => {
-        //     dispatch({ type: TRADES_LOADED, payload: json });
-        // });
+        //uncomment this block to call the TRADES_LAODED section in the root.js. It kills the 'this.state' in Recents.js though
+        .then(json => {
+            dispatch({ type: TRADES_LOADED, payload: json });
+        });
     };
 };
 
@@ -50,12 +49,9 @@ export function getMyOrders(payload){
     }
 };
 
-//currently only getting and returning data
+
 //not forwarding to the store
 export function postNewOrder(payload){
-    console.log("paylaod is::", payload)
-    //this returns a promise
-    //use thunk
     return function(dispatch){
         return fetch("http://localhost:3001/orders", {
             method: 'POST',

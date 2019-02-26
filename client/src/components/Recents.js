@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import {connect} from "react-redux";
 import { getTrades } from '../actions/index.js';
+import store from '../store/index.js';
+
 
 
 
@@ -12,7 +14,7 @@ const mapStateToProps = (state) => {
 //not using this yet
 function mapDispatchToProps(dispatch){
     return {
-        getTrades: article => dispatch(getTrades())
+        getTrades: trade => dispatch(getTrades())
     };
 }
 
@@ -21,14 +23,11 @@ class Recents extends Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            allTrades: []
-        };
         this.getData();
     }
 
     getData = function(){
-        this.props.getTrades().then(data => this.setState({allTrades: data}));
+        this.props.getTrades()
     }
 
     
@@ -43,8 +42,8 @@ class Recents extends Component {
                 <h2>Recent Completed Trades</h2>
 
 
-                <div class="table-wrapper-scroll-y">
-                    <table class="table table-dark table-striped table-bordered">
+                <div className="table-wrapper-scroll-y">
+                    <table className="table table-dark table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Size</th>
@@ -52,9 +51,9 @@ class Recents extends Component {
                             </tr>
                         </thead>
                         <tbody>                            
-                            {this.state.allTrades.map((trade) => {
+                            {this.props.trades.map((trade, index) => {
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                        <td>{trade.size}</td>
                                        <td>{trade.price}</td>
                                    </tr>)
