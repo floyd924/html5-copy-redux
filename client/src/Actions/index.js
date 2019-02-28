@@ -1,20 +1,18 @@
 import { CHANGE_USER }  from "../constants/action-types";
-import { GET_TRADES }  from "../constants/action-types";
 import { TRADES_LOADED } from "../constants/action-types";
 import { PENDING_ORDERS_LOADED } from "../constants/action-types";
 import { MY_ORDERS_LOADED } from "../constants/action-types";
-import { GET_PENDING_ORDERS }  from "../constants/action-types";
-import { GET_MY_ORDERS }  from "../constants/action-types";
-import { POST_NEW_ORDER }  from "../constants/action-types";
+import { store } from "../store/index";
+
 
 
 const fetch = require('node-fetch');
 
-//we are not going to do the 'get state' methods just now
-
 export function changeUser(payload){
+    console.log("change user called, name is", payload.name)
     return {type: CHANGE_USER, payload}
 };
+
 
 export function getTrades(){
     return function(dispatch) {
@@ -38,9 +36,9 @@ export function getPendingOrders(payload){
 };
 
 
-export function getMyOrders(payload){
+export function getMyOrders(name){
     return function(dispatch){
-        return fetch("http://localhost:3001/users/iain")
+        return fetch(`http://localhost:3001/users/${name}`)
         .then(res => res.json())
         .then(json => {
             dispatch({ type: MY_ORDERS_LOADED, payload: json });

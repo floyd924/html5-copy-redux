@@ -5,7 +5,7 @@ import { CHANGE_USER } from "../constants/action-types";
 
 
 const initialState = {
-    user: [],
+    user: ["iain"],
     trades: [],
     myOrders: [],
     pendingOrders: []
@@ -15,7 +15,6 @@ function rootReducer(state = initialState, action){
 
     switch (action.type) {
         case TRADES_LOADED:
-            console.log("Trades loaded has been called in the root with poayload:", action.payload)
             return Object.assign({}, state, {
                 trades: state.trades.concat(action.payload)
             });
@@ -23,22 +22,22 @@ function rootReducer(state = initialState, action){
 
         case MY_ORDERS_LOADED:
             return Object.assign({}, state, {
-                myOrders: state.myOrders.concat(action.payload)
-            });
+                myOrders: state.myOrders.slice(0, 0).concat(action.payload)
+            })
 
 
         case PENDING_ORDERS_LOADED:
-        console.log("pending orders called now", action.payload)
             return Object.assign({}, state, {
                 pendingOrders: state.pendingOrders.concat(action.payload)
             });
 
 
         case CHANGE_USER:
-        console.log("change user called in root.js with payload:", action.payload)
-            return Object.assign({}, state, {
-                user: state.user.concat(action.payload)
-            });
+            const newObject2 = Object.assign({}, state, {
+                user: getNewUser(initialState.user, action)
+            })
+            return newObject2;
+            
 
 
         default:
@@ -47,6 +46,16 @@ function rootReducer(state = initialState, action){
     }
 }
 
+
+function getNewUser(oldState, act){
+    let newUser = oldState.slice(0, 0)
+    newUser.push(act.payload.name);
+    return newUser
+};
+
 export default rootReducer;
 
 
+
+
+ 

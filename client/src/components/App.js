@@ -40,15 +40,10 @@ export class App extends Component {
 
 
 
-//===========================================================================================
 const mapStateToProps = (state) => {
   return { state };
 };
 
-console.log("looking for store.getState in App.js", store.getState())
 
 
 export default connect(mapStateToProps)(App);
-//============================================================================================
-
-// export default App;

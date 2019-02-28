@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { changeUser } from '../actions/index';
+import { getMyOrders } from '../actions/index';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
-    return { user: state.user };
+    return { 
+        user: state.user,
+        myOrders: state.myOrders 
+    };
 }
 
 function mapDispatchToProps(dispatch){
     return {
-        changeUser: user => dispatch(changeUser(user))
+        changeUser: user => dispatch(changeUser(user)),
+        getMyOrders: name => dispatch(getMyOrders(name))
     }
 }
 
@@ -33,6 +38,7 @@ class TopBar extends Component {
     handleButtonClick(event){
         console.log("button clicked")
         this.props.changeUser(this.state);
+        this.props.getMyOrders(this.state.name);
     }
 
     render(){
