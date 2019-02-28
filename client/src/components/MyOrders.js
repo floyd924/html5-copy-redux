@@ -40,7 +40,7 @@ class MyOrders extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.myOrders.map((order, index) => {
+                            {this.props.myOrders ? this.props.myOrders.map((order, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{order.action}</td>
@@ -48,7 +48,7 @@ class MyOrders extends Component{
                                         <td>{order.price}</td>
                                     </tr>
                                 )
-                            })}
+                            }): null }
                         </tbody>
                     </table>
                 </div>

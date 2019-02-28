@@ -37,13 +37,13 @@ class Recents extends Component {
                             </tr>
                         </thead>
                         <tbody>                            
-                            {this.props.trades.map((trade, index) => {
+                            {this.props.trades ? this.props.trades.map((trade, index) => {
                                 return (
                                     <tr key={index}>
                                        <td>{trade.size}</td>
                                        <td>{trade.price}</td>
                                    </tr>)
-                            })}
+                            }): null }
                         </tbody>
                     </table>
                 </div>

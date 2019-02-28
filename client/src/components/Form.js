@@ -38,6 +38,7 @@ class Form extends Component {
     handleButtonClick(event){
         if (this.state.quantity && this.state.price && this.state.action) {
             this.props.postNewOrder(this.state)
+            .then(window.alert("Your trade has been accepted"))
             .then(this.props.getMyOrders(this.state.account))
             .then(this.props.getTrades())
             .then(this.props.getPendingOrders())

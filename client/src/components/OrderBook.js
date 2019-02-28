@@ -33,7 +33,7 @@ class OrderBook extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.pendingOrders.map((order, index) => {
+                            {this.props.pendingOrders ? this.props.pendingOrders.map((order, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{order.account}</td>
@@ -42,7 +42,7 @@ class OrderBook extends Component{
                                         <td>{order.price}</td>
                                     </tr>
                                 )
-                            })}
+                            }): null }
                         </tbody>
                     </table>
                 </div>
