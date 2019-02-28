@@ -33,7 +33,31 @@ class OrderBook extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.pendingOrders ? this.props.pendingOrders.map((order, index) => {
+                            {this.props.pendingOrders ? this.props.pendingOrders.filter(x => x.action ==="SELL").map((order, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{order.account}</td>
+                                        <td>{order.action}</td>
+                                        <td>{order.quantity}</td>
+                                        <td>{order.price}</td>
+                                    </tr>
+                                )
+                            }): null }
+                        </tbody>
+                    </table>
+                </div>
+                <div className="table-wrapper-scroll-y">
+                    <table className="table table-dark table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.props.pendingOrders ? this.props.pendingOrders.filter(x => x.action === "BUY").map((order, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{order.account}</td>
