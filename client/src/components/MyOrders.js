@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import { getMyOrders } from '../actions/index.js';
-import store from '../store/index.js';
 
 const mapStateToProps = (state) => {
     return { 
@@ -10,7 +9,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-//why 'order'?
+
 function mapDispatchToProps(dispatch){
     return {
         getMyOrders: name => dispatch(getMyOrders(name))
@@ -28,9 +27,6 @@ class MyOrders extends Component{
 
     //should i put this in 'componentDidMount?'
 
-    getName = function(){
-        return this.props.user[0]
-    }
 
     getData = function(){
         let userName = this.props.user[0];

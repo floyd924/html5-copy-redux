@@ -16,7 +16,7 @@ function rootReducer(state = initialState, action){
     switch (action.type) {
         case TRADES_LOADED:
             return Object.assign({}, state, {
-                trades: state.trades.concat(action.payload)
+                trades: state.trades.slice(0,0).concat(action.payload)
             });
 
 
@@ -28,7 +28,7 @@ function rootReducer(state = initialState, action){
 
         case PENDING_ORDERS_LOADED:
             return Object.assign({}, state, {
-                pendingOrders: state.pendingOrders.concat(action.payload)
+                pendingOrders: state.pendingOrders.slice(0,0).concat(action.payload)
             });
 
 
