@@ -8,6 +8,7 @@ import OrderBook from './OrderBook.js';
 import MyOrders from './MyOrders.js';
 import Graph from './Graph.js';
 import Form from './Form.js';
+import store from '../store/index';
 
 export class App extends Component {
   render() {
@@ -40,13 +41,14 @@ export class App extends Component {
 
 
 //===========================================================================================
-// function mapStateToProps(state) {
-//   return {
-//     name: state.example.name
-//   };
-// }
+const mapStateToProps = (state) => {
+  return { state };
+};
 
-// export default connect(mapStateToProps)(App);
+console.log("looking for store.getState in App.js", store.getState())
+
+
+export default connect(mapStateToProps)(App);
 //============================================================================================
 
-export default App;
+// export default App;

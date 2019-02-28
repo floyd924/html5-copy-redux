@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
     return { orders: state.orders };
+    //come back and check this line if not working
 };
 
-//not using this yet
 function mapDispatchToProps(dispatch){
     return {
-        postNewOrder: article => dispatch(postNewOrder())
+        postNewOrder: order => dispatch(postNewOrder(order))
     }
 }
 
@@ -18,10 +18,10 @@ class Form extends Component {
     constructor(props){
         super(props);
         this.state = {
-            account: "",
-            quantity: "",
-            price: "",
-            action: ""
+            account: "TEST",
+            quantity: null,
+            price: null,
+            action: null
         }
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -33,12 +33,11 @@ class Form extends Component {
 
 
     handleButtonClick(event){
-        let quantityBox = document.getElementById("quantity");
-        console.log("submit state:", this.state)
-        //get name on account
-        //save name to local state
-        //send a post request using local state
-        //could hard code a post request if you need to
+       // send a post request using local state
+        if (this.state.quantity && this.state.price && this.state.action) {
+            this.props.postNewOrder(this.state).then(window.location.reload());
+            //document.getElementById("input-form").reset();
+        }
     }
 
     handleQuantityChange(event){
@@ -50,7 +49,6 @@ class Form extends Component {
     }
 
     handleButtonSelect(event){
-        console.log(event.target.value);
         this.setState({action: event.target.value})
     }
 
@@ -65,30 +63,30 @@ class Form extends Component {
             
             
             
-                        <div class="form-item d-inline">
+                        <div className="form-item d-inline">
 
-                            <label for="quantity">Quantity:</label>
+                            <label htmlFor="quantity">Quantity:</label>
                             <input onChange={this.handleQuantityChange} id="quantity" type="number" min="0" />
                         </div>
-            
-                        <div class="form-item d-inline">
+                        <br />
+                        <div className="form-item d-inline">
 
-                            <label for="price">Price:</label>
+                            <label htmlFor="price">Price:</label>
                             <input onChange={this.handlePriceChange} id="price" type="number" min="0" step="0.01" />
                         </div>
             
-                        <div class="form-item">
+                        <div className="form-item">
                             <fieldset>
                                 <legend>Action:</legend>
                                 <input onClick={this.handleButtonSelect} type="radio" id="action" name="action" value="BUY" />
-                                <label for="BUY">Buy</label>
+                                <label htmlFor="BUY">Buy</label>
                                 <input onClick={this.handleButtonSelect} type="radio" id="action" name="action" value="SELL" />
-                                <label for="SELL">Sell</label>
+                                <label htmlFor="SELL">Sell</label>
                             </fieldset>
                         </div>
             
             
-                        <button onClick={this.handleButtonClick} type="button" class="btn btn-info">Submit Order</button>
+                        <button onClick={this.handleButtonClick} type="button" className="btn btn-info">Submit Order</button>
             
                     </form>
             </div>

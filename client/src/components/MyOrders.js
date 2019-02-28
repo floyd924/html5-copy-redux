@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import { getMyOrders } from '../actions/index.js';
 import {connect} from "react-redux";
+import { getMyOrders } from '../actions/index.js';
 
 const mapStateToProps = (state) => {
-    return { orders: state.orders };
+    return { myOrders: state.myOrders };
 };
 
-//not using this yet
-
+//why 'order'?
 function mapDispatchToProps(dispatch){
     return {
-        getMyOrders: article => dispatch(getMyOrders())
+        getMyOrders: order => dispatch(getMyOrders())
     }
 }
 
@@ -19,22 +18,20 @@ class MyOrders extends Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            myOrders: []
-        };
         this.getData();
     }
 
+    //should i put this in 'componentDidMount?'
     getData = function(){
-        this.props.getMyOrders().then(data => this.setState({myOrders: data}));
+        this.props.getMyOrders();
     };
 
     render(){
         return(
             <div className="my-orders-container">
                 <h1>all my orders go here</h1>
-                <div class="table-wrapper-scroll-y">
-                    <table class="table table-dark table-striped table-bordered">
+                <div className="table-wrapper-scroll-y">
+                    <table className="table table-dark table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Action</th>
@@ -43,9 +40,9 @@ class MyOrders extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.myOrders.map((order) => {
+                            {this.props.myOrders.map((order, index) => {
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <td>{order.action}</td>
                                         <td>{order.quantity}</td>
                                         <td>{order.price}</td>
@@ -60,7 +57,4 @@ class MyOrders extends Component{
     }
 }
 
-
-// export default MyOrders;
-//need this last line to recognise the function 'getMyOrders'
 export default connect(mapStateToProps, mapDispatchToProps)(MyOrders);

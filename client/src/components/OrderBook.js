@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import { getPendingOrders } from '../actions/index.js';
 import { connect } from "react-redux";
+import { getPendingOrders } from '../actions/index.js';
 
 const mapStateToProps = (state) => {
-    return { orders: state.orders };
+    return { pendingOrders: state.pendingOrders };
 };
 
-//not using this yet
+//what does 'order' do here?
 function mapDispatchToProps(dispatch){
     return {
-        getPendingOrders: article => dispatch(getPendingOrders())
+        getPendingOrders: order => dispatch(getPendingOrders())
     }
 }
 
@@ -17,22 +17,20 @@ class OrderBook extends Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            allOrders: []
-        };
         this.getData();
     }
 
+    //should i put this in 'componentDidMount?'
     getData = function(){
-        this.props.getPendingOrders().then(data => this.setState({ allOrders: data}));
+        this.props.getPendingOrders();
     };
 
     render(){
         return(
             <div className="order-book-container">
                 <h1>here are the current pending orders</h1>
-                <div class="table-wrapper-scroll-y">
-                    <table class="table table-dark table-striped table-bordered">
+                <div className="table-wrapper-scroll-y">
+                    <table className="table table-dark table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -42,9 +40,9 @@ class OrderBook extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.allOrders.map((order) => {
+                            {this.props.pendingOrders.map((order, index) => {
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <td>{order.account}</td>
                                         <td>{order.action}</td>
                                         <td>{order.quantity}</td>
