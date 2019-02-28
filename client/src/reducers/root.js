@@ -14,29 +14,31 @@ const initialState = {
 function rootReducer(state = initialState, action){
 
     switch (action.type) {
+        //TODO: solve this:
+        //.slice(0,0) creates a copy that is empty
+        //these throw errors if i change .concat to .push
         case TRADES_LOADED:
-            return Object.assign({}, state, {
+            return  {...state, 
                 trades: state.trades.slice(0,0).concat(action.payload)
-            });
+            };
 
 
         case MY_ORDERS_LOADED:
-            return Object.assign({}, state, {
+            return { ...state, 
                 myOrders: state.myOrders.slice(0, 0).concat(action.payload)
-            })
+            };
 
 
         case PENDING_ORDERS_LOADED:
-            return Object.assign({}, state, {
+            return { ...state, 
                 pendingOrders: state.pendingOrders.slice(0,0).concat(action.payload)
-            });
+            };
 
 
         case CHANGE_USER:
-            const newObject2 = Object.assign({}, state, {
+            return { ...state,
                 user: getNewUser(initialState.user, action)
-            })
-            return newObject2;
+            };
             
 
 

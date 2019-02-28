@@ -5,22 +5,14 @@ import { getTrades } from '../actions/index.js';
 import { getMyOrders } from '../actions/index.js';
 import { getPendingOrders } from '../actions/index.js';
 
+const mapStateToProps = state => ({ orders: state.orders, user: state.user})
 
-const mapStateToProps = (state) => {
-    return { 
-        orders: state.orders,
-        user: state.user 
-    };
-};
-
-function mapDispatchToProps(dispatch){
-    return {
-        postNewOrder: order => dispatch(postNewOrder(order)),
-        getTrades: trade => dispatch(getTrades()),
-        getMyOrders: name => dispatch(getMyOrders(name)),
-        getPendingOrders: order => dispatch(getPendingOrders())
-    }
-}
+const mapDispatchToProps = dispatch => ({
+    postNewOrder: order => dispatch(postNewOrder(order)),
+    getTrades: trade => dispatch(getTrades()),
+    getMyOrders: name => dispatch(getMyOrders(name)),
+    getPendingOrders: order => dispatch(getPendingOrders())
+})
 
 class Form extends Component {
 
@@ -41,17 +33,15 @@ class Form extends Component {
 
 
 
-    //at the momoent the whole page reloads and resets to default...
-    //instead we want to call each getter method from here, using the current state
+
+    //we want to call each getter method from here, using the current state
     handleButtonClick(event){
         if (this.state.quantity && this.state.price && this.state.action) {
-            console.log("button clicked")
             this.props.postNewOrder(this.state)
             .then(this.props.getMyOrders(this.state.account))
             .then(this.props.getTrades())
             .then(this.props.getPendingOrders())
             .then(this.refreshThisComponent())
-            // .then(this.render);
         }
     }
 

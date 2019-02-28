@@ -2,31 +2,21 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import { getMyOrders } from '../actions/index.js';
 
-const mapStateToProps = (state) => {
-    return { 
-        myOrders: state.myOrders,
-        user: state.user 
-    };
-};
+
+const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user})
 
 
-function mapDispatchToProps(dispatch){
-    return {
-        getMyOrders: name => dispatch(getMyOrders(name))
-    }
-}
+
+const mapDispatchToProps = dispatch => ({getMyOrders: name => dispatch(getMyOrders(name))})
 
 
 class MyOrders extends Component{
 
     constructor(props){
         super(props);
-        this.getData();
-        
+        //should i put this in 'componentDidMount?'
+        this.getData();    
     }
-
-    //should i put this in 'componentDidMount?'
-
 
     getData = function(){
         let userName = this.props.user[0];

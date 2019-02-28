@@ -2,25 +2,18 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { getPendingOrders } from '../actions/index.js';
 
-const mapStateToProps = (state) => {
-    return { pendingOrders: state.pendingOrders };
-};
+const mapStateToProps = state => ({ pendingOrders: state.pendingOrders });
 
-//what does 'order' do here?
-function mapDispatchToProps(dispatch){
-    return {
-        getPendingOrders: order => dispatch(getPendingOrders())
-    }
-}
+const mapDispatchToProps = dispatch => ({ getPendingOrders: () => dispatch(getPendingOrders()) })
 
 class OrderBook extends Component{
 
     constructor(props){
         super(props);
+        //should i put this in 'componentDidMount?'
         this.getData();
     }
 
-    //should i put this in 'componentDidMount?'
     getData = function(){
         this.props.getPendingOrders();
     };

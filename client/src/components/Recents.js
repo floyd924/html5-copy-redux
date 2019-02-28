@@ -2,27 +2,19 @@ import React, { Component} from 'react';
 import {connect} from "react-redux";
 import { getTrades } from '../actions/index.js';
 
-const mapStateToProps = (state) => {
-    return { trades: state.trades };
-};
+const mapStateToProps = state => ({ trades: state.trades });
 
-
-//what does 'trade' do here?
-function mapDispatchToProps(dispatch){
-    return {
-        getTrades: trade => dispatch(getTrades())
-    };
-}
+const mapDispatchToProps = dispatch => ({ getTrades: () => dispatch(getTrades())});
 
     
 class Recents extends Component {
 
     constructor(props){
         super(props);
+        //should i put this in 'componentDidMount?'
         this.getData();
     }
 
-    //should i put this in 'componentDidMount?'
     getData = function(){
         this.props.getTrades()
     }
