@@ -18,6 +18,8 @@ function mapDispatchToProps(dispatch){
 }
 
 
+
+
 class TopBar extends Component {
 
     constructor(props){
@@ -27,16 +29,24 @@ class TopBar extends Component {
         }
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
+
+    componentDidMount(){
+        console.log("topbar did mount");
+        this.props.changeUser(this.state);
+        //this method is working, because the name displayed on myOrdwers table is correct
     }
 
 
     handleNameChange(event){
-        console.log("name changes to", this.state.name)
         this.setState({name: event.target.value})
+        console.log("name changes to", this.state.name)
+        //the above console log is aleways 1 behind the actual state. why?
     }
 
     handleButtonClick(event){
-        console.log("button clicked")
+        console.log("button clicked", this.state.name)
         this.props.changeUser(this.state);
         this.props.getMyOrders(this.state.name);
     }

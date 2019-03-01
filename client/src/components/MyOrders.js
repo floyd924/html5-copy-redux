@@ -15,14 +15,30 @@ class MyOrders extends Component{
     constructor(props){
         super(props);
         //should i put this in 'componentDidMount?'
-        this.getData();    
+        this.getInitialData();    
+    }
+
+    getInitialData = function(){
+        this.props.getMyOrders("iain");
     }
 
     getData = function(){
         let userName = this.props.user[0];
+        console.log(userName)
          this.props.getMyOrders(userName);
 
     };
+
+    componentDidUpdate(prevProps){
+        console.log("myOrders did update")
+        if (this.props.myOrders != prevProps.myOrders) {
+            console.log("no match");
+            console.log(this.props.user[0])
+            console.log("this.props.myorders:", this.props.myOrders);
+            console.log("prevprops.myOrders", prevProps.myOrders)
+            //this.getData(this.props.user[0])
+        }   
+    }
     
 
     render(){

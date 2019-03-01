@@ -38,6 +38,7 @@ export function getMyOrders(name){
 
 
 export function postNewOrder(payload){
+    console.log("post new order is being called")
     return function(){
         return fetch("http://localhost:3001/orders", {
             method: 'POST',

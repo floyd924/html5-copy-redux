@@ -5,7 +5,7 @@ import { CHANGE_USER } from "../constants/action-types";
 
 
 const initialState = {
-    user: ["iain"],
+    user: ["default"],
     trades: [],
     myOrders: [],
     pendingOrders: []
@@ -18,20 +18,24 @@ function rootReducer(state = initialState, action){
         //.slice(0,0) creates a copy that is empty
         //these throw errors if i change .concat to .push
         case TRADES_LOADED:
+        console.log("trades are being overwritten with new stuff:")
             return  {...state, 
-                trades: state.trades.slice(0,0).concat(action.payload)
+                trades: action.payload
             };
 
 
         case MY_ORDERS_LOADED:
+        console.log("myOrders is being overwritten")
             return { ...state, 
-                myOrders: state.myOrders.slice(0, 0).concat(action.payload)
+                myOrders: action.payload
+                // myOrders: state.myOrders.slice(0, 0).concat(action.payload)
             };
 
 
         case PENDING_ORDERS_LOADED:
+        console.log("pending orders are being overwritten with new stuff:", action.payload)
             return { ...state, 
-                pendingOrders: state.pendingOrders.slice(0,0).concat(action.payload)
+                pendingOrders: action.payload
             };
 
 

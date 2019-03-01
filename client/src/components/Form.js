@@ -9,9 +9,9 @@ const mapStateToProps = state => ({ orders: state.orders, user: state.user})
 
 const mapDispatchToProps = dispatch => ({
     postNewOrder: order => dispatch(postNewOrder(order)),
-    getTrades: trade => dispatch(getTrades()),
+    getTrades: () => dispatch(getTrades()),
     getMyOrders: name => dispatch(getMyOrders(name)),
-    getPendingOrders: order => dispatch(getPendingOrders())
+    getPendingOrders: () => dispatch(getPendingOrders())
 })
 
 class Form extends Component {
@@ -29,6 +29,13 @@ class Form extends Component {
         this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleButtonSelect = this.handleButtonSelect.bind(this);
         this.refreshThisComponent = this.refreshThisComponent.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+
+    }
+
+    componentDidMount(){
+        console.log("component did mount!");
+        this.setState({ account: this.props.user[0]});
     }
 
 
@@ -36,25 +43,42 @@ class Form extends Component {
 
     //we want to call each getter method from here, using the current state
     handleButtonClick(event){
+        let tempName = this.props.user[0]; //"iain"
+        this.setState({ account: tempName }); //does not seem to work!
+        const newOrder = {
+            account: tempName,
+            quantity: this.state.quantity,
+            price: this.state.price,
+            action: this.state.action
+        }
         if (this.state.quantity && this.state.price && this.state.action) {
-            this.props.postNewOrder(this.state)
-            .then(window.alert("Your trade has been accepted"))
-            .then(this.props.getMyOrders(this.state.account))
-            .then(this.props.getTrades())
-            .then(this.props.getPendingOrders())
-            .then(this.refreshThisComponent())
+            this.props.postNewOrder(newOrder)
+            .then(this.timer(newOrder));
         }
     }
 
-    refreshThisComponent = function(){
+    timer = (newOrder) => {
+        setTimeout(() => {
+            this.refreshAllComponents(newOrder)
+        }, 5);
+    }
+
+    refreshAllComponents = function(newOrder){
+        this.props.getPendingOrders()
+        //window.alert("Your trade has been accepted")
+        this.props.getMyOrders(newOrder.account)
+        this.props.getTrades()
+        this.refreshThisComponent(newOrder)
+    }
+
+    refreshThisComponent = function(newOrder){
         this.setState(
             {
-                account: this.props.user[0],
+                account: newOrder.account,
                 quantity: null,
                 price: null,
                 action: null
             })
-        console.log("here is the new state", this.state);
         document.getElementById("input-form").reset();
     }
 
