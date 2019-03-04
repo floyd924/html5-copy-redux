@@ -19,7 +19,7 @@ class Form extends Component {
     constructor(props){
         super(props);
         this.state = {
-            account: this.props.user[0],
+            account: this.props.user,
             quantity: null,
             price: null,
             action: null
@@ -34,16 +34,14 @@ class Form extends Component {
     }
 
     componentDidMount(){
-        console.log("component did mount!");
-        this.setState({ account: this.props.user[0]});
+        this.setState({ account: this.props.user});
     }
-
 
 
 
     //we want to call each getter method from here, using the current state
     handleButtonClick(event){
-        let tempName = this.props.user[0]; //"iain"
+        const tempName = this.props.user; //"iain"
         this.setState({ account: tempName }); //does not seem to work!
         const newOrder = {
             account: tempName,
@@ -54,19 +52,12 @@ class Form extends Component {
         if (this.state.quantity && this.state.price && this.state.action) {
             this.props.postNewOrder(newOrder)
             .then(() => this.refreshAllComponents(newOrder))
-            // .then(this.timer(newOrder));
         }
     }
 
-    // timer = (newOrder) => {
-    //     setTimeout(() => {
-    //         this.refreshAllComponents(newOrder)
-    //     }, 10);
-    // }
-
     refreshAllComponents = function(newOrder){
         this.props.getPendingOrders()
-        //window.alert("Your trade has been accepted")
+        window.alert("Your trade has been accepted")
         this.props.getMyOrders(newOrder.account)
         this.props.getTrades()
         this.refreshThisComponent(newOrder)

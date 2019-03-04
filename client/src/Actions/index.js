@@ -6,41 +6,41 @@ import { MY_ORDERS_LOADED } from "../Constants/action-types";
 
 
 const fetch = require('node-fetch');
+const url = "http://localhost:3001";
+
+const fetchAndDispatch = function(dispatch, path, command) {
+    return fetch(path)
+    .then(res => res.json())
+    .then(json => dispatch({ type: command, payload: json}));
+}
 
 export const changeUser = payload => ({ type: CHANGE_USER, payload });
 
 
 export function getTrades(){
     return function(dispatch) {
-        return fetch("http://localhost:3001/trades")
-        .then(res => res.json())
-        .then(json => dispatch({ type: TRADES_LOADED, payload: json }));
+        fetchAndDispatch(dispatch, `${url}/trades`, TRADES_LOADED)
     };
 };
 
 
 export function getPendingOrders(){
     return function (dispatch){
-        return fetch("http://localhost:3001/orders")
-        .then(res => res.json())
-        .then(json => dispatch({ type: PENDING_ORDERS_LOADED, payload: json }));
+        fetchAndDispatch(dispatch, `${url}/orders`, PENDING_ORDERS_LOADED)
     }
 };
 
 
 export function getMyOrders(name){
     return function(dispatch){
-        return fetch(`http://localhost:3001/users/${name}`)
-        .then(res => res.json())
-        .then(json => dispatch({ type: MY_ORDERS_LOADED, payload: json }));
+        fetchAndDispatch(dispatch, `${url}/users/${name}`, MY_ORDERS_LOADED)
     }
 };
 
 
 export function postNewOrder(payload){
-    console.log("post new order is being called")
     return function(){
-        return fetch("http://localhost:3001/orders", {
+        return fetch(`${url}/orders`, {
             method: 'POST',
             mode: 'CORS',
             headers: {

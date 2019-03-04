@@ -4,10 +4,9 @@ matcher.seed();
 
 let appRouter = function (app) {
     app.get("/", function(req, res){
-        res.status(200).send("welcome to the restful API :) This is a GET request on / ");
+        res.status(200).send("This is a GET request on / ");
     });
 
-    //maybe change this to buy and sell?
     app.get("/orders", function (req, res){
         let data = matcher.getAllPendingOrders();
         res.status(200).send(data);
@@ -15,7 +14,6 @@ let appRouter = function (app) {
 
 
     app.post("/orders", function (req, res){
-        console.log("post request has arrived", req.body);
         let newData = req.body;
         matcher.newOrder(newData.account, newData.price, newData.quantity, newData.action);
         res.status(201).send(matcher.getAllPendingOrders());

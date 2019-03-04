@@ -43,6 +43,12 @@
   background-color: #7d7d7d;
 }
 
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 /* ================================================================================== */
 
 .top {
@@ -113,7 +119,12 @@
   height: 100%;
   width: 100%;
 }
-/* 
+
+#input-form {
+  border: 3px solid salmon;
+  width: 300px;
+  margin: auto;
+}
 
 
 /* ===================================================================== */

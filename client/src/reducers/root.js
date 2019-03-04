@@ -5,7 +5,7 @@ import { CHANGE_USER } from "../Constants/action-types";
 
 
 const initialState = {
-    user: ["default"],
+    user: "default",
     trades: [],
     myOrders: [],
     pendingOrders: []
@@ -14,26 +14,19 @@ const initialState = {
 function rootReducer(state = initialState, action){
 
     switch (action.type) {
-        //TODO: solve this:
-        //.slice(0,0) creates a copy that is empty
-        //these throw errors if i change .concat to .push
         case TRADES_LOADED:
-        console.log("trades are being overwritten with new stuff:")
             return  {...state, 
                 trades: action.payload
             };
 
 
         case MY_ORDERS_LOADED:
-        console.log("myOrders is being overwritten")
             return { ...state, 
                 myOrders: action.payload
-                // myOrders: state.myOrders.slice(0, 0).concat(action.payload)
             };
 
 
         case PENDING_ORDERS_LOADED:
-        console.log("pending orders are being overwritten with new stuff:", action.payload)
             return { ...state, 
                 pendingOrders: action.payload
             };
@@ -41,7 +34,7 @@ function rootReducer(state = initialState, action){
 
         case CHANGE_USER:
             return { ...state,
-                user: getNewUser(initialState.user, action)
+                user: action.payload.name
             };
             
 
@@ -53,11 +46,11 @@ function rootReducer(state = initialState, action){
 }
 
 
-function getNewUser(oldState, act){
-    let newUser = oldState.slice(0, 0)
-    newUser.push(act.payload.name);
-    return newUser
-};
+// function getNewUser(oldState, act){
+//     const newUser = oldState.slice(0, 0)
+//     newUser.push(act.payload.name);
+//     return newUser
+// }
 
 export default rootReducer;
 
