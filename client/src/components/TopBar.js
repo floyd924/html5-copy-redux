@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
-import { changeUser } from '../actions/index';
+import { changeUser } from '../Actions/index';
+import { getMyOrders } from '../Actions/index';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
-    return { user: state.user };
+    return { 
+        user: state.user,
+        myOrders: state.myOrders 
+    };
 }
 
 function mapDispatchToProps(dispatch){
     return {
-        changeUser: user => dispatch(changeUser(user))
+        changeUser: user => dispatch(changeUser(user)),
+        getMyOrders: name => dispatch(getMyOrders(name))
     }
 }
+
+
 
 
 class TopBar extends Component {
@@ -22,17 +29,21 @@ class TopBar extends Component {
         }
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
+
+    componentDidMount(){
+        this.props.changeUser(this.state);
     }
 
 
     handleNameChange(event){
-        console.log("name changes to", this.state.name)
         this.setState({name: event.target.value})
     }
 
     handleButtonClick(event){
-        console.log("button clicked")
         this.props.changeUser(this.state);
+        this.props.getMyOrders(this.state.name);
     }
 
     render(){

@@ -1,11 +1,11 @@
-import { TRADES_LOADED } from "../constants/action-types";
-import { PENDING_ORDERS_LOADED } from "../constants/action-types";
-import { MY_ORDERS_LOADED } from "../constants/action-types";
-import { CHANGE_USER } from "../constants/action-types";
+import { TRADES_LOADED } from "../Constants/action-types";
+import { PENDING_ORDERS_LOADED } from "../Constants/action-types";
+import { MY_ORDERS_LOADED } from "../Constants/action-types";
+import { CHANGE_USER } from "../Constants/action-types";
 
 
 const initialState = {
-    user: [],
+    user: "default",
     trades: [],
     myOrders: [],
     pendingOrders: []
@@ -15,30 +15,28 @@ function rootReducer(state = initialState, action){
 
     switch (action.type) {
         case TRADES_LOADED:
-            console.log("Trades loaded has been called in the root with poayload:", action.payload)
-            return Object.assign({}, state, {
-                trades: state.trades.concat(action.payload)
-            });
+            return  {...state, 
+                trades: action.payload
+            };
 
 
         case MY_ORDERS_LOADED:
-            return Object.assign({}, state, {
-                myOrders: state.myOrders.concat(action.payload)
-            });
+            return { ...state, 
+                myOrders: action.payload
+            };
 
 
         case PENDING_ORDERS_LOADED:
-        console.log("pending orders called now", action.payload)
-            return Object.assign({}, state, {
-                pendingOrders: state.pendingOrders.concat(action.payload)
-            });
+            return { ...state, 
+                pendingOrders: action.payload
+            };
 
 
         case CHANGE_USER:
-        console.log("change user called in root.js with payload:", action.payload)
-            return Object.assign({}, state, {
-                user: state.user.concat(action.payload)
-            });
+            return { ...state,
+                user: action.payload.name
+            };
+            
 
 
         default:
@@ -47,6 +45,16 @@ function rootReducer(state = initialState, action){
     }
 }
 
+
+// function getNewUser(oldState, act){
+//     const newUser = oldState.slice(0, 0)
+//     newUser.push(act.payload.name);
+//     return newUser
+// }
+
 export default rootReducer;
 
 
+
+
+ 

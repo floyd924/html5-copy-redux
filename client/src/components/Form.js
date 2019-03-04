@@ -1,24 +1,25 @@
 import React, { Component} from 'react';
-import { postNewOrder } from '../actions/index.js';
+import { postNewOrder } from '../Actions/index.js';
 import { connect } from "react-redux";
+import { getTrades } from '../Actions/index.js';
+import { getMyOrders } from '../Actions/index.js';
+import { getPendingOrders } from '../Actions/index.js';
 
-const mapStateToProps = (state) => {
-    return { orders: state.orders };
-    //come back and check this line if not working
-};
+const mapStateToProps = state => ({ orders: state.orders, user: state.user})
 
-function mapDispatchToProps(dispatch){
-    return {
-        postNewOrder: order => dispatch(postNewOrder(order))
-    }
-}
+const mapDispatchToProps = dispatch => ({
+    postNewOrder: order => dispatch(postNewOrder(order)),
+    getTrades: () => dispatch(getTrades()),
+    getMyOrders: name => dispatch(getMyOrders(name)),
+    getPendingOrders: () => dispatch(getPendingOrders())
+})
 
 class Form extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            account: "TEST",
+            account: this.props.user,
             quantity: null,
             price: null,
             action: null
@@ -27,17 +28,50 @@ class Form extends Component {
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleButtonSelect = this.handleButtonSelect.bind(this);
+        this.refreshThisComponent = this.refreshThisComponent.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+
+    }
+
+    componentDidMount(){
+        this.setState({ account: this.props.user});
     }
 
 
 
-
+    //we want to call each getter method from here, using the current state
     handleButtonClick(event){
-       // send a post request using local state
-        if (this.state.quantity && this.state.price && this.state.action) {
-            this.props.postNewOrder(this.state).then(window.location.reload());
-            //document.getElementById("input-form").reset();
+        const tempName = this.props.user; //"iain"
+        this.setState({ account: tempName }); //does not seem to work!
+        const newOrder = {
+            account: tempName,
+            quantity: this.state.quantity,
+            price: this.state.price,
+            action: this.state.action
         }
+        if (this.state.quantity && this.state.price && this.state.action) {
+            this.props.postNewOrder(newOrder)
+            .then(() => this.refreshAllComponents(newOrder))
+        }
+    }
+
+    refreshAllComponents = function(newOrder){
+        this.props.getPendingOrders()
+        window.alert("Your trade has been accepted")
+        this.props.getMyOrders(newOrder.account)
+        this.props.getTrades()
+        this.refreshThisComponent(newOrder)
+    }
+
+    refreshThisComponent = function(newOrder){
+        this.setState(
+            {
+                account: newOrder.account,
+                quantity: null,
+                price: null,
+                action: null
+            })
+        document.getElementById("input-form").reset();
     }
 
     handleQuantityChange(event){

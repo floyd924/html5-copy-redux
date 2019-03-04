@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import './App.css';
 import TopBar from './TopBar.js';
@@ -8,7 +7,6 @@ import OrderBook from './OrderBook.js';
 import MyOrders from './MyOrders.js';
 import Graph from './Graph.js';
 import Form from './Form.js';
-import store from '../store/index';
 
 export class App extends Component {
   render() {
@@ -39,16 +37,7 @@ export class App extends Component {
 }
 
 
-
-//===========================================================================================
-const mapStateToProps = (state) => {
-  return { state };
-};
-
-console.log("looking for store.getState in App.js", store.getState())
+const mapStateToProps = state => state;
 
 
 export default connect(mapStateToProps)(App);
-//============================================================================================
-
-// export default App;

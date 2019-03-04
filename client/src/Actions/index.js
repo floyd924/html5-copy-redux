@@ -1,58 +1,46 @@
-import { CHANGE_USER }  from "../constants/action-types";
-import { GET_TRADES }  from "../constants/action-types";
-import { TRADES_LOADED } from "../constants/action-types";
-import { PENDING_ORDERS_LOADED } from "../constants/action-types";
-import { MY_ORDERS_LOADED } from "../constants/action-types";
-import { GET_PENDING_ORDERS }  from "../constants/action-types";
-import { GET_MY_ORDERS }  from "../constants/action-types";
-import { POST_NEW_ORDER }  from "../constants/action-types";
+import { CHANGE_USER }  from "../Constants/action-types";
+import { TRADES_LOADED } from "../Constants/action-types";
+import { PENDING_ORDERS_LOADED } from "../Constants/action-types";
+import { MY_ORDERS_LOADED } from "../Constants/action-types";
+
 
 
 const fetch = require('node-fetch');
+const url = "http://localhost:3001";
 
-//we are not going to do the 'get state' methods just now
+const fetchAndDispatch = function(dispatch, path, command) {
+    return fetch(path)
+    .then(res => res.json())
+    .then(json => dispatch({ type: command, payload: json}));
+}
 
-export function changeUser(payload){
-    return {type: CHANGE_USER, payload}
-};
+export const changeUser = payload => ({ type: CHANGE_USER, payload });
+
 
 export function getTrades(){
     return function(dispatch) {
-        return fetch("http://localhost:3001/trades")
-        .then(res => res.json())
-        .then(json => {
-            dispatch({ type: TRADES_LOADED, payload: json });
-        });
+        fetchAndDispatch(dispatch, `${url}/trades`, TRADES_LOADED)
     };
 };
 
 
-export function getPendingOrders(payload){
+export function getPendingOrders(){
     return function (dispatch){
-        return fetch("http://localhost:3001/orders")
-        .then(res => res.json())
-        .then(json => {
-            dispatch({ type: PENDING_ORDERS_LOADED, payload: json });
-        });
+        fetchAndDispatch(dispatch, `${url}/orders`, PENDING_ORDERS_LOADED)
     }
 };
 
 
-export function getMyOrders(payload){
+export function getMyOrders(name){
     return function(dispatch){
-        return fetch("http://localhost:3001/users/iain")
-        .then(res => res.json())
-        .then(json => {
-            dispatch({ type: MY_ORDERS_LOADED, payload: json });
-        });
+        fetchAndDispatch(dispatch, `${url}/users/${name}`, MY_ORDERS_LOADED)
     }
 };
 
 
-//not forwarding to the store
 export function postNewOrder(payload){
-    return function(dispatch){
-        return fetch("http://localhost:3001/orders", {
+    return function(){
+        return fetch(`${url}/orders`, {
             method: 'POST',
             mode: 'CORS',
             headers: {

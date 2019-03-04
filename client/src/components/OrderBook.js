@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import { getPendingOrders } from '../actions/index.js';
+import { getPendingOrders } from '../Actions/index.js';
 
-const mapStateToProps = (state) => {
-    return { pendingOrders: state.pendingOrders };
-};
+const mapStateToProps = state => ({ pendingOrders: state.pendingOrders });
 
-//what does 'order' do here?
-function mapDispatchToProps(dispatch){
-    return {
-        getPendingOrders: order => dispatch(getPendingOrders())
-    }
-}
+const mapDispatchToProps = dispatch => ({ getPendingOrders: () => dispatch(getPendingOrders()) })
 
 class OrderBook extends Component{
 
@@ -20,7 +13,6 @@ class OrderBook extends Component{
         this.getData();
     }
 
-    //should i put this in 'componentDidMount?'
     getData = function(){
         this.props.getPendingOrders();
     };
@@ -40,7 +32,31 @@ class OrderBook extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.pendingOrders.map((order, index) => {
+                            {this.props.pendingOrders ? this.props.pendingOrders.filter(x => x.action ==="SELL").map((order, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{order.account}</td>
+                                        <td>{order.action}</td>
+                                        <td>{order.quantity}</td>
+                                        <td>{order.price}</td>
+                                    </tr>
+                                )
+                            }): null }
+                        </tbody>
+                    </table>
+                </div>
+                <div className="table-wrapper-scroll-y">
+                    <table className="table table-dark table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.props.pendingOrders.filter(x => x.action === "BUY").map((order, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{order.account}</td>

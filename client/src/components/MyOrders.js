@@ -1,35 +1,38 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import { getMyOrders } from '../actions/index.js';
+import { getMyOrders } from '../Actions/index.js';
 
-const mapStateToProps = (state) => {
-    return { myOrders: state.myOrders };
-};
 
-//why 'order'?
-function mapDispatchToProps(dispatch){
-    return {
-        getMyOrders: order => dispatch(getMyOrders())
-    }
-}
+const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user})
+
+
+
+const mapDispatchToProps = dispatch => ({getMyOrders: name => dispatch(getMyOrders(name))})
 
 
 class MyOrders extends Component{
 
     constructor(props){
         super(props);
-        this.getData();
+        this.getInitialData();    
     }
 
-    //should i put this in 'componentDidMount?'
+    getInitialData = function(){
+        this.props.getMyOrders("iain");
+    }
+
     getData = function(){
-        this.props.getMyOrders();
+        const userName = this.props.user;
+         this.props.getMyOrders(userName);
+
     };
+    
 
     render(){
         return(
             <div className="my-orders-container">
                 <h1>all my orders go here</h1>
+                <h3>{this.props.user}</h3>
                 <div className="table-wrapper-scroll-y">
                     <table className="table table-dark table-striped table-bordered">
                         <thead>
