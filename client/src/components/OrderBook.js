@@ -20,12 +20,11 @@ class OrderBook extends Component{
     render(){
         return(
             <div className="order-book-container">
-                <h1>here are the current pending orders</h1>
+                <h1>Order Book</h1>
                 <div className="table-wrapper-scroll-y">
-                    <table className="table table-dark table-striped table-bordered">
+                    <table id="pending-sells">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
                                 <th scope="col">Action</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Rate</th>
@@ -35,7 +34,6 @@ class OrderBook extends Component{
                             {this.props.pendingOrders ? this.props.pendingOrders.filter(x => x.action ==="SELL").map((order, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{order.account}</td>
                                         <td>{order.action}</td>
                                         <td>{order.quantity}</td>
                                         <td>{order.price}</td>
@@ -45,11 +43,12 @@ class OrderBook extends Component{
                         </tbody>
                     </table>
                 </div>
+                <br />
+                <br />
                 <div className="table-wrapper-scroll-y">
-                    <table className="table table-dark table-striped table-bordered">
+                    <table id="pending-buys">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
                                 <th scope="col">Action</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Rate</th>
@@ -59,7 +58,6 @@ class OrderBook extends Component{
                             {this.props.pendingOrders.filter(x => x.action === "BUY").map((order, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{order.account}</td>
                                         <td>{order.action}</td>
                                         <td>{order.quantity}</td>
                                         <td>{order.price}</td>

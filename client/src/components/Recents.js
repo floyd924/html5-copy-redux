@@ -24,11 +24,11 @@ class Recents extends Component {
         return(
             <div className="recents-container">
 
-                <h2>Recent Completed Trades</h2>
+                <h2>Latest Trades</h2>
 
 
                 <div className="table-wrapper-scroll-y">
-                    <table className="table table-dark table-striped table-bordered">
+                    <table id="latest-table">
                         <thead>
                             <tr>
                                 <th scope="col">Size</th>

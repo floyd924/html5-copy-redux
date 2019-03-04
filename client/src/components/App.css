@@ -1,52 +1,27 @@
-.App {
-  text-align: center;
 
-
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 .grid {
   display: grid;
   grid-template-areas: 
     'top-bar top-bar top-bar top-bar'
-    'recents bananas bananas book'
+    'recents practice practice book'
     'recents graph graph book'
     'recents graph graph book'
     'my-orders graph graph book'
     'my-orders graph graph book';
+  
+  grid-template-columns: minmax(240px, 600px) 25% 25% minmax(240px, 600px);
+
   grid-gap: 5px;
   padding: 10px;
-  background-color: #7d7d7d;
+  background-color: #00204a;
 }
 
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 /* ================================================================================== */
@@ -102,26 +77,35 @@
 }
 
 .recents-container {
-  border: 3px solid yellow;
+  border: 4px solid black;
+  border-radius: 30px;
+  background-color: black;
+  color: silver;
   height: 100%;
   width: 100%;
+  text-align: center;
+  padding: 10px;
 }
 
 /* ===================================================================================== */
 
 
 .pracs{
-  grid-area: bananas;
+  grid-area: practice;
 }
 
 .pracs-container {
-  border: 3px solid white;
+  border: 4px solid black;
+  border-radius: 30px;
+  background-color: black;
+  color: silver;
   height: 100%;
   width: 100%;
+  text-align: center;
+  padding: 10px;
 }
 
 #input-form {
-  border: 3px solid salmon;
   width: 300px;
   margin: auto;
 }
@@ -134,37 +118,94 @@
 }
 
 .order-book-container {
-  border: 3px solid salmon;
+  border: 4px solid black;
+  border-radius: 30px;
+  background-color: black;
+  color: silver;
   height: 100%;
   width: 100%;
+  text-align: center;
+  padding: 10px;
 }
-/* 
-================================================================================ */
+
+/* ================================================================================ */
 
 .my-orders{
   grid-area: my-orders;
 }
 
 .my-orders-container {
-  border: 3px solid green;
+  border: 4px solid black;
+  border-radius: 30px;
+  background-color: black;
+  color: silver;
   height: 100%;
   width: 100%;
+  text-align: center;
+  padding: 10px;
 }
-/* 
-======================================================================================= */
+
+
+/* ======================================================================================= */
 
 .graph{
   grid-area: graph;
 }
 
 .graph-container{
-  border: 3px solid rgb(28, 190, 196);
+  border: 4px solid black;
+  border-radius: 30px;
+  background-color: black;
+  color: silver;
   height: 100%;
   width: 100%;
+  text-align: center;
+  padding: 10px;
 }
 
 .graph-image{
   width: 100%;
 }
-/* 
-==================================================================================== */
+
+/* ==================================================================================== */
+
+#latest-table,
+#my-orders-table,
+#pending-buys,
+#pending-sells {
+  color: silver;
+  border-radius: 20px;
+  border: 1px solid darkgray;
+  width: 100%;
+}
+
+#latest-table th,
+#my-orders-table th,
+#pending-sells th,
+#pending-buys th {
+  border-bottom: 1px solid white;
+  height: 50px;
+}
+
+#latest-table tr:nth-child(even),
+#my-orders-table tr:nth-child(even),
+#pending-sells tr:nth-child(even),
+#pending-buys tr:nth-child(even) {
+background-color: rgb(31, 31, 61);
+}
+
+#latest-table td,
+#my-orders-table td {
+  padding: 0;
+}
+
+
+#pending-sells td {
+  color: red;
+  padding: 0;
+}
+
+#pending-buys td {
+  color: greenyellow;
+  padding: 0;
+}
