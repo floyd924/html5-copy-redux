@@ -1,9 +1,9 @@
 import React, { Component} from 'react';
-import { postNewOrder } from '../actions/index.js';
+import { postNewOrder } from '../Actions/index.js';
 import { connect } from "react-redux";
-import { getTrades } from '../actions/index.js';
-import { getMyOrders } from '../actions/index.js';
-import { getPendingOrders } from '../actions/index.js';
+import { getTrades } from '../Actions/index.js';
+import { getMyOrders } from '../Actions/index.js';
+import { getPendingOrders } from '../Actions/index.js';
 
 const mapStateToProps = state => ({ orders: state.orders, user: state.user})
 
@@ -53,15 +53,16 @@ class Form extends Component {
         }
         if (this.state.quantity && this.state.price && this.state.action) {
             this.props.postNewOrder(newOrder)
-            .then(this.timer(newOrder));
+            .then(() => this.refreshAllComponents(newOrder))
+            // .then(this.timer(newOrder));
         }
     }
 
-    timer = (newOrder) => {
-        setTimeout(() => {
-            this.refreshAllComponents(newOrder)
-        }, 5);
-    }
+    // timer = (newOrder) => {
+    //     setTimeout(() => {
+    //         this.refreshAllComponents(newOrder)
+    //     }, 10);
+    // }
 
     refreshAllComponents = function(newOrder){
         this.props.getPendingOrders()

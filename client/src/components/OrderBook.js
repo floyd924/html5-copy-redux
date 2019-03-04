@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import { getPendingOrders } from '../actions/index.js';
+import { getPendingOrders } from '../Actions/index.js';
 
 const mapStateToProps = state => ({ pendingOrders: state.pendingOrders });
 

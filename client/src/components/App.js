@@ -8,7 +8,7 @@ import OrderBook from './OrderBook.js';
 import MyOrders from './MyOrders.js';
 import Graph from './Graph.js';
 import Form from './Form.js';
-import store from '../store/index';
+// import store from '../store/index';
 
 export class App extends Component {
   render() {
