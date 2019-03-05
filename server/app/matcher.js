@@ -137,13 +137,13 @@ function Matcher() {
 
 
     //for the API route /trades/recent
-    //returns 3 most recent orders that have not been fulfilled
+    //returns 15 most recent trades that have been fulfilled
     this.getRecentTrades = function(){
         let recentTrades = this.completedTrades.reverse();
-        return recentTrades.slice(0,3);
+        return recentTrades.slice(0,15);
     }
 
-    //for the API route /trades/:name
+    //returns all the pending orders for this user
     this.getAllOrdersByName = function(name){
         let ordersForThisPerson = this.allPendingOrders.filter(order => name.toUpperCase() === order.account.toUpperCase());
         return ordersForThisPerson;
@@ -162,7 +162,48 @@ function Matcher() {
         this.newOrder("iain", 1.25, 20, "BUY");
         this.newOrder("steve", 1.27, 40, "SELL");
         this.newOrder("benj", 1.31, 10, "SELL");
+        
+        this.newOrder("iain", 1.26, 30, "SELL");
+        this.newOrder("iain", 1.3, 20, "SELL");
+        this.newOrder("benj", 1.27, 5, "SELL");
+        this.newOrder("steve", 1.29, 20, "BUY");
+        this.newOrder("steve", 1.26, 10, "SELL");
+        this.newOrder("benj", 1.3, 12, "BUY");
+        this.newOrder("iain", 1.31, 14, "SELL");
+        this.newOrder("benj", 1.23, 2, "BUY");
+        this.newOrder("iain", 1.25, 20, "BUY");
+        this.newOrder("steve", 1.27, 40, "SELL");
+        this.newOrder("benj", 1.31, 10, "SELL");
+
+        this.newOrder("iain", 1.26, 30, "SELL");
+        this.newOrder("iain", 1.3, 20, "SELL");
+        this.newOrder("benj", 1.27, 5, "SELL");
+        this.newOrder("steve", 1.29, 20, "BUY");
+        this.newOrder("steve", 1.26, 10, "SELL");
+        this.newOrder("benj", 1.3, 12, "BUY");
+        this.newOrder("iain", 1.31, 14, "SELL");
+        this.newOrder("benj", 1.23, 2, "BUY");
+        this.newOrder("iain", 1.25, 20, "BUY");
+        this.newOrder("steve", 1.27, 40, "SELL");
+        this.newOrder("benj", 1.31, 10, "SELL");
+
+        this.newOrder("benj", 1.24, 6, "BUY");
+        this.newOrder("iain", 1.24, 6, "BUY");
+        this.newOrder("benj", 1.23, 7, "BUY");
+        this.newOrder("iain", 1.22, 14, "BUY");
+        this.newOrder("steve", 1.24, 7, "BUY");
+        this.newOrder("steve", 1.21, 10, "BUY");
+        this.newOrder("benj", 1.22, 4, "BUY");
+
+        this.newOrder("benj", 1.23, 4, "SELL");
+        this.newOrder("benj", 1.23, 5, "SELL");
+        this.newOrder("benj", 1.23, 6, "SELL");
+        this.newOrder("benj", 1.23, 7, "SELL");
     }
+
+
+
+
 
 
 }
