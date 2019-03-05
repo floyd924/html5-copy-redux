@@ -41,8 +41,8 @@ class Form extends Component {
 
     //we want to call each getter method from here, using the current state
     handleButtonClick(event){
-        const tempName = this.props.user; //"iain"
-        this.setState({ account: tempName }); //does not seem to work!
+        const tempName = this.props.user;
+        this.setState({ account: tempName });
         const newOrder = {
             account: tempName,
             quantity: this.state.quantity,
