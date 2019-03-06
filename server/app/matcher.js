@@ -135,34 +135,93 @@ function Matcher() {
     }
 
 
-
-    //for the API route /trades/recent
-    //returns 3 most recent orders that have not been fulfilled
+    //returns 15 most recent trades that have been fulfilled
     this.getRecentTrades = function(){
         let recentTrades = this.completedTrades.reverse();
-        return recentTrades.slice(0,3);
+        return recentTrades.slice(0,15);
     }
 
-    //for the API route /trades/:name
+    //returns all the pending orders for this user
     this.getAllOrdersByName = function(name){
         let ordersForThisPerson = this.allPendingOrders.filter(order => name.toUpperCase() === order.account.toUpperCase());
         return ordersForThisPerson;
+
     }
 
-    this.seed = function(){
-        //seed the file with data
-        this.newOrder("iain", 1.26, 30, "SELL");
-        this.newOrder("iain", 1.3, 20, "SELL");
-        this.newOrder("benj", 1.27, 5, "SELL");
-        this.newOrder("steve", 1.29, 20, "BUY");
-        this.newOrder("steve", 1.26, 10, "SELL");
-        this.newOrder("benj", 1.3, 12, "BUY");
-        this.newOrder("iain", 1.31, 14, "SELL");
-        this.newOrder("benj", 1.23, 2, "BUY");
-        this.newOrder("iain", 1.25, 20, "BUY");
-        this.newOrder("steve", 1.27, 40, "SELL");
-        this.newOrder("benj", 1.31, 10, "SELL");
+    this.sortByLowestPrice = function(array){
+        array.sort(function(a,b){
+            return a.price - b.price
+        })
     }
+
+    //return one object with market depth data for full range of buy and sell prices
+    this.getMarketDepth = function(){
+        
+        const sortedBuyOrders = this.sortByLowestPrice(this.buyOrders); 
+
+        const buys = this.createUniqueKeys(sortedBuyOrders)
+    
+        for (const key in buys){
+            sortedBuyOrders.forEach(order => {
+                if (key <= order.price) {
+                    buys[key] += order.price
+                }
+            })
+        }
+
+    
+        
+        const sortedSellOrders = this.sortByLowestPrice(this.sellOrders)
+
+        const sells = this.createUniqueKeys(sortedSellOrders)
+
+        for (const key in sells){
+            sortedSellOrders.forEach(order => {
+                if (key >= order.price) {
+                    sells[key] += order.price
+                }
+            })
+        }
+
+        const objectToExport = {
+            "buyData": buys,
+            "sellData": sells
+        }
+        return objectToExport;
+        
+    }
+
+    this.createUniqueKeys = function(array){
+        const keyValueObject = {};
+        array.forEach(item => {
+            keyValueObject[item.price] = 0;
+        });
+        return keyValueObject
+    }
+
+
+    //seed the file with data
+    this.seed = function(){
+        const names = ["iain","benj", "steve", "laurie", "al", "gavin", "pete"];
+        names.forEach(name => {
+            this.generateOrdersFor(name)
+        })
+    }
+
+    this.generateOrdersFor = function(name){
+        for (let i = 0; i < 10; i++) {
+            const price = Math.floor(Math.random()*30)
+            const quantity = Math.floor(Math.random()*50)
+            const randomIndex = Math.floor(Math.random()*1.99)
+            const actions = ["BUY", "SELL"]
+            const randomAction = actions[randomIndex]
+            this.newOrder(name, price, quantity, randomAction)          
+        }
+    }
+
+
+
+
 
 
 }

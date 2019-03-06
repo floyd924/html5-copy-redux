@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './App.css';
-import TopBar from './TopBar.js';
-import Recents from './Recents.js';
-import OrderBook from './OrderBook.js';
-import MyOrders from './MyOrders.js';
-import Graph from './Graph.js';
-import Form from './Form.js';
+import './form/Form.css';
+import './graph/Graph.css';
+import './myOrders/MyOrders.css';
+import './orderBook/OrderBook.css';
+import './recents/Recents.css';
+import './topBar/TopBar.css';
+import TopBar from './topBar/TopBar.js';
+import Recents from './recents/Recents.js';
+import OrderBook from './orderBook/OrderBook.js';
+import MyOrders from './myOrders/MyOrders.js';
+import Graph from './graph/Graph.js';
+import Form from './form/Form.js';
 
 export class App extends Component {
   render() {

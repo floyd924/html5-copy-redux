@@ -1,9 +1,9 @@
 import React, { Component} from 'react';
-import { postNewOrder } from '../Actions/index.js';
+import { postNewOrder } from '../../actions/index.js';
 import { connect } from "react-redux";
-import { getTrades } from '../Actions/index.js';
-import { getMyOrders } from '../Actions/index.js';
-import { getPendingOrders } from '../Actions/index.js';
+import { getTrades } from '../../actions/index.js';
+import { getMyOrders } from '../../actions/index.js';
+import { getPendingOrders } from '../../actions/index.js';
 
 const mapStateToProps = state => ({ orders: state.orders, user: state.user})
 
@@ -41,8 +41,8 @@ class Form extends Component {
 
     //we want to call each getter method from here, using the current state
     handleButtonClick(event){
-        const tempName = this.props.user; //"iain"
-        this.setState({ account: tempName }); //does not seem to work!
+        const tempName = this.props.user;
+        this.setState({ account: tempName });
         const newOrder = {
             account: tempName,
             quantity: this.state.quantity,
