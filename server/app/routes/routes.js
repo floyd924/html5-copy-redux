@@ -32,6 +32,11 @@ let appRouter = function (app) {
         res.status(200).send(data);
     })
 
+    app.get("/depth", function(req, res){
+        const data = matcher.getMarketDepth();
+        res.status(200).send(data);
+    })
+
 }
 
 module.exports = appRouter;
