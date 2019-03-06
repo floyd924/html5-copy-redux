@@ -1,7 +1,7 @@
-import { TRADES_LOADED } from "../Constants/action-types";
-import { PENDING_ORDERS_LOADED } from "../Constants/action-types";
-import { MY_ORDERS_LOADED } from "../Constants/action-types";
-import { CHANGE_USER } from "../Constants/action-types";
+import { TRADES_LOADED } from "../constants/action-types";
+import { PENDING_ORDERS_LOADED } from "../constants/action-types";
+import { MY_ORDERS_LOADED } from "../constants/action-types";
+import { CHANGE_USER } from "../constants/action-types";
 import { MARKET_DEPTH_LOADED } from "../Constants/action-types";
 
 
@@ -40,7 +40,6 @@ function rootReducer(state = initialState, action){
             };
         
         case MARKET_DEPTH_LOADED:
-        console.log("updating market depth in root", action.payload)
             return { ...state,
                 marketDepth: action.payload
             };

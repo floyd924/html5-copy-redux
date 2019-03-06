@@ -1,0 +1,46 @@
+/* ================================================================================== */
+/* TOP BAR AND CONTENTS */
+
+.top {
+    grid-area: top-bar;
+  }
+  
+  .top-bar {
+    color: white;
+    border: 2px solid #1eafed;
+    background-color: #00204a;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .logo {
+    display: inline;
+    height: 80px;
+    width: 80px;
+  }
+  
+  
+  .app-title{
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+  }
+  
+  .login {
+    float: right;
+    padding-top: 20px;
+    padding-right: 20px;
+  }
+  
+  .login-text {
+    display: inline-block;;
+    padding-bottom: -10px;
+  }
+  
+  .login-select {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+  }

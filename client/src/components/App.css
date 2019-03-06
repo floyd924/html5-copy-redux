@@ -16,64 +16,19 @@
   grid-gap: 5px;
   padding: 10px;
   background-color: #00204a;
+
+  
 }
 
-* {
+
+
+#root {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-/* ================================================================================== */
-/* TOP BAR AND CONTENTS */
-
-.top {
-  grid-area: top-bar;
-}
-
-.top-bar {
-  color: white;
-  border: 2px solid #1eafed;
-  background-color: #00204a;
-  height: 100%;
-  width: 100%;
-}
-
-.logo {
-  display: inline;
-  height: 80px;
-  width: 80px;
-}
-
-
-.app-title{
-  display: inline-block;
-  vertical-align: -webkit-baseline-middle;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  font-family: 'ZCOOL QingKe HuangYou', cursive;
-}
-
-.login {
-  float: right;
-  padding-top: 20px;
-  padding-right: 20px;
-  font-family: 'ZCOOL QingKe HuangYou', cursive;
-}
-
-.login-text {
-  display: inline-block;;
-  padding-bottom: -10px;
-}
-
-.login-select {
-  margin-left: 20px;
-  margin-right: 20px;
-  padding: 10px;
-}
-/* 
-=============================================================================================== */
 /* LATEST TRADES CONTAINER */
 
 .recents {
@@ -177,6 +132,7 @@
   width: 100%;
 }
 
+
 /* ==================================================================================== */
 /* TABLES */
 
@@ -221,23 +177,3 @@ background-color: rgb(31, 31, 61);
   padding: 0;
 }
 
-/* ========================================================================== */
-/* FORM */
-
-#quantity {
-  width: 70px;
-  background-color: silver;
-}
-
-#price {
-  width: 97px;
-  background-color: silver;
-}
-
-/* ==========================================
-FOR PRACTICE GRAPH */
-
-
-.chart-container rect {
-  fill: steelblue;
-}
