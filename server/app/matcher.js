@@ -145,14 +145,19 @@ function Matcher() {
     this.getAllOrdersByName = function(name){
         let ordersForThisPerson = this.allPendingOrders.filter(order => name.toUpperCase() === order.account.toUpperCase());
         return ordersForThisPerson;
+
+    }
+
+    this.sortByLowestPrice = function(array){
+        array.sort(function(a,b){
+            return a.price - b.price
+        })
     }
 
     //return one object with market depth data for full range of buy and sell prices
     this.getMarketDepth = function(){
         
-        const sortedBuyOrders = this.buyOrders.sort(function(a,b){
-            return a.price - b.price
-        })
+        const sortedBuyOrders = this.sortByLowestPrice(this.buyOrders); 
 
         const buys = this.createUniqueKeys(sortedBuyOrders)
     
@@ -166,9 +171,7 @@ function Matcher() {
 
     
         
-        const sortedSellOrders = this.sellOrders.sort(function(a,b){
-            return a.price - b.price
-        })
+        const sortedSellOrders = this.sortByLowestPrice(this.sellOrders)
 
         const sells = this.createUniqueKeys(sortedSellOrders)
 
@@ -199,54 +202,21 @@ function Matcher() {
 
     //seed the file with data
     this.seed = function(){
-        this.newOrder("iain", 1.26, 30, "SELL");
-        this.newOrder("iain", 1.3, 20, "SELL");
-        this.newOrder("benj", 1.27, 5, "SELL");
-        this.newOrder("steve", 1.29, 20, "BUY");
-        this.newOrder("steve", 1.26, 10, "SELL");
-        this.newOrder("benj", 1.3, 12, "BUY");
-        this.newOrder("iain", 1.31, 14, "SELL");
-        this.newOrder("benj", 1.23, 2, "BUY");
-        this.newOrder("iain", 1.25, 20, "BUY");
-        this.newOrder("steve", 1.27, 40, "SELL");
-        this.newOrder("benj", 1.31, 10, "SELL");
-        
-        this.newOrder("iain", 1.26, 30, "SELL");
-        this.newOrder("iain", 1.3, 20, "SELL");
-        this.newOrder("benj", 1.27, 5, "SELL");
-        this.newOrder("steve", 1.29, 20, "BUY");
-        this.newOrder("steve", 1.26, 10, "SELL");
-        this.newOrder("benj", 1.3, 12, "BUY");
-        this.newOrder("iain", 1.31, 14, "SELL");
-        this.newOrder("benj", 1.23, 2, "BUY");
-        this.newOrder("iain", 1.25, 20, "BUY");
-        this.newOrder("steve", 1.27, 40, "SELL");
-        this.newOrder("benj", 1.31, 10, "SELL");
+        const names = ["iain","benj", "steve", "laurie", "al", "gavin", "pete"];
+        names.forEach(name => {
+            this.generateOrdersFor(name)
+        })
+    }
 
-        this.newOrder("iain", 1.26, 30, "SELL");
-        this.newOrder("iain", 1.3, 20, "SELL");
-        this.newOrder("benj", 1.27, 5, "SELL");
-        this.newOrder("steve", 1.29, 20, "BUY");
-        this.newOrder("steve", 1.26, 10, "SELL");
-        this.newOrder("benj", 1.3, 12, "BUY");
-        this.newOrder("iain", 1.31, 14, "SELL");
-        this.newOrder("benj", 1.23, 2, "BUY");
-        this.newOrder("iain", 1.25, 20, "BUY");
-        this.newOrder("steve", 1.27, 40, "SELL");
-        this.newOrder("benj", 1.31, 10, "SELL");
-
-        this.newOrder("benj", 1.24, 6, "BUY");
-        this.newOrder("iain", 1.24, 6, "BUY");
-        this.newOrder("benj", 1.23, 7, "BUY");
-        this.newOrder("iain", 1.22, 14, "BUY");
-        this.newOrder("steve", 1.24, 7, "BUY");
-        this.newOrder("steve", 1.21, 10, "BUY");
-        this.newOrder("benj", 1.22, 4, "BUY");
-
-        this.newOrder("benj", 1.23, 4, "SELL");
-        this.newOrder("benj", 1.23, 5, "SELL");
-        this.newOrder("benj", 1.23, 6, "SELL");
-        this.newOrder("benj", 1.23, 7, "SELL");
+    this.generateOrdersFor = function(name){
+        for (let i = 0; i < 10; i++) {
+            const price = Math.floor(Math.random()*30)
+            const quantity = Math.floor(Math.random()*50)
+            const randomIndex = Math.floor(Math.random()*1.99)
+            const actions = ["BUY", "SELL"]
+            const randomAction = actions[randomIndex]
+            this.newOrder(name, price, quantity, randomAction)          
+        }
     }
 
 

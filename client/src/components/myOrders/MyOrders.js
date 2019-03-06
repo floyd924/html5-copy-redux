@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import { getMyOrders } from '../Actions/index.js';
+import { getMyOrders } from '../../actions/index.js';
 
 
 const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user})

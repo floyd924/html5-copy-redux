@@ -16,164 +16,19 @@
   grid-gap: 5px;
   padding: 10px;
   background-color: #00204a;
+
+  
 }
 
-* {
+
+
+#root {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-/* ================================================================================== */
-/* TOP BAR AND CONTENTS */
-
-.top {
-  grid-area: top-bar;
-}
-
-.top-bar {
-  color: white;
-  border: 2px solid #1eafed;
-  background-color: #00204a;
-  height: 100%;
-  width: 100%;
-}
-
-.logo {
-  display: inline;
-  height: 80px;
-  width: 80px;
-}
-
-
-.app-title{
-  display: inline-block;
-  vertical-align: -webkit-baseline-middle;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  font-family: 'ZCOOL QingKe HuangYou', cursive;
-}
-
-.login {
-  float: right;
-  padding-top: 20px;
-  padding-right: 20px;
-  font-family: 'ZCOOL QingKe HuangYou', cursive;
-}
-
-.login-text {
-  display: inline-block;;
-  padding-bottom: -10px;
-}
-
-.login-select {
-  margin-left: 20px;
-  margin-right: 20px;
-  padding: 10px;
-}
-/* 
-=============================================================================================== */
-/* LATEST TRADES CONTAINER */
-
-.recents {
-  grid-area: recents;
-}
-
-.recents-container {
-  border: 4px solid black;
-  border-radius: 30px;
-  background-color: black;
-  color: silver;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-}
-
-/* ===================================================================================== */
-/* FORM CONTAINER */
-
-
-.pracs{
-  grid-area: practice;
-}
-
-.pracs-container {
-  border: 4px solid black;
-  border-radius: 30px;
-  background-color: black;
-  color: silver;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-}
-
-#input-form {
-  width: 300px;
-  margin: auto;
-}
-
-
-/* ===================================================================== */
-/* ORDER BOOK CONTAINER */
-
-.order-book{
-  grid-area: book;
-}
-
-.order-book-container {
-  border: 4px solid black;
-  border-radius: 30px;
-  background-color: black;
-  color: silver;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-}
-
-/* ================================================================================ */
-/* MY ORDERS CONTAINER */
-
-.my-orders{
-  grid-area: my-orders;
-}
-
-.my-orders-container {
-  border: 4px solid black;
-  border-radius: 30px;
-  background-color: black;
-  color: silver;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-}
-
-
-/* ======================================================================================= */
-/* GRAPH CONTAINER */
-
-.graph{
-  grid-area: graph;
-}
-
-.graph-container{
-  border: 4px solid black;
-  border-radius: 30px;
-  background-color: black;
-  color: silver;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-}
-
-.graph-image{
-  width: 100%;
-}
 
 /* ==================================================================================== */
 /* TABLES */
@@ -219,15 +74,3 @@ background-color: rgb(31, 31, 61);
   padding: 0;
 }
 
-/* ========================================================================== */
-/* FORM */
-
-#quantity {
-  width: 70px;
-  background-color: silver;
-}
-
-#price {
-  width: 97px;
-  background-color: silver;
-}

@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import {connect} from "react-redux";
-import { getTrades } from '../Actions/index.js';
+import { getTrades } from '../../actions/index.js';
 
 const mapStateToProps = state => ({ trades: state.trades });
 
