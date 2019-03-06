@@ -23,6 +23,11 @@ export function getTrades(){
         fetchAndDispatch(dispatch, `${url}/trades`, TRADES_LOADED)
     };
 };
+export function getMarketDepth(){
+    return function(dispatch) {
+        fetchAndDispatch(dispatch, `${url}/depth`, MARKET_DEPTH_LOADED)
+    };
+};
 
 
 export function getPendingOrders(){
@@ -53,8 +58,8 @@ export function postNewOrder(payload){
     }
 }
 
-export function getMarketDepth(){
-    return function (dispatch){
-        fetchAndDispatch(dispatch, `${url}/depth`, MARKET_DEPTH_LOADED)
-    }
-}
+// export function getMarketDepth(){
+//     return function (dispatch){
+//         fetchAndDispatch(dispatch, `${url}/depth`, MARKET_DEPTH_LOADED)
+//     }
+// }

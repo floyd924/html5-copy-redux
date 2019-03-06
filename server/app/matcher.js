@@ -175,18 +175,73 @@ function Matcher() {
             "buyData": buys,
             "sellData": sells
         }
-        return objectToExport;
+        return this.getMarketDepthInNewForm(objectToExport);
         
     }
 
     //used to create an object of key:value pairs used for market depth
     this.createUniqueKeys = function(array){
-        const keyValueObject = {};
+        const keyObject = {};
         array.forEach(item => {
-            keyValueObject[item.price] = 0;
+            keyObject[item.price] = 0;
         });
-        return keyValueObject
+        return keyObject
     }
+
+
+
+
+    //return one object with market depth data for full range of buy and sell prices
+    this.getMarketDepthInNewForm = function(keyValueObject){
+            
+        const arrayOfBuyCoordinates = []
+        const arrayOfSellCoordinates = []
+        
+        for (const [key, value] of Object.entries(keyValueObject.buyData)) {
+            arrayOfBuyCoordinates.push({price: key, rate: value})
+        }
+        
+        for (const [key, value] of Object.entries(keyValueObject.sellData)) {
+            arrayOfSellCoordinates.push({price: key, rate: value})
+        }
+                    
+        const objectToBeReturned = { buys: arrayOfBuyCoordinates, sells: arrayOfSellCoordinates }
+
+        return objectToBeReturned;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //seed the file with data

@@ -163,7 +163,9 @@
 .graph-container{
   border: 4px solid black;
   border-radius: 30px;
-  background-color: black;
+  /* background-color: black; */
+  background-color: yellow;
+  /* to check if my graph is rendering! */
   color: silver;
   height: 100%;
   width: 100%;
@@ -230,4 +232,12 @@ background-color: rgb(31, 31, 61);
 #price {
   width: 97px;
   background-color: silver;
+}
+
+/* ==========================================
+FOR PRACTICE GRAPH */
+
+
+.chart-container rect {
+  fill: steelblue;
 }
