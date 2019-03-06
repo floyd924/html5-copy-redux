@@ -149,13 +149,10 @@ function Matcher() {
 
     //return one object with market depth data for full range of buy and sell prices
     this.getMarketDepth = function(){
-        
         const sortedBuyOrders = this.buyOrders.sort(function(a,b){
             return a.price - b.price
         })
-
         const buys = this.createUniqueKeys(sortedBuyOrders)
-    
         for (const key in buys){
             sortedBuyOrders.forEach(order => {
                 if (key <= order.price) {
@@ -163,15 +160,10 @@ function Matcher() {
                 }
             })
         }
-
-    
-        
         const sortedSellOrders = this.sellOrders.sort(function(a,b){
             return a.price - b.price
         })
-
         const sells = this.createUniqueKeys(sortedSellOrders)
-
         for (const key in sells){
             sortedSellOrders.forEach(order => {
                 if (key >= order.price) {
@@ -179,7 +171,6 @@ function Matcher() {
                 }
             })
         }
-
         const objectToExport = {
             "buyData": buys,
             "sellData": sells
@@ -188,6 +179,7 @@ function Matcher() {
         
     }
 
+    //used to create an object of key:value pairs used for market depth
     this.createUniqueKeys = function(array){
         const keyValueObject = {};
         array.forEach(item => {

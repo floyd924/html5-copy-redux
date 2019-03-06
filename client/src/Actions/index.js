@@ -2,6 +2,7 @@ import { CHANGE_USER }  from "../Constants/action-types";
 import { TRADES_LOADED } from "../Constants/action-types";
 import { PENDING_ORDERS_LOADED } from "../Constants/action-types";
 import { MY_ORDERS_LOADED } from "../Constants/action-types";
+import { MARKET_DEPTH_LOADED } from "../Constants/action-types";
 
 
 
@@ -49,5 +50,11 @@ export function postNewOrder(payload){
             },
             body: JSON.stringify(payload)
         })
+    }
+}
+
+export function getMarketDepth(){
+    return function (dispatch){
+        fetchAndDispatch(dispatch, `${url}/depth`, MARKET_DEPTH_LOADED)
     }
 }

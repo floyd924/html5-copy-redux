@@ -2,13 +2,15 @@ import { TRADES_LOADED } from "../Constants/action-types";
 import { PENDING_ORDERS_LOADED } from "../Constants/action-types";
 import { MY_ORDERS_LOADED } from "../Constants/action-types";
 import { CHANGE_USER } from "../Constants/action-types";
+import { MARKET_DEPTH_LOADED } from "../Constants/action-types";
 
 
 const initialState = {
     user: "default",
     trades: [],
     myOrders: [],
-    pendingOrders: []
+    pendingOrders: [],
+    marketDepth: {}
 }
 
 function rootReducer(state = initialState, action){
@@ -36,6 +38,11 @@ function rootReducer(state = initialState, action){
             return { ...state,
                 user: action.payload.name
             };
+        
+        case MARKET_DEPTH_LOADED:
+            return { ...state,
+                marketDepth: action.payload
+            };
             
 
 
@@ -45,12 +52,6 @@ function rootReducer(state = initialState, action){
     }
 }
 
-
-// function getNewUser(oldState, act){
-//     const newUser = oldState.slice(0, 0)
-//     newUser.push(act.payload.name);
-//     return newUser
-// }
 
 export default rootReducer;
 
