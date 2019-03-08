@@ -152,13 +152,13 @@ function Matcher() {
         array.sort(function(a,b){
             return a.price - b.price
         })
+        return array;
     }
 
     //return one object with market depth data for full range of buy and sell prices
     this.getMarketDepth = function(){
         
         const sortedBuyOrders = this.sortByLowestPrice(this.buyOrders); 
-
         const buys = this.createUniqueKeys(sortedBuyOrders)
         for (const key in buys){
             sortedBuyOrders.forEach(order => {
@@ -207,48 +207,17 @@ function Matcher() {
         const arrayOfSellCoordinates = []
         
         for (const [key, value] of Object.entries(keyValueObject.buyData)) {
-            arrayOfBuyCoordinates.push({price: key, rate: value})
+            arrayOfBuyCoordinates.push({price: key, depth: value})
         }
         
         for (const [key, value] of Object.entries(keyValueObject.sellData)) {
-            arrayOfSellCoordinates.push({price: key, rate: value})
+            arrayOfSellCoordinates.push({price: key, depth: value})
         }
                     
         const objectToBeReturned = { buys: arrayOfBuyCoordinates, sells: arrayOfSellCoordinates }
 
         return objectToBeReturned;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -263,8 +232,8 @@ function Matcher() {
 
     this.generateOrdersFor = function(name){
         for (let i = 0; i < 10; i++) {
-            const price = Math.floor(Math.random()*30)
-            const quantity = Math.floor(Math.random()*50)
+            const price = (Math.floor(Math.random()*20)) + 1
+            const quantity = (Math.floor(Math.random()*10)) + 1;
             const randomIndex = Math.floor(Math.random()*1.99)
             const actions = ["BUY", "SELL"]
             const randomAction = actions[randomIndex]

@@ -45,8 +45,8 @@ class Form extends Component {
         this.setState({ account: tempName });
         const newOrder = {
             account: tempName,
-            quantity: this.state.quantity,
-            price: this.state.price,
+            quantity: parseInt(this.state.quantity),
+            price: parseInt(this.state.price),
             action: this.state.action
         }
         if (this.state.quantity && this.state.price && this.state.action) {

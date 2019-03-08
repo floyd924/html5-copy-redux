@@ -2,7 +2,7 @@ import { TRADES_LOADED } from "../constants/action-types";
 import { PENDING_ORDERS_LOADED } from "../constants/action-types";
 import { MY_ORDERS_LOADED } from "../constants/action-types";
 import { CHANGE_USER } from "../constants/action-types";
-import { MARKET_DEPTH_LOADED } from "../Constants/action-types";
+import { MARKET_DEPTH_LOADED } from "../constants/action-types";
 
 
 const initialState = {
