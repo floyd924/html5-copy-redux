@@ -18,99 +18,81 @@ class  Chart extends Component {
         }
         this.getData()
 
-        
     }
 
-    getData = function(){
+    getData = () => {
         this.props.getMarketDepth()
     }
 
 
-
     componentDidUpdate(){
-        // this.drawChart();
         this.drawLineGraph();
 
     }
 
-    drawChart() {
-        // //declare data and get data into an array
-        // const arrayOfDepths = []
-        //     this.props.marketDepth.buys.forEach(object => {
-        //         arrayOfDepths.push(object.rate)
-        //     });
-        //     this.props.marketDepth.sells.forEach(object => {
-        //         arrayOfDepths.push(object.rate)
-        //     });
-            
-        // const dataPoints = arrayOfDepths;
 
 
-        // const svg = d3.select(".bananas")
-        // // const svg = d3.select(".bananas") ========> will append the graph into the section with class 'bananas'
-        //     .append("svg")
-        //     .attr("width", 700) //shorten this and data is chopped off - should try and use props?
-        //     .attr("height", 300) //shorten these and data is chopped off - should try and use props?
+    //I am trying to refactor these three getArray methods below. 
+    //But each method requires a slightly different output
+    //and each are needed for future calculations
 
 
-        // //create some bars
-        // svg.selectAll("rect") //this creates rectangles
-        //     .data(dataPoints)
-        //     .enter() //this loops thru the data points
-        //     .append("rect")
-        //     .attr("x", (d,i) => i*50)
-        //     .attr("y", (d) => 300-d*2 ) //box size minus height, to make each bar appear on the bottom, not the top
-        //     .attr("width", 25)
-        //     .attr("height", (d,i) => d * 2)
-        //     .attr("fill", "pink"); //rectangles will be pink
 
-        // //add some text to the bars
-        // svg.selectAll("text")
-        //     .data(dataPoints)//for each data point
-        //     .enter()//we will perform the following munipulation
-        //     .append("text")
-        //     .text((d) => d)
-        //     .attr("x", (d, i) => i*50)
-        //     .attr("y", (d, i) => 300 - (2*d) - 1)
-    }
-
-    //refactoer these methods into one 
     getArrayOfDepths = () => {
         const arrayOfDepths = []
         this.props.marketDepth.buys.forEach(object => {
-            arrayOfDepths.push(object.depth)
+            arrayOfDepths.push(parseFloat(object.depth))
         });
         this.props.marketDepth.sells.forEach(object => {
-            arrayOfDepths.push(object.depth)
+            arrayOfDepths.push(parseFloat(object.depth))
         });
+        arrayOfDepths.sort()
         return arrayOfDepths;
     }
-    //refactor these methods into one 
+
+
     getArrayOfPrices = () => {
         const arrayOfPrices = []
         this.props.marketDepth.buys.forEach(object => {
-            arrayOfPrices.push(object.price)
+            arrayOfPrices.push(parseFloat(object.price))
         });
         this.props.marketDepth.sells.forEach(object => {
-            arrayOfPrices.push(object.price)
+            arrayOfPrices.push(parseFloat(object.price))
         });
+        arrayOfPrices.sort();
         return arrayOfPrices;
     }
 
+    //returns objects with price and depth
     getArrayOfCoordinates = () => {
         const arrayOfCoordinates = []
-        this.props.marketDepth.buys.forEach(object => {
+        const sortedBuys = this.sortByPrice(this.props.marketDepth.buys)
+        const sortedSells = this.sortByPrice(this.props.marketDepth.sells)
+        sortedBuys.forEach(object => {
             arrayOfCoordinates.push(object)
         });
-        this.props.marketDepth.sells.forEach(object => {
+        sortedSells.forEach(object => {
             arrayOfCoordinates.push(object)
         });
         return arrayOfCoordinates
     }
 
+
+    sortByPrice = (array) => {
+
+        array.sort(function(a,b){
+            return a.price - b.price
+        })
+        return array;
+    }
+
+    //returns the price at which graph colours will change from green to red
     getMidPrice = () => {
-        const highestBuyPrice = parseInt(this.props.marketDepth.buys.pop().price);
-        const lowestSellPrice = parseInt(this.props.marketDepth.sells.shift().price);
+
+        const sortedBuys = this.sortByPrice(this.props.marketDepth.buys)
+        const sortedSells = this.sortByPrice(this.props.marketDepth.sells)
+        const highestBuyPrice = parseFloat(sortedBuys.pop().price);
+        const lowestSellPrice = parseFloat(sortedSells.shift().price);
         const midPrice = (lowestSellPrice + highestBuyPrice)/2;
         return midPrice;
     }
@@ -118,8 +100,7 @@ class  Chart extends Component {
 
     drawLineGraph(){
 
-        
-        
+        //height of graph container depends on height of orderbook
         const parentContainer = document.getElementById("chart-box");
         const margin = {top: 50, right: 50, bottom: 50, left: 50}
         const width = parentContainer.clientWidth - margin.left - margin.right;
@@ -134,7 +115,7 @@ class  Chart extends Component {
 
 
     
-        const n = depthData.length;
+        //find max and min of X and Y data for scale
         const maxPrice = Math.max(...priceData);
         const maxDepth = Math.max(...depthData);
         const minPrice = Math.min(...priceData);
@@ -144,21 +125,23 @@ class  Chart extends Component {
 
 
         const xScale = d3.scaleLinear()
-            .domain([minPrice-1, maxPrice+1])
-            .range([0, width]);
+            .domain([minPrice-1, maxPrice+1]) // data size
+            .range([0, width]); //space axis takes up
         
         const yScale = d3.scaleLinear()
             .domain([minDepth-1, maxDepth+1])
-            .range([height, 0]);
+            .range([height, 0]); //because y axis is automatically top to bottom, the zero goes second.
 
 
 
         const line = d3.line()
-            .x(function(d) { return xScale(d.price); }) 
-            .y(function(d) { return yScale(d.depth); }) 
+            .x(function(d) { return xScale(d.price); }) //put the price value on the x scale
+            .y(function(d) { return yScale(d.depth); }) //put the depth value on the y scale 
             .curve(d3.curveMonotoneX)
 
-        const svg = d3.select(".bananas").append("svg")
+        
+
+        const svg = d3.select(".chart-svg").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -190,6 +173,7 @@ class  Chart extends Component {
                 if ( d.price > midPrice) { return "red" } else { return "green" }
             })
 
+
         
 
 
@@ -199,7 +183,7 @@ class  Chart extends Component {
 
     render(){
         return(
-            <svg className="bananas"></svg>
+            <svg className="chart-svg"></svg>
         )
     }
 

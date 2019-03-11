@@ -15,8 +15,8 @@ function Matcher() {
     this.newOrder = function(acc, prix, volume, act){
         let order = {
             account: acc,
-            price: prix,
-            quantity: volume,
+            price: parseFloat(prix),
+            quantity: parseFloat(volume),
             action: act
         }
         this.receiveOrder(order);
@@ -163,7 +163,7 @@ function Matcher() {
         for (const key in buys){
             sortedBuyOrders.forEach(order => {
                 if (key <= order.price) {
-                    buys[key] += order.price
+                    buys[key] = Math.round(((buys[key] + order.price)*100)/100)
                 }
             })
         }
@@ -176,7 +176,7 @@ function Matcher() {
         for (const key in sells){
             sortedSellOrders.forEach(order => {
                 if (key >= order.price) {
-                    sells[key] += order.price
+                    sells[key] = Math.round(((sells[key] + order.price)*100)/100)
                 }
             })
         }
@@ -232,12 +232,28 @@ function Matcher() {
 
     this.generateOrdersFor = function(name){
         for (let i = 0; i < 10; i++) {
-            const price = (Math.floor(Math.random()*20)) + 1
-            const quantity = (Math.floor(Math.random()*10)) + 1;
+            const price = ((Math.floor((Math.random()*5)*10))/10) + 1
+            const quantity = (Math.floor(Math.random()*3)) + 1;
             const randomIndex = Math.floor(Math.random()*1.99)
             const actions = ["BUY", "SELL"]
             const randomAction = actions[randomIndex]
             this.newOrder(name, price, quantity, randomAction)          
+        }
+        
+        
+        
+        for (let i = 0; i < 10; i++) {
+            
+            const randomIndex = Math.floor(Math.random()*1.99)
+            if (randomIndex === 0) {
+                const price = ((Math.floor((Math.random()*5)*10))/10) + 1
+                const quantity = (Math.floor(Math.random()*6)) + 1;
+                this.newOrder(name, price, quantity, "BUY")     
+            } else {
+                const price = ((Math.floor((Math.random()*5)*10))/10) + 1
+                const quantity = (Math.floor(Math.random()*2)) + 1;
+                this.newOrder(name, price, quantity, "SELL")   
+            }
         }
     }
 

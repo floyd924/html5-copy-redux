@@ -28,7 +28,7 @@ class Graph extends Component {
 
 
                 <svg id="chart-box" className="chart-container-two"> 
-                    <Chart  data={this.props.marketDepth}/>
+                    <Chart data={this.props.marketDepth}/>
                 </svg>
 
 

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getTrades } from '../../actions/index.js';
 import { getMyOrders } from '../../actions/index.js';
 import { getPendingOrders } from '../../actions/index.js';
+import {getMarketDepth} from '../../actions/index.js';
 
 const mapStateToProps = state => ({ orders: state.orders, user: state.user})
 
@@ -11,7 +12,8 @@ const mapDispatchToProps = dispatch => ({
     postNewOrder: order => dispatch(postNewOrder(order)),
     getTrades: () => dispatch(getTrades()),
     getMyOrders: name => dispatch(getMyOrders(name)),
-    getPendingOrders: () => dispatch(getPendingOrders())
+    getPendingOrders: () => dispatch(getPendingOrders()),
+    getMarketDepth: () => dispatch(getMarketDepth())
 })
 
 class Form extends Component {
@@ -45,8 +47,8 @@ class Form extends Component {
         this.setState({ account: tempName });
         const newOrder = {
             account: tempName,
-            quantity: parseInt(this.state.quantity),
-            price: parseInt(this.state.price),
+            quantity: parseInt(this.state.quantity), //may need to ParseFloat instead if I want to include decimal points
+            price: parseInt(this.state.price), //may need to use parseFloat
             action: this.state.action
         }
         if (this.state.quantity && this.state.price && this.state.action) {
@@ -60,6 +62,7 @@ class Form extends Component {
         window.alert("Your trade has been accepted")
         this.props.getMyOrders(newOrder.account)
         this.props.getTrades()
+        this.props.getMarketDepth();
         this.refreshThisComponent(newOrder)
     }
 
