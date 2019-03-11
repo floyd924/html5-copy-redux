@@ -13,19 +13,24 @@ class  Chart extends Component {
     constructor(props){
         super(props)
         this.state= {
-            buys: [],
-            sells: []
+            previouslyPopulated: false
         }
         this.getData()
 
     }
 
     getData = () => {
-        this.props.getMarketDepth()
+        this.props.getMarketDepth();
     }
 
 
     componentDidUpdate(){
+        // if (this.state.previouslyPopulated) {
+        //     console.log("state is true")
+        //     d3.select(".chart-svg").remove()
+        //     this.setState({ populated: false })
+        // }
+        // this.setState({ previouslyPopulated: true })
         this.drawLineGraph();
 
     }
@@ -139,8 +144,11 @@ class  Chart extends Component {
             .y(function(d) { return yScale(d.depth); }) //put the depth value on the y scale 
             .curve(d3.curveMonotoneX)
 
+
         
 
+        d3.select(".chart-svg").selectAll("g").remove();
+        
         const svg = d3.select(".chart-svg").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)

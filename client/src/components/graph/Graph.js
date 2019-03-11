@@ -10,13 +10,8 @@ class Graph extends Component {
 
     constructor(props){
         super(props);
-        this.getData();
     }
 
-    getData = function(){
-        //this.props.getMarketDepth();
-        //maybe going to do this in the chart component instead of here?
-    }
 
 
     render(){

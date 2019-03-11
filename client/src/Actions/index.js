@@ -25,7 +25,7 @@ export function getTrades(){
 }
 export function getMarketDepth(){
     return function(dispatch) {
-        fetchAndDispatch(dispatch, `${url}/depth`, MARKET_DEPTH_LOADED)
+        fetchAndDispatch(dispatch, `${url}/depth`, MARKET_DEPTH_LOADED);
     };
 }
 
