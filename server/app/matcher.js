@@ -86,7 +86,7 @@ function Matcher() {
         }
 
         if (newOrderQuantityAfterTrade > 0) {
-             //credit each account????
+            //credit each account????
             this.credit(newOrder, oldOrder.quantity, tradePrice);
             this.credit(oldOrder, oldOrder.quantity, tradePrice);
             //subtract old order from new order
@@ -239,7 +239,7 @@ function Matcher() {
         const randomBuyPrice = ((Math.floor((Math.random()*5)*10))/10) + 1
         const randomBuyQuantity = (Math.floor(Math.random()*6)) + 1;
 
-        console.log("hello");
+
 
 
         //for each user, create 10 random orders

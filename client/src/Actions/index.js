@@ -11,8 +11,8 @@ const url = "http://localhost:3001";
 
 const fetchAndDispatch = function(dispatch, path, command) {
     return fetch(path)
-    .then(res => res.json())
-    .then(json => dispatch({ type: command, payload: json}));
+        .then(res => res.json())
+        .then(json => dispatch({ type: command, payload: json}));
 }
 
 export const changeUser = payload => ({ type: CHANGE_USER, payload });

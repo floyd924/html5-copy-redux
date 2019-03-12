@@ -3,11 +3,11 @@ import {connect} from "react-redux";
 import { getMyOrders } from '../../actions/index.js';
 
 
-const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user})
+const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user })
 
 
 
-const mapDispatchToProps = dispatch => ({getMyOrders: name => dispatch(getMyOrders(name))})
+const mapDispatchToProps = dispatch => ({ getMyOrders: name => dispatch(getMyOrders(name)) })
 
 
 class MyOrders extends Component{
@@ -17,15 +17,15 @@ class MyOrders extends Component{
         this.getInitialData();    
     }
 
-    getInitialData = function(){
+    getInitialData (){
         this.props.getMyOrders("iain");
     }
 
-    getData = function(){
+    getData (){
         const userName = this.props.user;
-         this.props.getMyOrders(userName);
+        this.props.getMyOrders(userName);
 
-    };
+    }
     
 
     render(){

@@ -18,13 +18,13 @@ class Graph extends Component {
 
         
         return(
-            <div className="graph-container">
-                <h2>here is the graph</h2>
+        <div className="graph-container">
+            <h2>here is the graph</h2>
 
 
-                <svg id="chart-box" className="chart-container-two"> 
-                    <Chart data={this.props.marketDepth}/>
-                </svg>
+            <svg id="chart-box" className="chart-container-two"> 
+                <Chart data={this.props.marketDepth}/>
+            </svg>
 
 
                 

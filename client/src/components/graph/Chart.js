@@ -26,12 +26,6 @@ class  Chart extends Component {
 
 
     componentDidUpdate(){
-        // if (this.state.previouslyPopulated) {
-        //     console.log("state is true")
-        //     d3.select(".chart-svg").remove()
-        //     this.setState({ populated: false })
-        // }
-        // this.setState({ previouslyPopulated: true })
         this.drawLineGraph();
     }
 
@@ -192,7 +186,6 @@ class  Chart extends Component {
     render(){
         return(
             <svg className="chart-svg"></svg>
-
         );
     }
 

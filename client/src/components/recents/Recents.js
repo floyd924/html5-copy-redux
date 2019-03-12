@@ -14,7 +14,7 @@ class Recents extends Component {
         this.getData();
     }
 
-    getData = function(){
+    getData (){
         this.props.getTrades()
     }
 
@@ -22,9 +22,9 @@ class Recents extends Component {
     render(){
 
         return(
-            <div className="recents-container">
+        <div className="recents-container">
 
-                <h2>Latest Trades</h2>
+            <h2>Latest Trades</h2>
 
 
                 <div className="table-wrapper-scroll-y">
