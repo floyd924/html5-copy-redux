@@ -50,6 +50,7 @@ class  Chart extends Component {
     }
 
 
+
     getArrayOfPrices () {
         const arrayOfPrices = []
         this.props.marketDepth.buys.forEach(object => {
@@ -87,6 +88,7 @@ class  Chart extends Component {
 
     //returns the price at which graph colours will change from green to red
     getMidPrice () {
+
 
         const sortedBuys = this.sortByPrice(this.props.marketDepth.buys)
         const sortedSells = this.sortByPrice(this.props.marketDepth.sells)
@@ -195,8 +197,7 @@ class  Chart extends Component {
 
     render(){
         return(
-            //<svg className="chart-svg"></svg>
-            null
+            <svg className="chart-svg"></svg>
         );
     }
 

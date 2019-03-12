@@ -22,9 +22,9 @@ class Recents extends Component {
     render(){
 
         return(
-        <div className="recents-container">
+            <div className="recents-container">
 
-            <h2>Latest Trades</h2>
+                <h2>Latest Trades</h2>
 
 
                 <div className="table-wrapper-scroll-y">
@@ -39,9 +39,9 @@ class Recents extends Component {
                             {this.props.trades.map((trade, index) => {
                                 return (
                                     <tr key={index}>
-                                       <td>{trade.size}</td>
-                                       <td>{trade.price}</td>
-                                   </tr>)
+                                        <td>{trade.size}</td>
+                                        <td>{trade.price}</td>
+                                    </tr>)
                             })}
                         </tbody>
                     </table>

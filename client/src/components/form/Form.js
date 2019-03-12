@@ -91,12 +91,12 @@ class Form extends Component {
 
     render(){
         return(
-        <div className="pracs-container">
+            <div className="pracs-container">
 
-            <h2>Add a new trade</h2>
+                <h2>Add a new trade</h2>
 
 
-            <form id="input-form">
+                <form id="input-form">
             
             
             
@@ -125,7 +125,7 @@ class Form extends Component {
             
                     <button onClick={this.handleButtonClick} type="button" className="btn btn-info">Submit Order</button>
             
-                    </form>
+                </form>
             </div>
         )
     }
