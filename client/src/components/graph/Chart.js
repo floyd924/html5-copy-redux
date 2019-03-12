@@ -19,9 +19,10 @@ class  Chart extends Component {
 
     }
 
-    getData = () => {
-        this.props.getMarketDepth();
+    getData () {
+        this.props.getMarketDepth()
     }
+
 
 
     componentDidUpdate(){
@@ -32,7 +33,6 @@ class  Chart extends Component {
         // }
         // this.setState({ previouslyPopulated: true })
         this.drawLineGraph();
-
     }
 
 
@@ -43,7 +43,7 @@ class  Chart extends Component {
 
 
 
-    getArrayOfDepths = () => {
+    getArrayOfDepths() {
         const arrayOfDepths = []
         this.props.marketDepth.buys.forEach(object => {
             arrayOfDepths.push(parseFloat(object.depth))
@@ -56,7 +56,7 @@ class  Chart extends Component {
     }
 
 
-    getArrayOfPrices = () => {
+    getArrayOfPrices () {
         const arrayOfPrices = []
         this.props.marketDepth.buys.forEach(object => {
             arrayOfPrices.push(parseFloat(object.price))
@@ -69,7 +69,7 @@ class  Chart extends Component {
     }
 
     //returns objects with price and depth
-    getArrayOfCoordinates = () => {
+    getArrayOfCoordinates () {
         const arrayOfCoordinates = []
         const sortedBuys = this.sortByPrice(this.props.marketDepth.buys)
         const sortedSells = this.sortByPrice(this.props.marketDepth.sells)
@@ -83,7 +83,7 @@ class  Chart extends Component {
     }
 
 
-    sortByPrice = (array) => {
+    sortByPrice (array) {
 
         array.sort(function(a,b){
             return a.price - b.price
@@ -92,12 +92,12 @@ class  Chart extends Component {
     }
 
     //returns the price at which graph colours will change from green to red
-    getMidPrice = () => {
+    getMidPrice () {
 
         const sortedBuys = this.sortByPrice(this.props.marketDepth.buys)
         const sortedSells = this.sortByPrice(this.props.marketDepth.sells)
-        const highestBuyPrice = parseFloat(sortedBuys.pop().price);
-        const lowestSellPrice = parseFloat(sortedSells.shift().price);
+        const highestBuyPrice = parseFloat(sortedBuys[sortedBuys.length -1].price);
+        const lowestSellPrice = parseFloat(sortedSells[0].price);
         const midPrice = (lowestSellPrice + highestBuyPrice)/2;
         return midPrice;
     }
@@ -159,7 +159,7 @@ class  Chart extends Component {
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(xScale));
-
+        
         svg.append("g")
             .attr("class", "y axis")
             .call(d3.axisLeft(yScale));
@@ -191,8 +191,9 @@ class  Chart extends Component {
 
     render(){
         return(
-            <svg className="chart-svg"></svg>
-        )
+            // <svg className="chart-svg"></svg>
+            null
+        );
     }
 
 }
