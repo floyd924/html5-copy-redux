@@ -231,27 +231,27 @@ function Matcher() {
     }
 
     this.generateOrdersFor = function(name){
-        for (let i = 0; i < 10; i++) {
-            const price = ((Math.floor((Math.random()*5)*10))/10) + 1
-            const quantity = (Math.floor(Math.random()*3)) + 1;
-            const randomIndex = Math.floor(Math.random()*1.99)
-            const actions = ["BUY", "SELL"]
-            const randomAction = actions[randomIndex]
-            this.newOrder(name, price, quantity, randomAction)          
-        }
-        
-        
-        
-        for (let i = 0; i < 10; i++) {
-            
+
+        //setting the size of data for buy and sell, 
+        //so I can control graph size, for testing
+        const randomSellPrice = ((Math.floor((Math.random()*5)*10))/10) + 1
+        const randomSellQuantity = (Math.floor(Math.random()*2)) + 1;
+        const randomBuyPrice = ((Math.floor((Math.random()*5)*10))/10) + 1
+        const randomBuyQuantity = (Math.floor(Math.random()*6)) + 1;
+
+        console.log("hello");
+
+
+        //for each user, create 10 random orders
+        for (let i = 0; i < 10; i++) {    
             const randomIndex = Math.floor(Math.random()*1.99)
             if (randomIndex === 0) {
-                const price = ((Math.floor((Math.random()*5)*10))/10) + 1
-                const quantity = (Math.floor(Math.random()*6)) + 1;
+                const price = randomBuyPrice;
+                const quantity = randomBuyQuantity;
                 this.newOrder(name, price, quantity, "BUY")     
             } else {
-                const price = ((Math.floor((Math.random()*5)*10))/10) + 1
-                const quantity = (Math.floor(Math.random()*2)) + 1;
+                const price = randomSellPrice;
+                const quantity = randomSellQuantity;
                 this.newOrder(name, price, quantity, "SELL")   
             }
         }
