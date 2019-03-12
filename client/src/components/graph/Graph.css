@@ -8,7 +8,8 @@
   .graph-container{
     border: 4px solid black;
     border-radius: 30px;
-    background-color: black;
+    /* background-color: black; */
+    background-color: green;
     color: silver;
     height: 100%;
     width: 100%;
@@ -19,3 +20,37 @@
   .graph-image{
     width: 100%;
   }
+
+  .chart-container{
+    border: 1px solid salmon;
+  }
+.chart-container-two{
+  width: 100%;
+  height: 80%;
+  color: white;
+  border: 3px solid silver;
+}
+
+/* ======================================================== */
+.line {
+  fill: none;
+  stroke: #ffab00;
+  stroke-width: 3;
+}
+
+.overlay {
+fill: none;
+pointer-events: all;
+}
+
+/* Style the dots by assigning a fill and stroke */
+.dot {
+  /* trying to do this in the file */
+  /* fill: #ffab00; */
+  stroke: #fff;
+}
+
+.focus circle {
+fill: none;
+stroke: steelblue;
+}

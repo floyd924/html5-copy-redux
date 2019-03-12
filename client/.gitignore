@@ -20,6 +20,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/src/components/DemoForm.jsx
+/src/demoFiles/
+
+/src/components/appcopy.css
+/src/components/appcopy.css.map
+/src/components/appcopy.sass
 
 

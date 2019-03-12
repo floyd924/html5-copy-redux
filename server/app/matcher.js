@@ -15,8 +15,8 @@ function Matcher() {
     this.newOrder = function(acc, prix, volume, act){
         let order = {
             account: acc,
-            price: prix,
-            quantity: volume,
+            price: parseFloat(prix),
+            quantity: parseFloat(volume),
             action: act
         }
         this.receiveOrder(order);
@@ -152,19 +152,18 @@ function Matcher() {
         array.sort(function(a,b){
             return a.price - b.price
         })
+        return array;
     }
 
     //return one object with market depth data for full range of buy and sell prices
     this.getMarketDepth = function(){
         
         const sortedBuyOrders = this.sortByLowestPrice(this.buyOrders); 
-
         const buys = this.createUniqueKeys(sortedBuyOrders)
-    
         for (const key in buys){
             sortedBuyOrders.forEach(order => {
                 if (key <= order.price) {
-                    buys[key] += order.price
+                    buys[key] = Math.round(((buys[key] + order.price)*100)/100)
                 }
             })
         }
@@ -174,30 +173,53 @@ function Matcher() {
         const sortedSellOrders = this.sortByLowestPrice(this.sellOrders)
 
         const sells = this.createUniqueKeys(sortedSellOrders)
-
         for (const key in sells){
             sortedSellOrders.forEach(order => {
                 if (key >= order.price) {
-                    sells[key] += order.price
+                    sells[key] = Math.round(((sells[key] + order.price)*100)/100)
                 }
             })
         }
-
         const objectToExport = {
             "buyData": buys,
             "sellData": sells
         }
-        return objectToExport;
+        return this.getMarketDepthInNewForm(objectToExport);
         
     }
 
+    //used to create an object of key:value pairs used for market depth
     this.createUniqueKeys = function(array){
-        const keyValueObject = {};
+        const keyObject = {};
         array.forEach(item => {
-            keyValueObject[item.price] = 0;
+            keyObject[item.price] = 0;
         });
-        return keyValueObject
+        return keyObject
     }
+
+
+
+
+    //return one object with market depth data for full range of buy and sell prices
+    this.getMarketDepthInNewForm = function(keyValueObject){
+            
+        const arrayOfBuyCoordinates = []
+        const arrayOfSellCoordinates = []
+        
+        for (const [key, value] of Object.entries(keyValueObject.buyData)) {
+            arrayOfBuyCoordinates.push({price: key, depth: value})
+        }
+        
+        for (const [key, value] of Object.entries(keyValueObject.sellData)) {
+            arrayOfSellCoordinates.push({price: key, depth: value})
+        }
+                    
+        const objectToBeReturned = { buys: arrayOfBuyCoordinates, sells: arrayOfSellCoordinates }
+
+        return objectToBeReturned;
+    }
+
+
 
 
     //seed the file with data
@@ -209,13 +231,29 @@ function Matcher() {
     }
 
     this.generateOrdersFor = function(name){
-        for (let i = 0; i < 10; i++) {
-            const price = Math.floor(Math.random()*30)
-            const quantity = Math.floor(Math.random()*50)
+
+        //setting the size of data for buy and sell, 
+        //so I can control graph size, for testing
+        const randomSellPrice = ((Math.floor((Math.random()*5)*10))/10) + 1
+        const randomSellQuantity = (Math.floor(Math.random()*2)) + 1;
+        const randomBuyPrice = ((Math.floor((Math.random()*5)*10))/10) + 1
+        const randomBuyQuantity = (Math.floor(Math.random()*6)) + 1;
+
+        console.log("hello");
+
+
+        //for each user, create 10 random orders
+        for (let i = 0; i < 10; i++) {    
             const randomIndex = Math.floor(Math.random()*1.99)
-            const actions = ["BUY", "SELL"]
-            const randomAction = actions[randomIndex]
-            this.newOrder(name, price, quantity, randomAction)          
+            if (randomIndex === 0) {
+                const price = randomBuyPrice;
+                const quantity = randomBuyQuantity;
+                this.newOrder(name, price, quantity, "BUY")     
+            } else {
+                const price = randomSellPrice;
+                const quantity = randomSellQuantity;
+                this.newOrder(name, price, quantity, "SELL")   
+            }
         }
     }
 

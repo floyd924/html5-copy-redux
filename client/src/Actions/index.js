@@ -2,6 +2,7 @@ import { CHANGE_USER }  from "../constants/action-types";
 import { TRADES_LOADED } from "../constants/action-types";
 import { PENDING_ORDERS_LOADED } from "../constants/action-types";
 import { MY_ORDERS_LOADED } from "../constants/action-types";
+import { MARKET_DEPTH_LOADED } from "../constants/action-types";
 
 
 
@@ -21,21 +22,26 @@ export function getTrades(){
     return function(dispatch) {
         fetchAndDispatch(dispatch, `${url}/trades`, TRADES_LOADED)
     };
-};
+}
+export function getMarketDepth(){
+    return function(dispatch) {
+        fetchAndDispatch(dispatch, `${url}/depth`, MARKET_DEPTH_LOADED)
+    };
+}
 
 
 export function getPendingOrders(){
     return function (dispatch){
         fetchAndDispatch(dispatch, `${url}/orders`, PENDING_ORDERS_LOADED)
     }
-};
+}
 
 
 export function getMyOrders(name){
     return function(dispatch){
         fetchAndDispatch(dispatch, `${url}/users/${name}`, MY_ORDERS_LOADED)
     }
-};
+}
 
 
 export function postNewOrder(payload){

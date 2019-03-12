@@ -14,7 +14,7 @@ class OrderBook extends Component{
     }
 
     getData = function(){
-        this.props.getPendingOrders();
+        (this.props.getPendingOrders());
     };
 
     render(){

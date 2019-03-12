@@ -13,6 +13,8 @@ module.exports = {
         "ecmaVersion": 2018
     },
     "rules": {
-        "eqeqeq": 2
+        "eqeqeq": 2,
+        "indent": ["error", 4]
     }
 };
+
