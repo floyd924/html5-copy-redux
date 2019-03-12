@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './App.css';
+// import './AppCopy.sass';
 import './form/Form.css';
 import './graph/Graph.css';
 import './myOrders/MyOrders.css';

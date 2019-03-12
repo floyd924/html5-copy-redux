@@ -146,9 +146,9 @@ class  Chart extends Component {
 
 
         
-
+        //this gets rid of all the data points before we generate new ones
         d3.select(".chart-svg").selectAll("g").remove();
-        
+
         const svg = d3.select(".chart-svg").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)

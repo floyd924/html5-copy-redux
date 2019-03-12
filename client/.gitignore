@@ -21,9 +21,9 @@ yarn-debug.log*
 yarn-error.log*
 
 /src/demoFiles/
-/src/demoFiles/DemoChart.js
-/src/demoFiles/DemoChartTwo.js
-/src/demoFiles/DemoForm.jsx
-/src/demoFiles/demoScript.js   
 
+
+/src/components/AppCopy.sass
+/src/components/AppCopy.css.map
+/src/components/AppCopy.css
 
