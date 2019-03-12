@@ -48,7 +48,7 @@ export function postNewOrder(payload){
     return function(){
         return fetch(`${url}/orders`, {
             method: 'POST',
-            mode: 'CORS',
+            mode: 'cors',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

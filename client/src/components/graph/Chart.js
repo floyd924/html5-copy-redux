@@ -191,8 +191,8 @@ class  Chart extends Component {
 
     render(){
         return(
-            // <svg className="chart-svg"></svg>
-            null
+            <svg className="chart-svg"></svg>
+
         );
     }
 
