@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { getPendingOrders } from '../../actions/index.js';
+import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ pendingOrders: state.pendingOrders });
 
@@ -10,11 +11,13 @@ class OrderBook extends Component{
 
     constructor(props){
         super(props);
+        this.socket = openSocket('http://localhost:3001');
         this.getData();
     }
 
     getData (){
         (this.props.getPendingOrders());
+        this.socket.emit('getPendingOrders')
     }
 
     render(){

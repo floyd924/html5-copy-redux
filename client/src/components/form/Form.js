@@ -5,6 +5,7 @@ import { getTrades } from '../../actions/index.js';
 import { getMyOrders } from '../../actions/index.js';
 import { getPendingOrders } from '../../actions/index.js';
 import {getMarketDepth} from '../../actions/index.js';
+import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ orders: state.orders, user: state.user})
 
@@ -32,7 +33,8 @@ class Form extends Component {
         this.handleButtonSelect = this.handleButtonSelect.bind(this);
         this.refreshThisComponent = this.refreshThisComponent.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
-
+        
+        this.socket = openSocket('http://localhost:3001');
     }
 
     componentDidMount(){
@@ -54,6 +56,10 @@ class Form extends Component {
         if (this.state.quantity && this.state.price && this.state.action) {
             this.props.postNewOrder(newOrder)
                 .then(() => this.refreshAllComponents(newOrder))
+            
+        
+            this.socket.emit('newOrder', {newOrder})
+
         }
     }
 

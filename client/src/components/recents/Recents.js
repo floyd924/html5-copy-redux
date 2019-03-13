@@ -14,12 +14,13 @@ class Recents extends Component {
 
     constructor(props){
         super(props);
+        this.socket = openSocket('http://localhost:3001');
         this.getData();
     }
 
     getData (){
         this.props.getTrades()
-        const socket = openSocket('http://localhost:3001');
+        this.socket.emit('getRecentTrades')
     }
 
     

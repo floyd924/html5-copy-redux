@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import { getMyOrders } from '../../actions/index.js';
+import openSocket from 'socket.io-client';
 
 
 const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user })
@@ -14,18 +15,22 @@ class MyOrders extends Component{
 
     constructor(props){
         super(props);
+        this.socket = openSocket('http://localhost:3001');
         this.getInitialData();    
     }
 
     getInitialData (){
         this.props.getMyOrders("iain");
+        this.socket.emit('getMyOrders');
     }
 
-    getData (){
-        const userName = this.props.user;
-        this.props.getMyOrders(userName);
 
-    }
+    // Do i actually use this method at all?
+    // getData (){
+    //     const userName = this.props.user;
+    //     this.props.getMyOrders(userName);
+
+    // }
     
 
     render(){

@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {getMarketDepth} from '../../actions/index.js';
+import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ marketDepth: state.marketDepth });
 const mapDispatchToProps = dispatch => ({ getMarketDepth: () => dispatch(getMarketDepth()) })
@@ -15,12 +16,14 @@ class  Chart extends Component {
         this.state= {
             previouslyPopulated: false
         }
+        this.socket = openSocket('http://localhost:3001');
         this.getData()
 
     }
 
     getData () {
         this.props.getMarketDepth()
+        this.socket.emit('getMarketDepth')
     }
 
 
