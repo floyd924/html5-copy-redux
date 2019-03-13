@@ -4,11 +4,12 @@
         "es6": true,
         "node": true
     },
-    "extends": ["react-app", "eslint:recommended"],
+    "extends": ["eslint:recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -21,11 +22,11 @@
     ],
     "rules": {
         "eqeqeq": 2,
-        "prefer-const":  ["error", {
+        "indent": ["error", 4],
+        "prefer-const": ["error", {
             "destructuring": "any",
             "ignoreReadBeforeAssign": false
         }],
-        "indent": ["error", 4],
-        "jsx-a11y/href-no-hash": [0]
+        "no-irregular-whitespace": ["error"]
     }
 }

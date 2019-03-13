@@ -1,6 +1,9 @@
 import React, { Component} from 'react';
 import {connect} from "react-redux";
 import { getTrades } from '../../actions/index.js';
+import openSocket from 'socket.io-client';
+
+
 
 const mapStateToProps = state => ({ trades: state.trades });
 
@@ -16,6 +19,7 @@ class Recents extends Component {
 
     getData (){
         this.props.getTrades()
+        const socket = openSocket('http://localhost:3001');
     }
 
     
