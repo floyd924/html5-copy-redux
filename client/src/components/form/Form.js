@@ -29,7 +29,6 @@ class Form extends Component {
     }
 
 
-
     handleButtonClick(){
         const tempName = this.props.user;
         this.setState({ account: tempName });
@@ -40,11 +39,8 @@ class Form extends Component {
             action: this.state.action
         }
         if (this.state.quantity && this.state.price && this.state.action) {
-           
-        
             this.socket.emit('newOrder', {newOrder});
             this.refreshThisComponent(newOrder); 
-            
         }
     }
 
@@ -78,13 +74,8 @@ class Form extends Component {
 
                 <h2>Add a new trade</h2>
 
-
                 <form id="input-form">
-            
-            
-            
                     <div className="form-item d-inline">
-
                         <label htmlFor="quantity">Quantity:</label>
                         <input onChange={this.handleQuantityChange} id="quantity" type="number" min="0" />
                     </div>
@@ -105,9 +96,7 @@ class Form extends Component {
                         </fieldset>
                     </div>
             
-            
                     <button onClick={this.handleButtonClick} type="button" className="btn btn-info">Submit Order</button>
-            
                 </form>
             </div>
         )

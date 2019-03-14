@@ -8,7 +8,6 @@ const mapStateToProps = state => ({ marketDepth: state.marketDepth });
 const mapDispatchToProps = dispatch => ({ getMarketDepth: (data) => dispatch(getMarketDepth(data)) })
 
 
-
 class  Chart extends Component {
 
     constructor(props){
@@ -21,9 +20,7 @@ class  Chart extends Component {
         this.socket.on('receiveMarketDepth', function(data){
             that.dispatchStuff(data)
         })
-
         this.getData()
-
     }
     
 
@@ -36,19 +33,14 @@ class  Chart extends Component {
     }
 
 
-
     componentDidUpdate(){
         this.drawLineGraph();
     }
 
 
-
     //I am trying to refactor these three getArray methods below. 
     //But each method requires a slightly different output
     //and each are needed for future calculations
-
-
-
     getArrayOfDepths() {
         const arrayOfDepths = []
         this.props.marketDepth.buys.forEach(object => {
@@ -62,7 +54,6 @@ class  Chart extends Component {
     }
 
 
-
     getArrayOfPrices () {
         const arrayOfPrices = []
         this.props.marketDepth.buys.forEach(object => {
@@ -74,6 +65,7 @@ class  Chart extends Component {
         arrayOfPrices.sort();
         return arrayOfPrices;
     }
+
 
     //returns objects with price and depth
     getArrayOfCoordinates () {
@@ -98,10 +90,9 @@ class  Chart extends Component {
         return array;
     }
 
+
     //returns the price at which graph colours will change from green to red
     getMidPrice () {
-
-
         const sortedBuys = this.sortByPrice(this.props.marketDepth.buys)
         const sortedSells = this.sortByPrice(this.props.marketDepth.sells)
 
@@ -117,7 +108,6 @@ class  Chart extends Component {
 
 
     drawLineGraph(){
-
         //this gets rid of all the data points before we generate new ones
         d3.select(".chart-svg").selectAll("g").remove();
 
@@ -126,8 +116,6 @@ class  Chart extends Component {
         const margin = {top: 50, right: 50, bottom: 50, left: 50}
         const width = parentContainer.clientWidth - margin.left - margin.right;
         const height = parentContainer.clientHeight - margin.top - margin.bottom;
-
-        
             
         const depthData = this.getArrayOfDepths();
         const priceData = this.getArrayOfPrices();
@@ -145,9 +133,6 @@ class  Chart extends Component {
             const minPrice = Math.min(...priceData);
             const minDepth = Math.min(...depthData);
 
-
-
-
             const xScale = d3.scaleLinear()
                 .domain([minPrice-1, maxPrice+1]) // data size
                 .range([0, width]); //space axis takes up
@@ -156,16 +141,10 @@ class  Chart extends Component {
                 .domain([minDepth-1, maxDepth+1])
                 .range([height, 0]); //because y axis is automatically top to bottom, the zero goes second.
 
-
-
             const line = d3.line()
                 .x(function(d) { return xScale(d.price); }) //put the price value on the x scale
                 .y(function(d) { return yScale(d.depth); }) //put the depth value on the y scale 
                 .curve(d3.curveMonotoneX)
-
-
-        
-        
 
             const svg = d3.select(".chart-svg").append("svg")
                 .attr("width", width + margin.left + margin.right)
@@ -187,7 +166,6 @@ class  Chart extends Component {
                 .attr("class", "line")
                 .attr("d", line);
             
-
             svg.selectAll(".dot")
                 .data(coordinates)
                 .enter().append("circle")
@@ -198,21 +176,14 @@ class  Chart extends Component {
                 .style("fill", function(d) {
                     if ( d.price > midPrice) { return "red" } else { return "green" }
                 })
-
-
         }
-
-
     }
-
-
 
     render(){
         return(
             <svg className="chart-svg"></svg>
         );
     }
-
 }
     
 

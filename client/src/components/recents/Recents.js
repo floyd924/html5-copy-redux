@@ -3,13 +3,9 @@ import {connect} from "react-redux";
 import { getTrades } from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 
-
-
 const mapStateToProps = state => ({ trades: state.trades });
-
 const mapDispatchToProps = dispatch => ({ getTrades: (data) => dispatch(getTrades(data)) });
 
-    
 class Recents extends Component {
 
     constructor(props){
@@ -32,12 +28,10 @@ class Recents extends Component {
 
     
     render(){
-
         return(
             <div className="recents-container">
 
                 <h2>Latest Trades</h2>
-
 
                 <div className="table-wrapper-scroll-y">
                     <table id="latest-table">
@@ -62,7 +56,6 @@ class Recents extends Component {
         )
     }
 }
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recents);

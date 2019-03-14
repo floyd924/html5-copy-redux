@@ -3,11 +3,7 @@ import {connect} from "react-redux";
 import { getMyOrders } from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 
-
 const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user })
-
-
-
 const mapDispatchToProps = dispatch => ({ getMyOrders: data => dispatch(getMyOrders(data)) })
 
 
@@ -31,7 +27,6 @@ class MyOrders extends Component{
         this.props.getMyOrders(data)
     }
 
-    
 
     render(){
         return(

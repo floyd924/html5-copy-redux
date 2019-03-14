@@ -4,7 +4,6 @@ import { getPendingOrders } from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ pendingOrders: state.pendingOrders });
-
 const mapDispatchToProps = dispatch => ({ getPendingOrders: (data) => dispatch(getPendingOrders(data)) })
 
 class OrderBook extends Component{
