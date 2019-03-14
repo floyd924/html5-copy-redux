@@ -19,18 +19,10 @@ class Graph extends Component {
             <div className="graph-container">
                 <h2>here is the graph</h2>
 
-
                 <svg id="chart-box" className="chart-container-two"> 
                     <Chart data={this.props.marketDepth}/>
                 </svg>
 
-
-                
-
-
-
-
-                
             </div>
         )
     }

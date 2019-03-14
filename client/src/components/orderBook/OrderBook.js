@@ -5,9 +5,7 @@ import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ pendingOrders: state.pendingOrders });
 
-const mapDispatchToProps = dispatch => ({ 
-    getPendingOrders: (data) => dispatch(getPendingOrders(data)) 
-})
+const mapDispatchToProps = dispatch => ({ getPendingOrders: (data) => dispatch(getPendingOrders(data)) })
 
 class OrderBook extends Component{
 
@@ -16,7 +14,6 @@ class OrderBook extends Component{
         const that = this;
         this.socket = openSocket('http://localhost:3001');
         this.socket.on('receiveOrderData', function(data){
-            console.log('order data received in the front end', data)
             that.dispatchStuff(data)
         })
         this.getData();
@@ -27,7 +24,6 @@ class OrderBook extends Component{
     }
 
     dispatchStuff (data) {
-        console.log("dispatching to getPendingOrders", data)
         this.props.getPendingOrders(data)
     }
 

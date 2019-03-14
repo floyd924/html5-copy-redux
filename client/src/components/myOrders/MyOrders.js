@@ -8,9 +8,7 @@ const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user }
 
 
 
-const mapDispatchToProps = dispatch => ({ 
-    getMyOrders: data => dispatch(getMyOrders(data)) 
-})
+const mapDispatchToProps = dispatch => ({ getMyOrders: data => dispatch(getMyOrders(data)) })
 
 
 class MyOrders extends Component{
@@ -30,7 +28,6 @@ class MyOrders extends Component{
     }
 
     dispatchStuff (data) {
-        console.log("dispatchign to getMyOrders", data)
         this.props.getMyOrders(data)
     }
 

@@ -5,9 +5,7 @@ import {getMarketDepth} from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ marketDepth: state.marketDepth });
-const mapDispatchToProps = dispatch => ({ 
-    getMarketDepth: (data) => dispatch(getMarketDepth(data))
-})
+const mapDispatchToProps = dispatch => ({ getMarketDepth: (data) => dispatch(getMarketDepth(data)) })
 
 
 
@@ -34,7 +32,6 @@ class  Chart extends Component {
     }
 
     dispatchStuff (data) {
-        console.log("dispatching to getMarketDepth", data)
         this.props.getMarketDepth(data)
     }
 

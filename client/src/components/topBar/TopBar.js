@@ -11,13 +11,7 @@ const mapStateToProps = (state) => {
     };
 }
 
-function mapDispatchToProps(dispatch){
-    return {
-        changeUser: user => dispatch(changeUser(user)),
-    }
-}
-
-
+const mapDispatchToProps = dispatch => ({ changeUser: user => dispatch(changeUser(user)) })
 
 
 class TopBar extends Component {

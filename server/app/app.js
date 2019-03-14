@@ -19,8 +19,6 @@ app.use((req, res, next) => {
 
 routes(app);
 
-console.log(routes)
-
 let server = app.listen(3001, function () {
     console.log("app running on port.", server.address().port);
 });
@@ -41,68 +39,60 @@ let pendingOrdersSocket = null;
 
 
 io.on('connection', function(socket){
-    console.log("made socket connection", socket.id);
 
     socket.on('newOrder', function(data){
-      console.log("made it here with a post request", data)
-      matcher.newOrder(data.newOrder.account, data.newOrder.quantity, data.newOrder.price, data.newOrder.action)
-      sendRecentTrades();
-      sendMarketDepth();
-      sendMyOrders();
-      sendPendingOrders();
+        matcher.newOrder(data.newOrder.account, data.newOrder.quantity, data.newOrder.price, data.newOrder.action)
+        sendRecentTrades();
+        sendMarketDepth();
+        sendMyOrders();
+        sendPendingOrders();
     })
 
     socket.on('updateName', function(name){
-      console.log("update name called")
-      nameToUse = name;
-      sendMyOrders();
+        nameToUse = name;
+        sendMyOrders();
     })
 
     socket.on('getRecentTrades', function(){
-      tradesSocket = socket;
-      sendRecentTrades()
+        tradesSocket = socket;
+        sendRecentTrades()
     })
 
     socket.on('getMarketDepth', function(){
-      depthSocket = socket;
-      sendMarketDepth()
+        depthSocket = socket;
+        sendMarketDepth()
     })
 
     socket.on('getMyOrders', function(name){
-      nameToUse = name
-      myOrdersSocket = socket;
-      sendMyOrders();
+        nameToUse = name
+        myOrdersSocket = socket;
+        sendMyOrders();
     })
 
     socket.on('getPendingOrders', function(){
-      pendingOrdersSocket = socket;
-      sendPendingOrders();
+        pendingOrdersSocket = socket;
+        sendPendingOrders();
     })
 })
 
 
 //method to send data(socket)
 let sendMyOrders = () => {
-  console.log("the name we are using is", nameToUse)
-  const data = matcher.getAllOrdersByName(nameToUse)
-  console.log("sending my orders", myOrdersSocket.id, nameToUse, data)
-  myOrdersSocket.emit('receiveMyOrders', data);
+    const data = matcher.getAllOrdersByName(nameToUse)
+    myOrdersSocket.emit('receiveMyOrders', data);
 }
 
 let sendPendingOrders = () => {
-  const data = matcher.getAllPendingOrders()
-  console.log("sending pending orders", pendingOrdersSocket.id, data)
-  pendingOrdersSocket.emit('receiveOrderData', data)
+    const data = matcher.getAllPendingOrders()
+    pendingOrdersSocket.emit('receiveOrderData', data)
 }
 
 let sendRecentTrades = () => {
-  const data = matcher.getRecentTrades()
-  console.log("sending recent trades", tradesSocket.id, data)
-  tradesSocket.emit('receiveTradeData', data)
+    const data = matcher.getRecentTrades()
+    tradesSocket.emit('receiveTradeData', data)
 }
 
 let sendMarketDepth = () => {
-  const data = matcher.getMarketDepth()
-  console.log("sending market depth", depthSocket.id, data)
-  depthSocket.emit('receiveMarketDepth', data)
+    const data = matcher.getMarketDepth()
+    depthSocket.emit('receiveMarketDepth', data)
 }

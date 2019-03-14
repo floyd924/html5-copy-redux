@@ -7,9 +7,7 @@ import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ trades: state.trades });
 
-const mapDispatchToProps = dispatch => ({ 
-    getTrades: (data) => dispatch(getTrades(data))
-});
+const mapDispatchToProps = dispatch => ({ getTrades: (data) => dispatch(getTrades(data)) });
 
     
 class Recents extends Component {
@@ -19,7 +17,6 @@ class Recents extends Component {
         const that = this;
         this.socket = openSocket('http://localhost:3001');
         this.socket.on('receiveTradeData', function(data){
-            console.log('trade data received', data)
             that.dispatchStuff(data)
         })
         this.getData();
@@ -30,7 +27,6 @@ class Recents extends Component {
     }
 
     dispatchStuff (data) {
-        console.log("dispatching to getTrades", data)
         this.props.getTrades(data);
     }
 
