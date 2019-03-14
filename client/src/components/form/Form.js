@@ -1,21 +1,8 @@
 import React, { Component} from 'react';
-import { postNewOrder } from '../../actions/index.js';
 import { connect } from "react-redux";
-import { getTrades } from '../../actions/index.js';
-import { getMyOrders } from '../../actions/index.js';
-import { getPendingOrders } from '../../actions/index.js';
-import {getMarketDepth} from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 
-const mapStateToProps = state => ({ orders: state.orders, user: state.user})
-
-const mapDispatchToProps = dispatch => ({
-    postNewOrder: order => dispatch(postNewOrder(order)),
-    getTrades: () => dispatch(getTrades()),
-    getMyOrders: name => dispatch(getMyOrders(name)),
-    getPendingOrders: () => dispatch(getPendingOrders()),
-    getMarketDepth: () => dispatch(getMarketDepth())
-})
+const mapStateToProps = state => ({ orders: state.orders, user: state.user })
 
 class Form extends Component {
 
@@ -43,7 +30,6 @@ class Form extends Component {
 
 
 
-    //we want to call each getter method from here, using the current state
     handleButtonClick(){
         const tempName = this.props.user;
         this.setState({ account: tempName });
@@ -54,23 +40,14 @@ class Form extends Component {
             action: this.state.action
         }
         if (this.state.quantity && this.state.price && this.state.action) {
-            this.props.postNewOrder(newOrder)
-                .then(() => this.refreshAllComponents(newOrder))
-            
+           
         
-            this.socket.emit('newOrder', {newOrder})
-
+            this.socket.emit('newOrder', {newOrder});
+            this.refreshThisComponent(newOrder); 
+            
         }
     }
 
-    refreshAllComponents(newOrder){
-        this.props.getPendingOrders()
-        window.alert("Your trade has been accepted")
-        this.props.getMyOrders(newOrder.account)
-        this.props.getTrades()
-        this.props.getMarketDepth();
-        this.refreshThisComponent(newOrder)
-    }
 
     refreshThisComponent(newOrder){
         this.setState(
@@ -137,4 +114,4 @@ class Form extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps)(Form);

@@ -8,29 +8,32 @@ const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user }
 
 
 
-const mapDispatchToProps = dispatch => ({ getMyOrders: name => dispatch(getMyOrders(name)) })
+const mapDispatchToProps = dispatch => ({ 
+    getMyOrders: data => dispatch(getMyOrders(data)) 
+})
 
 
 class MyOrders extends Component{
 
     constructor(props){
         super(props);
+        const that = this;
         this.socket = openSocket('http://localhost:3001');
+        this.socket.on('receiveMyOrders', function(data){
+            that.dispatchStuff(data)
+        })
         this.getInitialData();    
     }
 
     getInitialData (){
-        this.props.getMyOrders("iain");
-        this.socket.emit('getMyOrders');
+        this.socket.emit('getMyOrders', "iain");
     }
 
+    dispatchStuff (data) {
+        console.log("dispatchign to getMyOrders", data)
+        this.props.getMyOrders(data)
+    }
 
-    // Do i actually use this method at all?
-    // getData (){
-    //     const userName = this.props.user;
-    //     this.props.getMyOrders(userName);
-
-    // }
     
 
     render(){

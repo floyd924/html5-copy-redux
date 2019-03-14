@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import {getMarketDepth} from '../../actions/index.js';
 import Chart from './Chart.js';
 
 const mapStateToProps = state => ({ marketDepth: state.marketDepth });
-const mapDispatchToProps = dispatch => ({ getMarketDepth: () => dispatch(getMarketDepth()) })
 
 class Graph extends Component {
 
@@ -38,4 +36,4 @@ class Graph extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Graph);
+export default connect(mapStateToProps)(Graph);

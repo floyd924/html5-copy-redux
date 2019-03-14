@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { changeUser } from '../../actions/index';
-import { getMyOrders } from '../../actions/index';
 import { connect } from 'react-redux';
+import openSocket from 'socket.io-client';
+
 
 const mapStateToProps = (state) => {
     return { 
@@ -13,7 +14,6 @@ const mapStateToProps = (state) => {
 function mapDispatchToProps(dispatch){
     return {
         changeUser: user => dispatch(changeUser(user)),
-        getMyOrders: name => dispatch(getMyOrders(name))
     }
 }
 
@@ -27,6 +27,7 @@ class TopBar extends Component {
         this.state = {
             name: "iain"
         }
+        this.socket = openSocket('http://localhost:3001');
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -43,7 +44,7 @@ class TopBar extends Component {
 
     handleButtonClick(){
         this.props.changeUser(this.state);
-        this.props.getMyOrders(this.state.name);
+        this.socket.emit('updateName', this.state.name);
     }
 
     render(){
