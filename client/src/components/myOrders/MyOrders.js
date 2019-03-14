@@ -14,6 +14,7 @@ class MyOrders extends Component{
         const that = this;
         this.socket = openSocket('http://localhost:3001');
         this.socket.on('receiveMyOrders', function(data){
+            console.log("orders received:", data)
             that.dispatchStuff(data)
         })
         this.getInitialData();    

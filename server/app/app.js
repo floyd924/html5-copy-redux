@@ -41,6 +41,7 @@ let pendingOrdersSocket = null;
 io.on('connection', function(socket){
 
     socket.on('newOrder', function(data){
+        console.log("new order recceived in back end", data)
         matcher.newOrder(data.newOrder.account, data.newOrder.quantity, data.newOrder.price, data.newOrder.action)
         sendRecentTrades();
         sendMarketDepth();
