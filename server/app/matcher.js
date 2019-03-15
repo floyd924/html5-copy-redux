@@ -131,7 +131,8 @@ function Matcher() {
 
     //returns 15 most recent trades that have been fulfilled
     this.getRecentTrades = function(){
-        let recentTrades = this.completedTrades.reverse();
+        let recentTrades = this.completedTrades.slice();
+        recentTrades.reverse();
         return recentTrades.slice(0,15);
     }
 

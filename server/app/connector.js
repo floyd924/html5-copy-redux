@@ -20,11 +20,14 @@ function Connector(){
         io.on('connection', function(socket){
 
             socket.on('newOrder', function(data){
-                matcher.newOrder(data.newOrder.account, data.newOrder.price, data.newOrder.quantity, data.newOrder.action)
-                sendRecentTrades();
-                sendMarketDepth();
-                sendMyOrders();
-                sendPendingOrders();
+                if (data.newOrder.price > 0 && data.newOrder.quantity > 0) {
+                    console.log("new order arrived", data)
+                    matcher.newOrder(data.newOrder.account, data.newOrder.price, data.newOrder.quantity, data.newOrder.action)
+                    sendRecentTrades();
+                    sendMarketDepth();
+                    sendMyOrders();
+                    sendPendingOrders();  
+                }
             })
 
             socket.on('updateName', function(name){

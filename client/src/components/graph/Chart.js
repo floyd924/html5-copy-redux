@@ -134,7 +134,7 @@ class  Chart extends Component {
             const minDepth = Math.min(...depthData);
 
             const xScale = d3.scaleLinear()
-                .domain([minPrice-1, maxPrice+1]) // data size
+                .domain([Math.max(0, minPrice-1), maxPrice+1]) // data size
                 .range([0, width]); //space axis takes up
         
             const yScale = d3.scaleLinear()
