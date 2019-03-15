@@ -19,7 +19,7 @@ class TopBar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: "iain"
+            name: 'iain'
         }
         this.socket = openSocket('http://localhost:3001');
         this.handleNameChange = this.handleNameChange.bind(this);

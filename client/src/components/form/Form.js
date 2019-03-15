@@ -1,5 +1,5 @@
-import React, { Component} from 'react';
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ orders: state.orders, user: state.user })
@@ -53,7 +53,7 @@ class Form extends Component {
                 price: null,
                 action: null
             })
-        document.getElementById("input-form").reset();
+        document.getElementById('input-form').reset();
     }
 
     handleQuantityChange(event){

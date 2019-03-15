@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 import { getMyOrders } from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 
@@ -20,7 +20,7 @@ class MyOrders extends Component{
     }
 
     getInitialData (){
-        this.socket.emit('getMyOrders', "iain");
+        this.socket.emit('getMyOrders', 'iain');
     }
 
     dispatchStuff (data) {

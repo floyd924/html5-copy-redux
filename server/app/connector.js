@@ -4,18 +4,17 @@ let Matcher = require('./matcher');
 
 function Connector(){
 
-    this.connect = function(server) {
-        
+    this.connect = function(server) {   
+
         const io = socket(server)
         let matcher = new Matcher;
         matcher.seed();
-        let nameToUse = "test"
+
+        let nameToUse = 'test'
         let tradesSocket = null;
         let depthSocket = null;
         let myOrdersSocket = null;
         let pendingOrdersSocket = null;
-
-
 
 
         io.on('connection', function(socket){
@@ -77,7 +76,6 @@ function Connector(){
             depthSocket.emit('receiveMarketDepth', data)
         }
     }
-
 }
 
 module.exports = Connector

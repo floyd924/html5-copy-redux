@@ -23,8 +23,6 @@ function Matcher() {
         this.clearEmptyOrders();
     }
 
- 
-   
 
     //checks what type of order has arrived, adds order to relevant array
     //and calls relevant checkOrders method
@@ -68,8 +66,6 @@ function Matcher() {
                 this.trade(order, e)
             }
         });
-
-
     }
 
     //makes the exchange between two orders, removes completed orders 
@@ -120,7 +116,6 @@ function Matcher() {
             let trade = {size: quantity, price: prix}
             this.completedTrades.push(trade);
         }
-
     }
 
     this.clearEmptyOrders = function(){
@@ -134,7 +129,6 @@ function Matcher() {
         return this.allPendingOrders;
     }
 
-
     //returns 15 most recent trades that have been fulfilled
     this.getRecentTrades = function(){
         let recentTrades = this.completedTrades.reverse();
@@ -145,7 +139,6 @@ function Matcher() {
     this.getAllOrdersByName = function(name){
         let ordersForThisPerson = this.allPendingOrders.filter(order => name.toUpperCase() === order.account.toUpperCase());
         return ordersForThisPerson;
-
     }
 
     this.sortByLowestPrice = function(array){
@@ -167,8 +160,6 @@ function Matcher() {
                 }
             })
         }
-
-    
         
         const sortedSellOrders = this.sortByLowestPrice(this.sellOrders)
 
@@ -180,10 +171,12 @@ function Matcher() {
                 }
             })
         }
+
         const objectToExport = {
             "buyData": buys,
             "sellData": sells
         }
+
         return this.getMarketDepthInNewForm(objectToExport);
         
     }
@@ -196,8 +189,6 @@ function Matcher() {
         });
         return keyObject
     }
-
-
 
 
     //return one object with market depth data for full range of buy and sell prices
@@ -220,8 +211,6 @@ function Matcher() {
     }
 
 
-
-
     //seed the file with data
     this.seed = function(){
         const names = ["iain","benj", "steve", "laurie", "al", "gavin", "pete"];
@@ -231,15 +220,12 @@ function Matcher() {
     }
 
     this.generateOrdersFor = function(name){
-
         //setting the size of data for buy and sell, 
         //so I can control graph size, for testing
         const randomSellPrice = ((Math.floor((Math.random()*5)*10))/10) + 1
         const randomSellQuantity = (Math.floor(Math.random()*2)) + 1;
         const randomBuyPrice = ((Math.floor((Math.random()*5)*10))/10) + 1
         const randomBuyQuantity = (Math.floor(Math.random()*6)) + 1;
-
-
 
 
         //for each user, create 10 random orders
@@ -256,16 +242,7 @@ function Matcher() {
             }
         }
     }
-
-
-
-
-
-
 }
-
-
-
 
 
 module.exports = Matcher;

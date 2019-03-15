@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { getPendingOrders } from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 

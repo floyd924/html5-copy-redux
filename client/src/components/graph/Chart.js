@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import {getMarketDepth} from '../../actions/index.js';
+import { connect } from 'react-redux';
+import  {getMarketDepth } from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ marketDepth: state.marketDepth });
