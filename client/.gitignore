@@ -27,3 +27,7 @@ yarn-error.log*
 /src/components/appcopy.sass
 
 
+/src/components/AppCopy.sass
+/src/components/AppCopy.css.map
+/src/components/AppCopy.css
+

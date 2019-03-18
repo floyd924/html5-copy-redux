@@ -1,21 +1,30 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { getPendingOrders } from '../../actions/index.js';
+import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ pendingOrders: state.pendingOrders });
-
-const mapDispatchToProps = dispatch => ({ getPendingOrders: () => dispatch(getPendingOrders()) })
+const mapDispatchToProps = dispatch => ({ getPendingOrders: (data) => dispatch(getPendingOrders(data)) })
 
 class OrderBook extends Component{
 
     constructor(props){
         super(props);
+        const that = this;
+        this.socket = openSocket('http://localhost:3001');
+        this.socket.on('receiveOrderData', function(data){
+            that.dispatchStuff(data)
+        })
         this.getData();
     }
 
-    getData = function(){
-        (this.props.getPendingOrders());
-    };
+    getData (){
+        this.socket.emit('getPendingOrders')
+    }
+
+    dispatchStuff (data) {
+        this.props.getPendingOrders(data)
+    }
 
     render(){
         return(

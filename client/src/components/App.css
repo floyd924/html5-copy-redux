@@ -1,4 +1,17 @@
 
+#root {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+
+  --page-background: #00204a;
+  --component-background: black;
+}
+
+
+
 /* GRID */
 
 .grid {
@@ -15,21 +28,13 @@
 
   grid-gap: 5px;
   padding: 10px;
-  background-color: #00204a;
- 
+  background-color: var(--page-background);
 
-  
 }
 
 
 
 
-#root {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
 
 
 

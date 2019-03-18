@@ -15,31 +15,30 @@ import Graph from './graph/Graph.js';
 import Form from './form/Form.js';
 
 export class App extends Component {
-  render() {
-    return (
-      <div className="grid">
-          <div className="top">
-            <TopBar />
-          </div>
-          <div className="recents">
-            <Recents />
-          </div>
-          <div className="pracs">
-            <Form />
-          </div>
-          <div className="order-book">
-            <OrderBook />
-          </div>
-          <div className="my-orders">
-            <MyOrders />
-          </div>
-          <div className="graph">
-            <Graph />
-          </div>
-      </div>
-
-    );
-  }
+    render() {
+        return (
+            <div className="grid">
+                <div className="top">
+                    <TopBar />
+                </div>
+                <div className="recents">
+                    <Recents />
+                </div>
+                <div className="pracs">
+                    <Form />
+                </div>
+                <div className="order-book">
+                    <OrderBook />
+                </div>
+                <div className="my-orders">
+                    <MyOrders />
+                </div>
+                <div className="graph">
+                    <Graph />
+                </div>
+            </div>
+        );
+    }
 }
 
 

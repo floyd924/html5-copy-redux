@@ -1,32 +1,32 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import { getMyOrders } from '../../actions/index.js';
+import openSocket from 'socket.io-client';
 
-
-const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user})
-
-
-
-const mapDispatchToProps = dispatch => ({getMyOrders: name => dispatch(getMyOrders(name))})
+const mapStateToProps = state => ({ myOrders: state.myOrders, user: state.user })
+const mapDispatchToProps = dispatch => ({ getMyOrders: data => dispatch(getMyOrders(data)) })
 
 
 class MyOrders extends Component{
 
     constructor(props){
         super(props);
+        const that = this;
+        this.socket = openSocket('http://localhost:3001');
+        this.socket.on('receiveMyOrders', function(data){
+            that.dispatchStuff(data)
+        })
         this.getInitialData();    
     }
 
-    getInitialData = function(){
-        this.props.getMyOrders("iain");
+    getInitialData (){
+        this.socket.emit('getMyOrders', "iain");
     }
 
-    getData = function(){
-        const userName = this.props.user;
-         this.props.getMyOrders(userName);
+    dispatchStuff (data) {
+        this.props.getMyOrders(data)
+    }
 
-    };
-    
 
     render(){
         return(
