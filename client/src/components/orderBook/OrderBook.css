@@ -1,7 +1,6 @@
 /* ===================================================================== */
 /* ORDER BOOK CONTAINER */
-.order-book {
-  grid-area: book; }
+.order-book { grid-area: book; }
 
 .order-book-container {
   border: 4px solid black;
