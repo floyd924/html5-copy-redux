@@ -35,7 +35,7 @@ class Form extends Component {
         const newOrder = {
             account: tempName,
             quantity: parseInt(this.state.quantity), //may need to ParseFloat instead if I want to include decimal points
-            price: parseInt(this.state.price), //may need to use parseFloat
+            price: parseFloat(this.state.price), 
             action: this.state.action
         }
         if (this.state.quantity && this.state.price && this.state.action) {
@@ -83,7 +83,7 @@ class Form extends Component {
                     <div className="form-item d-inline">
 
                         <label htmlFor="price">Price:</label>
-                        <input onChange={this.handlePriceChange} id="price" type="number" min="0" step="0.01" />
+                        <input onChange={this.handlePriceChange} id="price" type="number" min="0" step="0.1" />
                     </div>
             
                     <div className="form-item">

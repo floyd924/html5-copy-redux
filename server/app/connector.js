@@ -21,7 +21,6 @@ function Connector(){
 
             socket.on('newOrder', function(data){
                 if (data.newOrder.price > 0 && data.newOrder.quantity > 0) {
-                    console.log("new order arrived", data)
                     matcher.newOrder(data.newOrder.account, data.newOrder.price, data.newOrder.quantity, data.newOrder.action)
                     sendRecentTrades();
                     sendMarketDepth();

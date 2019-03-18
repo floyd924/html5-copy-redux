@@ -83,7 +83,6 @@ class  Chart extends Component {
 
 
     sortByPrice (array) {
-
         array.sort(function(a,b){
             return a.price - b.price
         })
@@ -145,6 +144,8 @@ class  Chart extends Component {
                 .x(function(d) { return xScale(d.price); }) //put the price value on the x scale
                 .y(function(d) { return yScale(d.depth); }) //put the depth value on the y scale 
                 .curve(d3.curveMonotoneX)
+                // .curve(d3.curveStepAfter) // I would like to eventually use 2 datasets to make the sells in this style
+                // .curve(d3.curveStepBefore) // and the buys in this style
 
             const svg = d3.select(".chart-svg").append("svg")
                 .attr("width", width + margin.left + margin.right)
