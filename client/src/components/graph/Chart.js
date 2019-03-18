@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import {getMarketDepth} from '../../actions/index.js';
+import { connect } from 'react-redux';
+import  {getMarketDepth } from '../../actions/index.js';
 import openSocket from 'socket.io-client';
 
 const mapStateToProps = state => ({ marketDepth: state.marketDepth });
@@ -83,7 +83,6 @@ class  Chart extends Component {
 
 
     sortByPrice (array) {
-
         array.sort(function(a,b){
             return a.price - b.price
         })
@@ -134,7 +133,7 @@ class  Chart extends Component {
             const minDepth = Math.min(...depthData);
 
             const xScale = d3.scaleLinear()
-                .domain([minPrice-1, maxPrice+1]) // data size
+                .domain([Math.max(0, minPrice-1), maxPrice+1]) // data size
                 .range([0, width]); //space axis takes up
         
             const yScale = d3.scaleLinear()
@@ -145,6 +144,8 @@ class  Chart extends Component {
                 .x(function(d) { return xScale(d.price); }) //put the price value on the x scale
                 .y(function(d) { return yScale(d.depth); }) //put the depth value on the y scale 
                 .curve(d3.curveMonotoneX)
+                // .curve(d3.curveStepAfter) // I would like to eventually use 2 datasets to make the sells in this style
+                // .curve(d3.curveStepBefore) // and the buys in this style
 
             const svg = d3.select(".chart-svg").append("svg")
                 .attr("width", width + margin.left + margin.right)
